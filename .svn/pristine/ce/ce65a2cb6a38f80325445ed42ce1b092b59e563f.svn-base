@@ -1,0 +1,5 @@
+
+
+{loop $tags $i $t}
+<li class="wb_news"><a href="{$t[linkurl]}"{if $target} target="{$target}"{/if}{if $class} class="{$class}"{/if} title="{$t[alt]}">{dsubstr($t[title], 26, '...')}</a>      [{timetodate($t[addtime], $datetype)}]</li>
+{/loop}

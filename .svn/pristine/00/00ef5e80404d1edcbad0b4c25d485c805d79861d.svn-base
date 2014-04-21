@@ -1,0 +1,10 @@
+<!--
+{loop $tags $i $t}
+<li class="wb_news"><a href="{$t[linkurl]}"{if $target} target="{$target}"{/if}{if $class} class="{$class}"{/if} title="{$t[alt]}">{$t[title]}</a>      [{timetodate($t[addtime], $datetype)}]</li>
+{/loop}
+-->
+{loop $tags $i $t}
+
+<li><a href="{$t[linkurl]}"{if $target} target="{$target}"{/if}{if $class} class="{$class}"{/if} title="{$t[alt]}"><img src="{$t[thumb]}" width="92" height="89" title="{$t[alt]}" /></a><p class="qbbt"><a href="{$t[linkurl]}"{if $target} target="{$target}"{/if}{if $class} class="{$class}"{/if} title="{$t[alt]}">{$t[title]}</a></p><p class="qbjg">当前价:{$t[auction_price]}元</p></li>
+
+{/loop}

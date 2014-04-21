@@ -1,0 +1,5 @@
+
+{loop $tags $t}
+<li style="width:65px;"><a href="{$t[linkurl]}" target="_blank">{$t[company]}</a><a href="{$t[linkurl]}" target="_blank"><img src="{DT_SKIN}image/wenbao/vip.gif" border="0" align="absmiddle" style="margin-left:3px;"/></a></li>
+
+{/loop}

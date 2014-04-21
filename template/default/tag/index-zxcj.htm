@@ -1,0 +1,14 @@
+
+
+<!--
+{loop $tags $i $t}
+<li class="wb_news"><a href="{$t[linkurl]}"{if $target} target="{$target}"{/if}{if $class} class="{$class}"{/if} title="{$t[alt]}">{$t[title]}</a>      [{timetodate($t[addtime], $datetype)}]</li>
+{/loop}
+-->
+
+{loop $tags $i $t}
+<li class="zxpm_mc"><strong>拍品名：</strong><a href="{$t[linkurl]}"{if $target} target="{$target}"{/if}{if $class} class="{$class}"{/if} title="{$t[alt]}"><b class="cjmz">{dsubstr($t[title], 26, '...')}</b></a>
+<div class="num"><span class="wb_cs">出价次数：<b class="cjmz">{$t[orders]}</b>次</span><span class="wb_cj">成交价：<b class="cjmz">{$t[auction_price]}</b>元</span></div>
+<div class="clear"></div>
+</li>
+{/loop}

@@ -1,0 +1,19 @@
+<!--
+{loop $tags $i $t}
+<li class="wb_news"><a href="{$t[linkurl]}"{if $target} target="{$target}"{/if}{if $class} class="{$class}"{/if} title="{$t[alt]}">{$t[title]}</a>      [{timetodate($t[addtime], $datetype)}]</li>
+{/loop}
+-->
+{loop $tags $i $t}
+
+<li>
+<table width="718" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="217" height="28"><a href="{$t[linkurl]}"{if $target} target="{$target}"{/if}{if $class} class="{$class}"{/if} title="{$t[alt]}">{$t[title]}</a></td>
+    <td width="111">{$t[username]}</td>
+    <td width="101">{$t[price]}元</td>
+    <td width="158">{timetodate($t[fromtime], $datetype)} 开拍</td>
+    <td width="131">出价{$t[orders]}次 </td>
+  </tr>
+</table>
+</li>
+{/loop}

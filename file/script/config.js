@@ -1,0 +1,1 @@
+var DTPath = "http://wenbaozaixian.sk45.sdwlsym.com/";var SKPath = "http://wenbaozaixian.sk45.sdwlsym.com/skin/default/";var MEPath = "http://wenbaozaixian.sk45.sdwlsym.com/member/";var EXPath = "http://wenbaozaixian.sk45.sdwlsym.com/extend/";var CKDomain = "";var CKPath = "/";var CKPrex = "cdl_";

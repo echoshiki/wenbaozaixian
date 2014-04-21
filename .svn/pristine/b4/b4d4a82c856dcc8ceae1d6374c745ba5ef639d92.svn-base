@@ -1,0 +1,26 @@
+@charset "utf-8";
+/*reset*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,textarea,p,th,td,tr,table,tbody,thead,tfoot,em,strong,span {padding:0;margin:0; font-size:12px;} 
+
+/*focus*/
+.focus {height:200px;overflow:hidden;position:relative;background:#ccc;}
+.focus_m ul {width:496;height:200px;overflow:hidden;}
+.focus_m li {width:496;height:200px;_float:left;}
+.focus_m li.li_1 {background:url(banner.jpg) center 0 no-repeat;}
+.focus_m li.li_2 {background:url(banner1.jpg) center 0 no-repeat;}
+.focus_m li.li_3 {background:url(banner2.jpg) center 0 no-repeat;}
+
+.focus_s {height:0;position:relative;margin:0 auto;z-index:2;width:493px;}
+.focus_s ul {height:12px;overflow:hidden;position:absolute;left:10px;top:60px;}
+.focus_s li {float:left;cursor:pointer;height:12px;width:12px;overflow:hidden;margin-right:10px;}
+.focus_s li b {display:block;text-indent:-999em;background:url(circle.png) 0 0 no-repeat;width:12px;height:32px;overflow:hidden;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=noscale, src='images/index/circle.png');_background:none;}
+.focus_s li.active b {margin-top:-20px;}
+.focus_l,.focus_r {position:absolute;display:block;width:50px;height:75px;overflow:hidden;z-index:2;top:60px;}
+.focus_l {left:0;}
+.focus_r {right:0;}
+.focus_l b,.focus_r b {position:absolute;z-index:1;display:block;width:50px;height:75px;overflow:hidden;background:#000;opacity:0.3;filter:alpha(opacity=30);cursor:pointer;}
+.focus_l span,.focus_r span {display:block;position:relative;z-index:2;width:22px;height:33px;top:21px;cursor:pointer; margin-right:28px;}
+.focus_l span {left:12px;background:url(l.png) 0 0 no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=noscale, src='l.png');_background:none;}
+.focus_r span {left:16px;background:url(r.png) 0 0 no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=noscale, src='r.png');_background:none;}
+.focus_l:hover,.focus_r:hover {*zoom:1;}
+.focus_l:hover b,.focus_r:hover b {opacity:0.5;filter:alpha(opacity=50);}

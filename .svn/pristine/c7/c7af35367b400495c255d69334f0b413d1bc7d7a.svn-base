@@ -1,0 +1,7 @@
+<? //print_r ($tags);?>
+{loop $tags $t}
+<li class="zxpm_mc"><strong>卖家名：</strong><a href="{$t[linkurl]}" target="_blank"><b class="cjmz">{$t[company]}</b></a>
+<div class="num"><span class="wb_cs">地区：<b class="cjmz">{area_pos($t[areaid], '/', 1)}</b></span><span class="wb_cj">主营：<b class="cjmz">{$t[business]}</b></span></div>
+<div class="clear"></div>
+</li>
+{/loop}
