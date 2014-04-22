@@ -89,14 +89,13 @@ function setHomepage(){
 <body>
 <div class="wb_top">
 <ul>
-<li class="top_left">{if $_userid}<span class="f_b" title="{$MG[groupname]}">{$_truename}</span> <a href="{$MODULE[2][linkurl]}line.php" title="{if $_online}在线，点击隐身{else}隐身，点击上线{/if}"><img src="{DT_SKIN}image/user_{if $_online}on{else}off{/if}line.png" width="10" height="10" align="absmiddle"/></a> | <a href="{$MODULE[2][linkurl]}">商务中心</a> | <a href="{$MODULE[2][linkurl]}message.php">站内信(<span class="head_t" id="destoon_message">{if $_message}<strong>{$_message}</strong>{else}0{/if}</span>)</a>{if $DT[im_web]} | <a href="{$MODULE[2][linkurl]}chat.php">新对话(<span class="head_t" id="destoon_chat">{if $_chat}<strong>{$_chat}</strong>'+sound('chat_new')+'{else}0{/if}</span>)</a>{/if} | <a href="{$MODULE[2][linkurl]}logout.php">退出</a>{else}您好，欢迎您访问文宝在线网！<!--<strong><a href="{$MODULE[2][linkurl]}{$DT[file_login]}" style="color:#FF0000">登录</a></strong>  -->[<a href="{$MODULE[2][linkurl]}{$DT[file_register]}">免费注册</a>]{/if}</li>
-<li class="top_right"><script type="text/javascript">addFav('收藏本页');</script> | <a href="javascript:setHomepage();">设为首页</a> </li>
+<li class="top_left">{if $_userid}<span class="f_b" title="{$MG[groupname]}">{$_truename}</span> <a href="{$MODULE[2][linkurl]}line.php" title="{if $_online}在线，点击隐身{else}隐身，点击上线{/if}"><img src="{DT_SKIN}image/user_{if $_online}on{else}off{/if}line.png" width="10" height="10" align="absmiddle"/></a> | <a href="{$MODULE[2][linkurl]}">商务中心</a> | <a href="{$MODULE[2][linkurl]}message.php">站内信(<span class="head_t" id="destoon_message">{if $_message}<strong>{$_message}</strong>{else}0{/if}</span>)</a>{if $DT[im_web]} | <a href="{$MODULE[2][linkurl]}chat.php">新对话(<span class="head_t" id="destoon_chat">{if $_chat}<strong>{$_chat}</strong>'+sound('chat_new')+'{else}0{/if}</span>)</a>{/if} | <a href="{$MODULE[2][linkurl]}logout.php">退出</a>{else}您好，欢迎您访问文宝在线拍卖网！<!--<strong><a href="{$MODULE[2][linkurl]}{$DT[file_login]}" style="color:#FF0000">登录</a></strong>  -->[<a href="{$MODULE[2][linkurl]}{$DT[file_register]}">免费注册</a>]{/if}</li>
+<li class="top_right"><script type="text/javascript">addFav('收藏本页');</script> | <a href="javascript:setHomepage();">设为首页</a></li>
 </ul>
 </div>
 <!--wb_top over--><div class="m head_s" id="destoon_space" style="display:none"></div>
 <div class="pag_head">
 <div class="pag_logo"><img src="{$DT[logo]}" alt="{$DT[sitename]}" style=" margin-top:13px"/></div>
-
 
 <div id="search_module" style="display:none; margin-left:573px;" onmouseout="Dh('search_module');" onmouseover="Ds('search_module');">
 <!--{php $tags1=tag("table=category&condition=moduleid=23 and parentid=0&order=catid desc&template=null");}-->
@@ -104,11 +103,10 @@ function setHomepage(){
 <a href="javascript:void(0);" onclick="setModule1('{$t1[catid]}','{$t1[catname]}')">{$t1[catname]}</a>{/loop}
 	</div>
 	
-	
 <div class="pag_select">
-<form id="destoon_search" action="{$MODULE[23][linkurl]}search.php" onsubmit="return Dsearch(1);">
-	<input type="hidden" name="catid" value="4" id="destoon_moduleid"/>
-	<input type="hidden" name="spread" value="0" id="destoon_spread"/>
+  <form id="destoon_search" action="{$MODULE[23][linkurl]}search.php" onsubmit="return Dsearch(1);">
+  	<input type="hidden" name="catid" value="4" id="destoon_moduleid"/>
+  	<input type="hidden" name="spread" value="0" id="destoon_spread"/>
 <INPUT name="kw" type="text" value="{if $kw}{$kw}{else}请输入关键词{/if}" onfocus="if(this.value=='请输入关键词') this.value='';"{if $DT[search_tips]} onkeyup="STip(this.value);" autocomplete="off"{/if} id="select_text">
 
 <input type="text" onclick="$('#search_module').fadeIn('fast');" onfocus="this.blur();" readonly="" value="分类" class="search_m" id="destoon_select"  style="width:52px; line-height:28px; padding:0px; margin:0px; height:28px; border:2px solid #835502; border-left:none; background:url(../../skin/default/image/ico_arrow_d.gif) no-repeat 90% center; float:left">
@@ -132,13 +130,19 @@ function setHomepage(){
                         <h4><a href="/auction/list.php?catid=4">钱币</a></h4>
                     </li>
                     <li class="bg clearfix">
-                        <h4><a href="/auction/list.php?catid=8">官方专场</a></h4>
+                        <h4><a href="/news/">钱币资讯</a></h4>
                     </li>
                     <li class="clearfix">
-                        <h4><a href="/auction/list.php?catid=9">加盟方专场</a></h4>
+                        <h4><a href="/auction/?sta=finish">已成交拍品</a></h4>
                     </li>
                     <li class="bg clearfix">
-                        <h4><a href="/auction/list.php?catid=10">第三方拍品</a></h4>
+                        <h4><a href="/auction/list.php?catid=8">官方区</a></h4>
+                    </li>
+                    <li class="clearfix">
+                        <h4><a href="/auction/list.php?catid=9">加盟方区</a></h4>
+                    </li>
+                    <li class="bg clearfix">
+                        <h4><a href="/auction/list.php?catid=10">会员区</a></h4>
                     </li>
                     <li class="clearfix">
                         <h4><a href="/auction/list.php?catid=11">瓷器及其他</a></h4>
@@ -155,9 +159,9 @@ function setHomepage(){
         <ul class="menu_bd">
             <li><a href="{$MODULE[1][linkurl]}" >首页</a></li>
             <li><a href="{$MODULE[23][linkurl]}list.php?catid=4"  title="钱币">钱币</a></li>		
-            <li><a  href="{$MODULE[23][linkurl]}list.php?catid=8"  title="官方专场">官方专场</a></li>		
-            <li><a  href="{$MODULE[23][linkurl]}list.php?catid=9"  title="加盟方专场">加盟方专场</a></li>		
-            <li><a  href="{$MODULE[23][linkurl]}list.php?catid=10"  title="第三方拍品">第三方拍品</a></li>		
+            <li><a  href="{$MODULE[23][linkurl]}list.php?catid=8"  title="官方专场">官方区</a></li>		
+            <li><a  href="{$MODULE[23][linkurl]}list.php?catid=9"  title="加盟方专场">加盟方区</a></li>		
+            <li><a  href="{$MODULE[23][linkurl]}list.php?catid=10"  title="第三方拍品">会员区</a></li>		
             <li><a  href="{$MODULE[23][linkurl]}list.php?catid=11"  title="瓷器及其他">瓷器及其他</a></li>		
             <li><a  href="{$MODULE[1][linkurl]}about/8.html"  title="拍卖规则">拍卖规则</a></li>		
             <li><a  href="{$MODULE[1][linkurl]}about/9.html"  title="买卖须知">买卖须知</a></li>		

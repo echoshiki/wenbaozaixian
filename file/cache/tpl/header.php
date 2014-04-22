@@ -92,9 +92,9 @@ prefs.setCharPref('browser.startup.homepage','<?php echo $MODULE['1']['linkurl']
 line.png" width="10" height="10" align="absmiddle"/></a> | <a href="<?php echo $MODULE['2']['linkurl'];?>">商务中心</a> | <a href="<?php echo $MODULE['2']['linkurl'];?>message.php">站内信(<span class="head_t" id="destoon_message"><?php if($_message) { ?><strong><?php echo $_message;?></strong><?php } else { ?>0<?php } ?>
 </span>)</a><?php if($DT['im_web']) { ?> | <a href="<?php echo $MODULE['2']['linkurl'];?>chat.php">新对话(<span class="head_t" id="destoon_chat"><?php if($_chat) { ?><strong><?php echo $_chat;?></strong>'+sound('chat_new')+'<?php } else { ?>0<?php } ?>
 </span>)</a><?php } ?>
- | <a href="<?php echo $MODULE['2']['linkurl'];?>logout.php">退出</a><?php } else { ?>您好，欢迎您访问文宝在线网！<!--<strong><a href="<?php echo $MODULE['2']['linkurl'];?><?php echo $DT['file_login'];?>" style="color:#FF0000">登录</a></strong>  -->[<a href="<?php echo $MODULE['2']['linkurl'];?><?php echo $DT['file_register'];?>">免费注册</a>]<?php } ?>
+ | <a href="<?php echo $MODULE['2']['linkurl'];?>logout.php">退出</a><?php } else { ?>您好，欢迎您访问文宝在线拍卖网！<!--<strong><a href="<?php echo $MODULE['2']['linkurl'];?><?php echo $DT['file_login'];?>" style="color:#FF0000">登录</a></strong>  -->[<a href="<?php echo $MODULE['2']['linkurl'];?><?php echo $DT['file_register'];?>">免费注册</a>]<?php } ?>
 </li>
-<li class="top_right"><script type="text/javascript">addFav('收藏本页');</script> | <a href="javascript:setHomepage();">设为首页</a> </li>
+<li class="top_right"><script type="text/javascript">addFav('收藏本页');</script> | <a href="javascript:setHomepage();">设为首页</a></li>
 </ul>
 </div>
 <!--wb_top over--><div class="m head_s" id="destoon_space" style="display:none"></div>
@@ -106,11 +106,10 @@ line.png" width="10" height="10" align="absmiddle"/></a> | <a href="<?php echo $
 <a href="javascript:void(0);" onclick="setModule1('<?php echo $t1['catid'];?>','<?php echo $t1['catname'];?>')"><?php echo $t1['catname'];?></a><?php } } ?>
 </div>
 
-
 <div class="pag_select">
-<form id="destoon_search" action="<?php echo $MODULE['23']['linkurl'];?>search.php" onsubmit="return Dsearch(1);">
-<input type="hidden" name="catid" value="4" id="destoon_moduleid"/>
-<input type="hidden" name="spread" value="0" id="destoon_spread"/>
+  <form id="destoon_search" action="<?php echo $MODULE['23']['linkurl'];?>search.php" onsubmit="return Dsearch(1);">
+  <input type="hidden" name="catid" value="4" id="destoon_moduleid"/>
+  <input type="hidden" name="spread" value="0" id="destoon_spread"/>
 <INPUT name="kw" type="text" value="<?php if($kw) { ?><?php echo $kw;?><?php } else { ?>请输入关键词<?php } ?>
 " onfocus="if(this.value=='请输入关键词') this.value='';"<?php if($DT['search_tips']) { ?> onkeyup="STip(this.value);" autocomplete="off"<?php } ?>
  id="select_text">
@@ -134,13 +133,19 @@ line.png" width="10" height="10" align="absmiddle"/></a> | <a href="<?php echo $
                         <h4><a href="/auction/list.php?catid=4">钱币</a></h4>
                     </li>
                     <li class="bg clearfix">
-                        <h4><a href="/auction/list.php?catid=8">官方专场</a></h4>
+                        <h4><a href="/news/">钱币资讯</a></h4>
                     </li>
                     <li class="clearfix">
-                        <h4><a href="/auction/list.php?catid=9">加盟方专场</a></h4>
+                        <h4><a href="/auction/?sta=finish">已成交拍品</a></h4>
                     </li>
                     <li class="bg clearfix">
-                        <h4><a href="/auction/list.php?catid=10">第三方拍品</a></h4>
+                        <h4><a href="/auction/list.php?catid=8">官方区</a></h4>
+                    </li>
+                    <li class="clearfix">
+                        <h4><a href="/auction/list.php?catid=9">加盟方区</a></h4>
+                    </li>
+                    <li class="bg clearfix">
+                        <h4><a href="/auction/list.php?catid=10">会员区</a></h4>
                     </li>
                     <li class="clearfix">
                         <h4><a href="/auction/list.php?catid=11">瓷器及其他</a></h4>
@@ -157,9 +162,9 @@ line.png" width="10" height="10" align="absmiddle"/></a> | <a href="<?php echo $
         <ul class="menu_bd">
             <li><a href="<?php echo $MODULE['1']['linkurl'];?>" >首页</a></li>
             <li><a href="<?php echo $MODULE['23']['linkurl'];?>list.php?catid=4"  title="钱币">钱币</a></li>
-            <li><a  href="<?php echo $MODULE['23']['linkurl'];?>list.php?catid=8"  title="官方专场">官方专场</a></li>
-            <li><a  href="<?php echo $MODULE['23']['linkurl'];?>list.php?catid=9"  title="加盟方专场">加盟方专场</a></li>
-            <li><a  href="<?php echo $MODULE['23']['linkurl'];?>list.php?catid=10"  title="第三方拍品">第三方拍品</a></li>
+            <li><a  href="<?php echo $MODULE['23']['linkurl'];?>list.php?catid=8"  title="官方专场">官方区</a></li>
+            <li><a  href="<?php echo $MODULE['23']['linkurl'];?>list.php?catid=9"  title="加盟方专场">加盟方区</a></li>
+            <li><a  href="<?php echo $MODULE['23']['linkurl'];?>list.php?catid=10"  title="第三方拍品">会员区</a></li>
             <li><a  href="<?php echo $MODULE['23']['linkurl'];?>list.php?catid=11"  title="瓷器及其他">瓷器及其他</a></li>
             <li><a  href="<?php echo $MODULE['1']['linkurl'];?>about/8.html"  title="拍卖规则">拍卖规则</a></li>
             <li><a  href="<?php echo $MODULE['1']['linkurl'];?>about/9.html"  title="买卖须知">买卖须知</a></li>

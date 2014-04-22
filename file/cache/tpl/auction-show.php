@@ -44,10 +44,12 @@ Dd('dfavorite').submit();
 <div>加价幅度<br/>￥<?php echo $minamount;?></div>
 <div><strong>秒杀价<br/><?php if($marketprice>=99999999) { ?>无<?php } else { ?>￥<?php echo $marketprice;?><?php } ?>
 </strong></div>
+<div id="fnotice"><strong>友情提示：</strong>为保证竞拍过程的公正与秩序，首次参与该商品竞拍的用户需支付该商品底价10%的保证金，该保证金在竞拍过程中交由网站系统保管，直到竞拍结束后归还用户账户。保证金只收取一次。</div>
 </div>
 <div class="b10 c_b">&nbsp;</div>
 <!-- <div class="g_deal" onclick="Go('<?php echo $MOD['linkurl'];?><?php echo rewrite('buy.php?itemid='.$itemid);?>');"> -->
-<div class="g_deal" id="deal1" onclick='$("#auction_area").show(500);'>
+<div class="g_deal" id="deal1" <?php if($fromtime-86400 < time()) { ?>onclick='$("#auction_area").show(500);'<?php } ?>
+>
 <input type='hidden' id="url_go" value="<?php echo $MOD['linkurl'];?><?php echo rewrite('buy.php?itemid='.$itemid);?>">
 <div>￥<?php echo $iprice;?></div>
 </div>
@@ -61,6 +63,8 @@ $("#go_auction").click(function(){
 var x = $("#auction_price").val();
 var y = $("#url_go").val();
 if(confirm('确定是否以'+x+'元的价格竞价此商品？')){
+var user = "<?php echo $_username; ?>";
+if (user == '') { alert('竞拍商品前请您先登录。'); return false; };
 $.get('<?php echo $MOD['linkurl'];?><?php echo rewrite("auction.php?itemid=".$itemid);?>',{values:x},function(data){
 // //处理返回的data
 // alert(data);
@@ -76,6 +80,7 @@ window.location.reload();
 });
 });
 </script>
+<?php if($fromtime-86400 < time()) { ?>
 <?php if($process == 2) { ?>
 <div class="g_timer">
 本竞拍结束于
@@ -117,24 +122,36 @@ setInterval("_totimer()", 1000);
 </script>
 <?php } ?>
 <?php } ?>
-
+<?php } else { ?>
+<div class="g_timer">
+本竞拍开拍时间为
+<div id="totimer"><?php echo timetodate($fromtime, 'Y年n月j日');?><br />
+请等待...</div>
+</div>
+<div class="b10 c_b">&nbsp;</div>
+<?php } ?>
 <div class="g_info">
-<strong>已经有 <span><?php echo $orders;?></span> 人竞拍</strong>
+<strong>该商品已经有 <span><?php echo $orders;?></span> 人竞拍</strong>
 <div>
 <div id="testarea">
 <table>
+<tr>
+<th width="23%">参与用户</th>
+<th>出价</th>
+<th width="50%">竞拍时间</th>
+</tr>
 <?php foreach ($tags as $key => $value) { ?>
 <tr><td><?php echo $value['auction_user'];?></td>
-<td><?php echo $value['price'];?></td>
+<td>￥<?php echo $value['price'];?></td>
 <td><?php echo $value['time'];?></td></tr>
 <?php } ?>
 </table>
 </div>
-页码：<select id="test" >
+<span class="page_info">页码：</span><select id="test" >
 <?php for ($i=1; $i <= $pages ; $i++) { ?>
 <option value="<?php echo $i;?>"><?php echo $i;?></option>
 <?php }?>
-</select>&nbsp;&nbsp;共<?php echo $pages;?>页
+</select>&nbsp;&nbsp;<span class="page_info">共<span><?php echo $pages;?></span>页</span>
 <!-- <?php if($process == 0) { ?>
 正在成团，距离团购人数还差<?php echo $left;?>人
 <?php } else if($process == 1) { ?>
@@ -151,10 +168,12 @@ setInterval("_totimer()", 1000);
 <div class="b10 c_b">&nbsp;</div>
 </div>
 </div>
+<div class="m">
 <!-- UY BEGIN -->
 <div id="uyan_frame"></div>
 <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1640067"></script>
 <!-- UY END -->
+</div>
 <script type="text/javascript">
 $(document).ready(function(){
 $("#test").click(function(){

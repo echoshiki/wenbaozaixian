@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="{DT_SKIN}{$module}.css"/>
 <div class="m">
 	<div class="left_box">
-		<div class="pos">当1231前位置: <a href="{$MODULE[1][linkurl]}">首页</a>
+		<div class="pos">当前位置: <a href="{$MODULE[1][linkurl]}">首页</a>
 		&raquo; <a href="{$MOD[linkurl]}">{$MOD[name]}</a>
 		{if $catid}&raquo; {cat_pos($CAT, ' &raquo; ')}{/if}
 		</div>
@@ -18,7 +18,13 @@
 			{/loop}
 			</table>
 			</div>
-		</div>		<!--{tag("moduleid=$moduleid&condition=status=3&catid=$catid&areaid=$cityid&pagesize=15&page=$page&showpage=1&width=250&height=180&cols=3&datetype=5&order=".$MOD[order]."&target=_blank&lazy=$lazy&template=list-auction")}-->
+		</div>		
+		<?php if ($_GET['sta'] == 'finish'){ ?>
+			<!--{tag("moduleid=$moduleid&condition=auction_status!=0&catid=$catid&areaid=$cityid&pagesize=15&page=$page&showpage=1&width=250&height=180&cols=3&datetype=5&order=".$MOD[order]."&target=_blank&lazy=$lazy&template=list-auction")}-->
+		<?php }else{ ?>
+			<!--{tag("moduleid=$moduleid&condition=status=3&catid=$catid&areaid=$cityid&pagesize=15&page=$page&showpage=1&width=250&height=180&cols=3&datetype=5&order=".$MOD[order]."&target=_blank&lazy=$lazy&template=list-auction")}-->
+		<?php } ?>
+		
 	</div>
 </div>
 {template 'footer'}
