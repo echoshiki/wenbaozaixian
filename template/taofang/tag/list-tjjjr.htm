@@ -1,0 +1,13 @@
+{loop $tags $k $t} 
+<dd>
+			 <em><a href="{userurl($t[username], '')}" target=_blank><img src="{imgurl($t[thumb], 1)}"  /></a></em>
+          <ul>
+            <li>姓名：{$t[username]}</li>
+            <li>公司：<a href="{userurl($t[username], '')}" target="_blank">{$t[company]}</a></li>
+            <li>电话：{$t[telephone]}</li>
+            <li>区域：{area_pos($t[areaid], '')}</li>
+            <li><a href="{userurl($t[username], '')}" target="_blank">进入店铺>></a></li>
+          </ul>
+        </dd>{/loop}
+			
+			

@@ -89,7 +89,7 @@ function setHomepage(){
 <body>
 <div class="wb_top">
 <ul>
-<li class="top_left">{if $_userid}<span class="f_b" title="{$MG[groupname]}">{$_truename}</span> <a href="{$MODULE[2][linkurl]}line.php" title="{if $_online}在线，点击隐身{else}隐身，点击上线{/if}"><img src="{DT_SKIN}image/user_{if $_online}on{else}off{/if}line.png" width="10" height="10" align="absmiddle"/></a> | <a href="{$MODULE[2][linkurl]}">商务中心</a> | <a href="{$MODULE[2][linkurl]}message.php">站内信(<span class="head_t" id="destoon_message">{if $_message}<strong>{$_message}</strong>{else}0{/if}</span>)</a>{if $DT[im_web]} | <a href="{$MODULE[2][linkurl]}chat.php">新对话(<span class="head_t" id="destoon_chat">{if $_chat}<strong>{$_chat}</strong>'+sound('chat_new')+'{else}0{/if}</span>)</a>{/if} | <a href="{$MODULE[2][linkurl]}logout.php">退出</a>{else}您好，欢迎您访问文宝在线拍卖网！<!--<strong><a href="{$MODULE[2][linkurl]}{$DT[file_login]}" style="color:#FF0000">登录</a></strong>  -->[<a href="{$MODULE[2][linkurl]}{$DT[file_register]}">免费注册</a>]{/if}</li>
+<li class="top_left">{if $_userid}<span class="f_b" title="{$MG[groupname]}">{$_truename}</span> <a href="{$MODULE[2][linkurl]}line.php" title="{if $_online}在线，点击隐身{else}隐身，点击上线{/if}"><img src="{DT_SKIN}image/user_{if $_online}on{else}off{/if}line.png" width="10" height="10" align="absmiddle"/></a> | <a href="{$MODULE[2][linkurl]}">商务中心</a> | <a href="{$MODULE[2][linkurl]}message.php">站内信(<span class="head_t" id="destoon_message">{if $_message}<strong>{$_message}</strong>{else}0{/if}</span>)</a>{if $DT[im_web]} | <a href="{$MODULE[2][linkurl]}chat.php">新对话(<span class="head_t" id="destoon_chat">{if $_chat}<strong>{$_chat}</strong>'+sound('chat_new')+'{else}0{/if}</span>)</a>{/if} | <a href="{$MODULE[2][linkurl]}logout.php">退出</a>{else}您好，欢迎访问中国最专业的钱币在线拍卖平台！<strong><a href="{$MODULE[2][linkurl]}{$DT[file_login]}" style="color:#FF0000">登录</a></strong> [<a href="{$MODULE[2][linkurl]}{$DT[file_register]}">免费注册</a>]{/if}</li>
 <li class="top_right"><script type="text/javascript">addFav('收藏本页');</script> | <a href="javascript:setHomepage();">设为首页</a></li>
 </ul>
 </div>
@@ -142,7 +142,7 @@ function setHomepage(){
                         <h4><a href="/auction/list.php?catid=9">加盟方区</a></h4>
                     </li>
                     <li class="bg clearfix">
-                        <h4><a href="/auction/list.php?catid=10">会员区</a></h4>
+                        <h4><a href="/company/search.php?new=1">会员区</a></h4>
                     </li>
                     <li class="clearfix">
                         <h4><a href="/auction/list.php?catid=11">瓷器及其他</a></h4>

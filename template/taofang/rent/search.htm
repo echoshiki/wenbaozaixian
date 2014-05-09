@@ -1,0 +1,186 @@
+{template 'top'}
+<link rel=stylesheet type=text/css href="{AJ_SKIN}rent/esf.css">
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/footer.css">
+<script type="text/javascript">var sh = '{$MOD[linkurl]}search.php?catid={$catid}';</script>
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/pages.css">
+<SCRIPT type=text/javascript src="{AJ_SKIN}js/list.js"></SCRIPT>
+<SCRIPT type=text/javascript>
+
+$(document).ready(function(){
+	$('.a_listdown1').hover(
+	function(){
+	  $('.down_list1').show().end();	 
+	},
+	function(){
+	  $('.down_list1').hide().end();	 
+	}
+	);
+	//装修下拉  
+	$('.a_listdown2').hover(
+	function(){
+	  $('.down_list2').show().end();	 
+	},
+	function(){
+	  $('.down_list2').hide().end();	 
+	}
+	);
+	//房龄 
+	$('.a_listdown10').hover(
+	function(){
+	  $('.down_list10').show().end();	 
+	},
+	function(){
+	  $('.down_list10').hide().end();	 
+	}
+	);
+	//发布时间下拉  
+	$('.a_listdown3').hover(
+	function(){
+	  $('.down_list3').show().end();	 
+	},
+	function(){
+	  $('.down_list3').hide().end();	 
+	}
+	);
+	//更新时间下拉  
+	$('.b_elist_linput_timelist').hover(
+	function(){
+	  $('.down_list4').show().end();	 
+	},
+	function(){
+	  $('.down_list4').hide().end();	 
+	}
+	);
+})
+
+
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+$(document).ready(function(){
+   $('.hotarea dt').hover(function(){
+	   $('.hotarea dt').removeClass('select');
+	   $(this).addClass('select');
+	   $('.hotarea dt').next().css('display','none');
+	   $(this).next().css('display','block');
+	   })
+   })
+</SCRIPT>
+
+<DIV id=content>
+<P class=b_elist>您现在的位置：<a href="{$MODULE[1][linkurl]}">首页</a> &raquo; <a href="{$MOD[linkurl]}">{$MOD[name]}</a> &raquo; <EM>房源列表</EM></A></P>
+<DIV class=b_elist_txt>
+<P><SPAN class=a_name>类型：</SPAN> <SPAN>
+<A  href='{$MOD[linkurl]}list.php?p={$_GET['p']}&areaid={$_GET['areaid']}&r={$_GET['r']}&a={$_GET['a']}&typeid={$_GET['typeid']}&catid=''' class='{if $_GET['catid']==''}select{/if}'>不限</A>
+
+			{loop $maincat $k $v}
+		<a  href="{$MOD[linkurl]}list.php?p={$_GET['p']}&areaid={$_GET['areaid']}&r={$_GET['r']}&a={$_GET['a']}&typeid={$_GET['typeid']}&catid={$v[catid]}" class='{if $v[catid]==$catid}select{/if}'>{$v[catname]}</a>
+		{/loop} </SPAN></P>
+<P><SPAN class=a_name>区域：</SPAN><SPAN> <a href="{$MOD[linkurl]}list.php?p={$_GET['p']}&a={$_GET['a']}&r={$_GET['r']}&areaid={$cityid}&catid={$_GET['catid']}&typeid={$_GET['typeid']}" class="{if $_GET['areaid']==$cityid or $_GET['areaid']=='' }select{/if}">不限</A> 
+ {loop $mainarea $k $v}    
+  <a href="{$MOD[linkurl]}list.php?p={$_GET['p']}&a={$_GET['a']}&r={$_GET['r']}&areaid={$v[areaid]}&catid={$_GET['catid']}&typeid={$_GET['typeid']}" class="{if $v[areaid]==$areaid}select{else}""{/if}">{$v[areaname]}</a>   {/loop}
+</SPAN></P>
+<P><SPAN class=a_name>价格：</SPAN><SPAN> <a href='{$MOD[linkurl]}list.php?l={$_GET['l']}&a={$_GET['a']}&areaid={$_GET['areaid']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&p=''' class='{if $_GET['p']==''}select{/if}'>不限</a> 
+{php $price = array('200元以下', '200-500元', '500-1000元', '1000-1500元', '1500-2000元', '2000-3000元','3000元以上');}
+{loop $price $k $v}  <a href='{$MOD[linkurl]}list.php?r={$_GET['r']}&a={$_GET['a']}&areaid={$_GET['areaid']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&p=<?php echo $k+1;?>' class='{if $_GET['p']==($k+1)}select{else}{/if}'>{$v}</a>&nbsp;{/loop}</SPAN></P>
+<P><SPAN class=a_name>面积：</SPAN><SPAN>  <a href='{$MOD[linkurl]}list.php?r={$_GET['r']}&areaid={$_GET['areaid']}&p={$_GET['p']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&a=''' class='{if $_GET['a']==''}select{/if}'>不限</a> 
+{php $mianji = array('40平米以下', '40-60平米', '60-80平米', '80-100平米', '100-120平米', '120-150平米','150平米以上');}
+{loop $mianji $k $v}  <a href='{$MOD[linkurl]}list.php?r={$_GET['r']}&areaid={$_GET['areaid']}&p={$_GET['p']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&a=<?php echo $k+1;?>' class='{if $_GET['a']==($k+1)}select{else}{/if}'>{$v}</a>&nbsp;{/loop} </SPAN></P>
+<P><SPAN class=a_name>户型：</SPAN><SPAN> <a href='{$MOD[linkurl]}list.php?a={$_GET['a']}&areaid={$_GET['areaid']}&p={$_GET['p']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&r=''' class='{if $_GET['r']==''}select{/if}'>不限</a> 
+{php $huxing = array('一室', '二室', '三室', '四室', '其它');}
+{loop $huxing $k $v}  <a href='{$MOD[linkurl]}list.php?a={$_GET['a']}&areaid={$_GET['areaid']}&p={$_GET['p']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&r=<?php echo $k+1;?>' class='{if $_GET['r']==($k+1)}select{else}{/if}'>{$v}</a>&nbsp;{/loop} </SPAN></P>
+<DIV class=b_elist_lsearchlist>
+<form id="aijiacms_search" action="{$MODULE[7][linkurl]}search.php" onsubmit="return Dsearch();">
+<input type="hidden" name="spread" value="0" id="aijiacms_spread"/>
+
+
+<input name="kw" id="aijiacms_kw" type="text" class="b_elist_lsearch_txtone fl" size="15" value="请输入房源名称" onfocus="if(this.value=='请输入房源名称') this.value='';" onkeyup="STip(this.value);" autocomplete="off"/>
+		  <input type="submit" value="搜索" class="b_elist_lsearch_txttwo"/></form>      
+  <div class="b_elist_linput">
+                 <span class="b_elist_linput_one">价格区间：</span>
+               
+                 <div class="a_listdown2">
+				   				<form action="{$MODULE[7][linkurl]}search.php" id="fsearch">
+			<input type="hidden" name="list" id="list" value="{$list}"/>   <INPUT id=minprices 
+class=b_eicon1 onKeyUp="value=value.replace(/[^0-9.]/g,'')" size=5 
+name=minprice> -- <INPUT id=maxprices class=b_eicon1 
+onkeyup="value=value.replace(/[^0-9.]/g,'')" size=5 name=maxprice> 万 <input type="submit" class=b_eicon2  name="Submit" value="搜索" /></form> 
+                 </div>
+</DIV>
+
+<DIV class=clear></DIV></DIV></DIV>
+<DIV class="b_elist_left b_mt10 fl ">
+<DIV class=b_elist_ltxt_title>
+<SPAN  class={if $_GET['typeid']==''}b_elist_bg1{/if}><A  href='{$MOD[linkurl]}list.php?p={$_GET['p']}&areaid={$_GET['areaid']}&r={$_GET['r']}&a={$_GET['a']}&catid={$_GET['catid']}&typeid=''' >全部房源</A></SPAN>{loop $TYPE $k $v}
+          <SPAN  class={if $_GET['typeid']==$k and $_GET['typeid']!='' }b_elist_bg1{/if}>  <a href="{$MOD[linkurl]}list.php?p={$_GET['p']}&areaid={$_GET['areaid']}&r={$_GET['r']}&a={$_GET['a']}&catid={$_GET['catid']}&typeid={$k}">{$v}</a></SPAN>
+  {/loop} 
+
+
+  </DIV>
+<DIV class="b_elist_ltxt mb10">
+<DIV class=b_elist_lsearch2>
+
+<DIV class=b_elist_linput_defult><SPAN class=b_elist_linput_one>排序方式：</SPAN> 
+<SPAN class=b_elist_linput_timelist><EM><A href="javascript:;">默认排序</A> </EM>
+<DIV class=down_list4>
+
+<A 
+href="{$MOD[linkurl]}list.php?r={$_GET['r']}&a={$_GET['a']}&areaid={$_GET['areaid']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&p={$_GET['p']}">默认排序</A> <A 
+href="{$MOD[linkurl]}list.php?r={$_GET['r']}&a={$_GET['a']}&areaid={$_GET['areaid']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&p={$_GET['p']}&order=ed">按发布时间从新到旧</A> <A 
+href="{$MOD[linkurl]}list.php?r={$_GET['r']}&a={$_GET['a']}&areaid={$_GET['areaid']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&p={$_GET['p']}&order=ea">按发布时间从旧到新</A> <A 
+href="{$MOD[linkurl]}list.php?r={$_GET['r']}&a={$_GET['a']}&areaid={$_GET['areaid']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&p={$_GET['p']}&order=hd">按面积从大到小排序</A> <A 
+href="{$MOD[linkurl]}list.php?r={$_GET['r']}&a={$_GET['a']}&areaid={$_GET['areaid']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&p={$_GET['p']}&order=ha">按面积从小到大排序</A> <A 
+href="{$MOD[linkurl]}list.php?r={$_GET['r']}&a={$_GET['a']}&areaid={$_GET['areaid']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&p={$_GET['p']}&order=pd">按租金从高到低排序</A> <A 
+href="{$MOD[linkurl]}list.php?r={$_GET['r']}&a={$_GET['a']}&areaid={$_GET['areaid']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&p={$_GET['p']}&order=pa">按租金从低到高排序</A>  </DIV></SPAN>
+
+{if $_GET['order']=="hd"}
+<span class="b_elist_linput_threedown"><a href="{$MOD[linkurl]}list.php?r={$_GET['r']}&a={$_GET['a']}&areaid={$_GET['areaid']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&p={$_GET['p']}&order=ha">面积 </a></span>{else}
+<SPAN class=b_elist_linput_three><A href="{$MOD[linkurl]}list.php?r={$_GET['r']}&a={$_GET['a']}&areaid={$_GET['areaid']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&p={$_GET['p']}&order=hd">面积 </A></SPAN>{/if}
+{if $_GET['order']=="pd"}
+<span class="b_elist_linput_threedown"><a href="{$MOD[linkurl]}list.php?r={$_GET['r']}&a={$_GET['a']}&areaid={$_GET['areaid']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&p={$_GET['p']}&order=pa">租金 </a></span>{else}
+<SPAN class=b_elist_linput_three><A href="{$MOD[linkurl]}list.php?r={$_GET['r']}&a={$_GET['a']}&areaid={$_GET['areaid']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&p={$_GET['p']}&order=pd">租金 </A></SPAN>{/if}
+</DIV>
+<P>共有 <A>{$items}</A> 套符合要求的房子</P></DIV>
+
+ {if $page==1 && $kw}
+		{ad($moduleid,$catid,$kw,6)}
+		{load('m'.$moduleid.'_k'.urlencode($kw).'.htm')}
+		{/if}
+{if $tags}
+
+{if $page == 1}{load('ad_m'.$moduleid.'_c'.$catid.'.htm')}{/if}
+		{if $tags}{template 'list-'.$module, 'tag'}{/if}
+		
+		</form>
+       {else}
+		{template 'noresult', 'message'}
+		{/if}
+
+
+</DIV>	</DIV>
+<DIV class="b_elist_right b_mt10 fr">
+ <div class="b_elist_r2">
+        <div class="b_elist_r2_title">
+          <h2>人气房源</h2>
+        </div>
+		<div class="b_elist_rhousea" style="display:none">还没有房源记录</div>
+		
+		<div class="b_elist_rhousea">
+		 <!--{tag("moduleid=7&table=rent&condition=status=3 and itemid<>'$itemid'&areaid=$cityid&pagesize=10&order=hits desc&template=list-renttjy")}-->
+				
+				<div class="clear"></div>
+        </div>
+		
+ </div>
+
+<DIV style="MARGIN-TOP: 5px" class=b_elist_r2>
+<DIV class=b_elist_r2_title>
+<H2>经纪人排行</H2></DIV>
+<DIV class=b_elist_rhousea>
+
+<!--{tag("table=member&condition=groupid=7&order=userid desc&pagesize=10&template=list-jjr")}-->
+<DIV class=clear></DIV></DIV></DIV>
+</DIV><!--footer-->
+<DIV class=clear></DIV><!--区域链接-->
+
+{template 'foot'}

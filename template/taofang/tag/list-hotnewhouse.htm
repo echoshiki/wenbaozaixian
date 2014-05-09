@@ -1,0 +1,9 @@
+{loop $tags $k $t}
+{if $k%8==0}<ul>
+<li class="f_rank_top">楼盘&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价格</li>{/if}
+			
+
+<li><span>{if $t[price]}{$t[price]}{else}均价{/if}</span><strong><?php echo $k+1;?></strong> <a href="{$t[linkurl]}" target="_blank">{dsubstr($t[alt], 12, '')}</a></li>
+
+ {if $k==7 or $k==15 }</ul>{/if} 
+{/loop}

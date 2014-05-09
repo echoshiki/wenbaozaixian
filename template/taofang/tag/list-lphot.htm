@@ -1,0 +1,12 @@
+{loop $tags $k $t}
+<dd>
+          <div class="i">
+	 	  <aside class="Aic"><a href="{$t[linkurl]}" target="_blank"><img src="{imgurl($t[thumb], 1)}" width="130" height="100" border="0" /></a></aside>
+          </div>
+          <div class="in">
+            <p><a href="{$t[linkurl]}"  target="_blank">{$t[title]}</a></p>
+            <em>{$t[telephone]}</em> <a href="{$t[linkurl]}" class="zt">{if $typeid==0}待售{elseif $typeid==1}在售{elseif $typeid==2}打折{elseif $typeid==3}热点{/if} </a>
+		   {if $t[price]}{$t[price]}元/平米{else}一房一价{/if} 
+             </div>
+        </dd>{/loop}
+		

@@ -1,0 +1,13 @@
+{loop $tags $k $t}
+ <LI {if $k==4 or $k==9 }class=mr0{else}{/if}>
+  <DIV class=h_h_pic><a href="{$t[linkurl]}" target="_blank"><img src="{imgurl($t[thumb], 1)}" width="180" height="115" border="0" /></a></DIV>
+  <DIV class=h_h_info>
+  <DIV class=h_h_name><a href="{$t[linkurl]}"  target="_blank">{$t[title]}</a></DIV>
+  <DIV class=h_h_tel>{dsubstr($t[telephone], 12, $suffix = '')}<B></B></DIV>
+  <DIV class=h_h_arrow></DIV>
+  <DIV class=h_h_purposes>“‚œÚ£∫<SPAN class=warns>{$t[hits]}»À</SPAN></DIV></DIV>
+  <DIV class=h_h_tip><a href="{$t[linkurl]}"  target="_blank">{dsubstr($t[tedian], 26, $suffix = '')}</a></DIV>
+  </LI> {/loop}
+  
+  
+		

@@ -1,0 +1,247 @@
+{template 'top', 'article'}
+<link rel="stylesheet" type="text/css" href="{AJ_SKIN}news_index.css">
+<div class="clear"></div>  
+  <!--新闻首页广告 新闻首页-通栏1-->
+  
+  <div class="indexmain">
+  	  <!--第一屏-->
+  	  <div class="boxA">
+      	<!--焦点图综合资讯-->
+        <div class="boxAleft fl">
+        	<div class="Foucs">
+          	<!--{tag("moduleid=$moduleid&condition=status=3 and level=2 and thumb!=''&areaid=$cityid&order=".$MOD[order]."&pagesize=".$MOD[page_islide]."&width=330&height=200&target=_blank&template=slide")}-->
+        <!--幻灯结束-->
+       </div>
+<!--新闻首页 焦点图-->
+       <div class="clear"></div>
+	    {if $MOD[page_lrec]}
+            <div class="indexnews mt10">
+            	            		<h3 class="name"><span><a href="{$MODULE[8][linkurl]}" target="_blank">更多</a></span><b><a href="{$MODULE[8][linkurl]}" target="_blank">推荐{$MOD[name]}</a></b></h3>
+                                <ul>
+					                          <!--{php $tags=tag("moduleid=$moduleid&condition=status=3 and level=1&order=".$MOD[order]."&pagesize=".$MOD[page_lrec]."&target=_blank&template=null");}-->
+	{loop $tags $k $t}
+		 <li><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></li> {/loop}
+					                </ul>
+        </div> {/if}<!--新闻首页 一屏左侧-栏目1-->
+        </div>
+        <!--热点新闻-->
+        <div class="boxAcenter fl ml10">
+        	<div class="ti">
+			  <!--{php $tags=tag("moduleid=$moduleid&condition=status=3 and level=5&areaid=$cityid&length=20&order=".$MOD[order]."&pagesize=1&target=_blank&template=null");}-->
+								{loop $tags $k $t}
+            	    <h1><a target="_blank" href="{$t[linkurl]}">{$t[title]}</a></h1>{/loop}
+<ul class="txtone">
+     <!--{php $tags=tag("moduleid=$moduleid&condition=status=3 and level=4&areaid=$cityid&length=20&order=".$MOD[order]."&pagesize=4&target=_blank&template=null");}-->
+								{loop $tags $k $t}
+								 <li><a target="_blank" href="{$t[linkurl]}">{$t[title]}</a></li>{/loop}
+</ul><!--新闻首页 头条新闻-->
+
+            </div>
+            <ul class="w14">
+             <!--{php $tags=tag("moduleid=$moduleid&condition=status=3 and level=1&areaid=$cityid&length=42&order=".$MOD[order]."&pagesize=4&target=_blank&template=null");}-->
+								{loop $tags $k $t}
+								 <li><a target="_blank" href="{$t[linkurl]}">{$t[title]}</a></li>{/loop}
+        </ul><ul class="w14 last">  <!--{php $tags=tag("moduleid=$moduleid&condition=status=3 and level=1&areaid=$cityid&length=42&order=".$MOD[order]."&pagesize=4&target=_blank&template=null");}-->
+								{loop $tags $k $t}
+								 <li><a target="_blank" href="{$t[linkurl]}">{$t[title]}</a></li>{/loop}
+        </ul><!--新闻首页 推荐新闻-->
+        </div>
+        <!--右侧-->
+        <div class="boxAright fl ml10">
+        	<div class="indexnews">
+            	            		<h3 class="name"><span><a href="{$MODULE[8][linkurl]}" target="_blank">更多</a></span><b><a href="{$MODULE[8][linkurl]}" target="_blank">推荐信息</a></b></h3>
+                                <!--{php $tags=tag("moduleid=8&condition=status=3&areaid=$cityid&length=20&pagesize=1&order=addtime desc&target=_blank&template=null");}-->
+ {loop $tags $i $t}    <div class="hg1">
+                        <div class="Img1"><a href="{$t[linkurl]}" title="{$t[title]}" target="_blank"><img src="{imgurl($t[thumb], 1)}" width="70" height="60"></a></div>
+                        <div class="Text1"><b><a href="{$t[linkurl]}" title="{$t[title]}" target="_blank">{$t[title]}</a>
+                        </b>{dsubstr($t[introduce], 50, $suffix = '..')}<a href="{$t[linkurl]}" target="_blank">[详细]</a></div>
+                    </div>{/loop}
+                                <ul>
+                                        <!--{php $tags=tag("moduleid=8&condition=status=3&areaid=$cityid&length=40&pagesize=5&order=addtime desc&target=_blank&template=null");}-->
+ {loop $tags $i $t}          <li><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}" >{$t[title]}</a></li>{/loop}
+                                    </ul>
+        	</div><!--新闻首页 一屏右侧-栏目1-->
+        	<div class="mt10">
+     {ad(42)} 
+</div><!--新闻首页广告 新闻首页-画中画1-->
+        </div>
+      </div>
+      <!--新闻首页广告 新闻首页-通栏2-->
+<!--第二屏-->
+      <div class="mt10">
+        <!--左侧-->
+        <div class="fl wid300">
+        	<!--屏二左侧-栏目新闻-->
+			{if $MOD[page_lhits]}
+            <div class="border">
+             <h3 class="name"><b><a href="{$MODULE[8][linkurl]}" target="_blank">新闻排行</a></b></h3>
+             <ul style="display: block;" class="news_rank"  id="con01-0">
+             	         <!--{php $tags=tag("moduleid=$moduleid&condition=status=3 and addtime>$today_endtime-30*86400&length=42&order=hits desc&pagesize=".$MOD[page_lhits]."&target=_blank&template=null");}-->
+	{loop $tags $k $t}
+		
+        	               <li><i class="{if $k<3}selectred{else}{/if}" ><?php echo $k+1;?></i><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></li>
+						   {/loop}
+                        	 </ul>
+           </div>{/if}<!--新闻首页 二屏左侧-栏目1-->
+        	<div class="mt10">
+   {ad(43)} 
+</div><!--新闻首页广告 新闻首页-画中画2-->
+ <div class="mt10">
+        <!--左侧-->
+        <div class="fl wid300">
+           {if $MOD[page_lrecimg]}
+      <div class="house_ranking mt10">
+                <h3><span><a href="{$MODULE[8][linkurl]}" target="_blank">更多>></a></span><b><a href="{$MODULE[8][linkurl]}" target="_blank">推荐图文</a></b></h3>
+     
+        <ul class="topic" id="zt_con13-0">
+		   <!--{php $tags=tag("moduleid=$moduleid&length=18&condition=status=3 and level=3 and thumb!=''&pagesize=".$MOD[page_lrecimg]."&order=".$MOD[order]."&width=120&height=90&cols=2&target=_blank&template=null");}-->
+	{loop $tags $k $t}
+                            <li>
+                    <div class="topic_img"><a href="{$t[linkurl]}" title="{$t[titlle]}" target="_blank"><img src="{imgurl($t[thumb], 1)}" width="120" height="95" alt="{$t[alt]}" ></a></div> <p><a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a></p>
+                </li> {/loop}
+                           
+                   
+                    </ul>
+        
+      
+       
+        <div class="clear"></div>
+      </div>
+	  {/if}<!--新闻首页 三屏左侧-栏目1-->
+           <div class="mt10">
+    {ad(44)} 
+</div>
+<!--楼盘排行-->
+      <div class="house_ranking">
+      	<div class="house_rankingtitle">
+        	<h2>楼盘</h2>
+        	<ul class="hr_title">
+              <li class="hover" id="news_m02-0" onMouseOver="Tab01(0,2);return false;"><a href="{$MODULE[6][linkurl]}list.php" target="_blank">热点楼盘</a></li>
+<li id="news_m02-1" onMouseOver="Tab01(1,2);return false;"><a href="{$MODULE[6][linkurl]}list.php" target="_blank">最新开盘</a></li>
+<li class="more"><a href="{$MODULE[6][linkurl]}" target="_blank">更多>></a></li>
+			</ul>
+	  	</div>
+     	<div class="tab">
+                      <table id="news_con02-0" width="280" border="0" align="center" cellpadding="0" cellspacing="0">
+            <colgroup>
+            <col width="102">
+            <col width="70">
+            <col width="72">
+            <col width="72">
+            </colgroup>
+            <tbody>
+              <tr>
+                <th>楼盘名称</th>
+                <th>开盘价</th>
+                <th>位置</th>
+                <th>开盘时间</th>
+              </tr>
+                      <!--{php $tags=tag("moduleid=6&condition=status=3 and isnew=1 &areaid=$cityid&length=12&pagesize=10&order=hits desc&template=null");}-->
+								{loop $tags $k $t}
+                                      <tr>
+                        <td><em><a target="_blank" href="{$t[linkurl]}">{$t[title]}</a></em></td>
+                        <td><span> {if $t[price]}{$t[price]}元{else}待定{/if} </span></td>
+                        <td>{area_poss($t[areaid], ' ')}</td>
+                        <td >{$t[selltime]}</td>
+                      </tr>{/loop}
+                                </tbody>
+          </table><!--新闻详情页 详情右侧—楼盘.热点楼盘-->
+             <table id="news_con02-1"  width="280" border="0" align="center" cellpadding="0" cellspacing="0" style="display:none;">
+            <colgroup>
+            <col width="102">
+            <col width="70">
+            <col width="72">
+            <col width="72">
+            </colgroup>
+            <tbody>
+              <tr>
+                <th>楼盘名称</th>
+                <th>开盘价</th>
+                <th>位置</th>
+                <th>开盘时间</th>
+              </tr><!--{php $tags=tag("moduleid=6&condition=status=3 and isnew=1 &areaid=$cityid&length=12&pagesize=10&order=selltime desc&template=null");}-->
+								{loop $tags $k $t}
+                                      <tr>
+                        <td><em><a target="_blank" href="{$t[linkurl]}">{$t[title]}</a></em></td>
+                        <td><span> {if $t[price]}{$t[price]}元{else}待定{/if} </span></td>
+                        <td>{area_poss($t[areaid], ' ')}</td>
+                        <td >{$t[selltime]}</td>
+                      </tr>{/loop}
+                            
+                                </tbody>
+          </table><!--新闻详情页 详情右侧—楼盘.近期开盘-->
+        </div>
+      </div>
+<script>
+$(function(){
+	$("#news_con02-1").hide();
+})
+</script><!--新闻首页广告 新闻首页-画中画3-->
+           <!--新闻首页 三屏左侧-栏目2-->
+        </div>
+        </div>
+		 </div>
+        <!--右侧-->
+		{if $MOD[page_icat]}
+        <div class="fr wid650 bo_left_top">
+		{loop $childcat $i $c}
+          <div class="z_newslist">
+           	                		<h3 class="title"><a href="{$MOD[linkurl]}{$c[linkurl]}" title="{$c[catname]}" target="_blank">更多</a><b><a href="{$MOD[linkurl]}{$c[linkurl]}" title="{$c[catname]}" target="_blank">{$c[catname]} &raquo;</a></b></h3>
+									{if $i==0 ||$i==1|| $i==4 || $i==5}
+									  <!--{php $tags=tag("moduleid=8&catid=".$c[catid]."&condition=status=3&areaid=$cityid&length=18&pagesize=1&order=addtime desc&target=_blank&template=null");}-->
+ {loop $tags $i $t}<div class="z_picnews">		
+                     <div class="z_Img"><a href="{$t[linkurl]}" title="{$t[title]}" target="_blank"><img src="{imgurl($t[thumb], 1)}" width="105" height="80"></a></div>
+                     <div class="z_Text"><b><a href="{$t[linkurl]}" title="{$t[title]}" target="_blank">{$t[title]}</a></b>{dsubstr($t[introduce], 50, $suffix = '..')}<a href="{$t[linkurl]}" target="_blank">[详细]</a></div>
+                </div>{/loop}{/if}
+                        		<ul>
+                                       <!--{php $tags=tag("moduleid=8&catid=".$c[catid]."&condition=status=3&areaid=$cityid&length=42&pagesize=5&order=addtime desc&target=_blank&template=null");}-->
+ {loop $tags $i $t}          <li><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}" >{$t[title]}</a></li>{/loop}
+                                              
+                                    </ul>
+          </div><!--新闻首页 二屏右侧-栏目1-->
+		  {/loop}
+         
+          <!--新闻首页 二屏右侧-栏目4-->
+           <div class="clear"></div>
+        </div>{/if}
+        <div class="clear"></div>
+      </div>
+      <!--新闻首页广告 新闻首页-通栏3-->
+      <!--第三屏-->
+     
+        <!--右侧-->
+        <!--新闻首页 三屏右侧-栏目6-->
+        
+        <div class="clear"></div>
+      </div>      
+      <!--图片集-->
+
+     
+   
+     <!--新闻首页 区域楼盘-->
+       <div class="clear"></div>
+       <div class="areahouse mt10">
+  <div class="areatitle"><p>友情链接</p><span style="float:right;padding-right:10px;" > </span></div>
+  <div class="frlinkcon">
+         <!--{php $tags=tag("table=link&condition=status=3 and  typeid=4 and thumb='' and username=''&areaid=$cityid&pagesize=".$AJ['page_text']."&order=listorder desc,itemid desc&template=null");}-->
+					  {loop $tags $t}  
+			      	<a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{$t[title]}</a> {/loop}
+                <div class="clear"></div>
+   </div>
+</div><!--新闻首页 友情链接-->
+       <!--底部-->
+      <div class="foot"></div>
+  </div>
+</div>
+<div class="Area">
+<style type="text/css">.Area {
+	CLEAR: both; MARGIN: 0px auto; WIDTH: 950px; HEIGHT: auto
+}
+.Area A {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+</style>
+{template 'footer'}</div>
+
+</body>
+</html>

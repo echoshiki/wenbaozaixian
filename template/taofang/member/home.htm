@@ -1,0 +1,72 @@
+{template 'header', 'member'}
+<script type="text/javascript">c(3);</script>
+<div class="text">
+<div class="menus">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td class="tab" id="Tab0"><a href="home.php"><span>商铺设置</span></a></td>
+<td class="tab_nav">&nbsp;</td>
+<td class="tab" id="Tab1"><a href="style.php"><span>模板设置</span></a></td>
+<td class="tab_nav">&nbsp;</td>
+<td class="tab" id="Tab2"><a href="{AJ_PATH}index.php?homepage={$_username}&update=1" target="homepage"><span>更新主页</span></a></td>
+</tr>
+</table>
+</div>
+<form method="post" action="home.php" id="dform">
+<table  class="sell1" width="755"  border="1">
+
+<tr>
+<td class="tl">显示设置</td>
+<td class="tr">
+<input type="radio" name="setting[side_pos]" value="0" id="s_p_0"{if $side_pos==0} checked{/if}/><label for="s_p_0"> 侧栏在左</label>&nbsp;&nbsp;
+<input type="radio" name="setting[side_pos]" value="1" id="s_p_1"{if $side_pos==1} checked{/if}/><label for="s_p_1"> 侧栏在右</label> 
+</td>
+</tr>
+<tr>
+<td class="tl">访问统计</td>
+<td class="tr">
+<input type="radio" name="setting[show_stats]" value="1" id="s_s_1"{if $show_stats==1} checked{/if}/><label for="s_s_1"> 显示</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" name="setting[show_stats]" value="0" id="s_s_0"{if $show_stats==0} checked{/if}/><label for="s_s_0"> 不显示</label> 
+</td>
+</tr>
+
+<tr>
+<td class="tl">网站公告<br/>(支持html)</td>
+<td class="tr"><textarea name="setting[announce]" id="announce" style="width:500px;height:60px;">{$announce}</textarea></td>
+</tr>
+<tr>
+<td class="tl">首页SEO标题</td>
+<td class="tr"><input type="text" size="60" name="setting[seo_title]" value="{$seo_title}"/> 不设置则显示公司名称</td>
+</tr>
+<tr>
+<td class="tl">网站关键词</td>
+<td class="tr"><input type="text" size="80" name="setting[seo_keywords]" value="{$seo_keywords}"/></td>
+</tr>
+<tr>
+<td class="tl">网站描述</td>
+<td class="tr"><input type="text" size="80" name="setting[seo_description]" value="{$seo_description}"/></td>
+</tr>
+{if $api_map && $MG[map]}
+<tr>
+<td class="tl">地图坐标</td>
+<td class="tr">{php include AJ_ROOT.'/api/map/'.$api_map.'/post.inc.php';}</td>
+</tr>
+
+
+{/if}
+{if $api_stats && $MG[stats]}
+{php include AJ_ROOT.'/api/stats/'.$api_stats.'/post.inc.php';}
+{/if}
+{if $api_kf && $MG[kf]}
+{php include AJ_ROOT.'/api/kf/'.$api_kf.'/post.inc.php';}
+{/if}
+<tr>
+<td class="tl">&nbsp;</td>
+<td class="tr" height="30"><input type="submit" name="submit" value=" 保 存 " class="btn"/>&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="submit" value=" 恢复默认 " class="btn" onclick="if(confirm('确定要恢复默认设置吗？当前所有设置将被清空')){this.form.action='home.php?reset=1';}else{return false;}"/></td>
+</tr>
+</table>
+</form>
+</div>
+{load('clear.js')}
+<script type="text/javascript">s('homepage');m('Tab0');</script>
+{template 'footer', 'member'}

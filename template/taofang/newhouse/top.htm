@@ -1,0 +1,16 @@
+
+<!--导航 begin -->
+<div class="nav">
+<ul class="link1">
+<li class="link2"><a href="{$MODULE[6][linkurl]}">新房首页</a></li>
+<li class="aa"><a href="{$MODULE[6][linkurl]}list.php">楼盘超市</a></li>
+{php $maincat = get_maincat(0,8)}
+{loop $maincat $k $v}
+<li  class="{if $v[catid]==$catid}link2{else}aa{/if}">
+<a  href="{$MODULE[8][linkurl]}{$v[linkurl]}">{$v[catname]}</a>
+</li>{/loop}
+
+</ul>
+</div>
+<div class="hr10"></div>
+<!--导航 end -->

@@ -1,0 +1,20 @@
+
+{loop $tags $k $t} 
+
+  <DIV class=esf_con_manone>
+<DIV class="esf_con_mamone_img fl"><A 
+href="{userurl($t[username], '')}" target=_blank><IMG 
+src="{imgurl($t[thumb], 1)}"></A> </DIV>
+<UL class="esf_con_manone_txt fl">
+  <LI><SPAN class=esf_blue><A 
+  href="{userurl($t[username], '')}" 
+  target=_blank>{$t[username]}</A></SPAN> <SPAN class=level>{if $t[vip]}<img src="{AJ_SKIN}image/vip.gif"/> <img src="{AJ_SKIN}image/vip_{$t[vip]}.gif"/></span>{/if}</SPAN> 
+  <LI>¹«Ë¾£º<A href="{userurl($t[username], '')}" 
+  target=_blank>{$t[company]}</A><BR></LI>
+   <LI>ÇøÓò£º<EM>{area_pos($t[areaid], '')}</EM>
+  </LI>
+  </UL></DIV>
+
+  {/loop}
+			
+			

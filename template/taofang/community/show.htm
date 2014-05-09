@@ -1,0 +1,132 @@
+{template 'top'}
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/community_detail.css">
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/footer.css">
+<DIV class=content><!--当前位置，小区导航start-->
+<P class=p_add>您现在的位置：<a href="{$MODULE[1][linkurl]}">首页</a> &raquo; <a href="{$MOD[linkurl]}">小区中心</A>  &raquo;<EM> {$title}</EM></P>
+<DIV class=Atitle>
+<H1>{$title}</H1>
+<DIV class="subNav clearfix">
+<UL class=clearfix>
+  <LI class=selected><A 
+  href="{$linkurl}">小区概况</A> </LI>
+  <LI><A href="{$MODULE[18][linkurl]}jiage.php?itemid={$itemid}">价格行情</A> </LI>
+  <LI><A href="{$MODULE[18][linkurl]}sale.php?itemid={$itemid}">出售房源</A> </LI>
+  <LI><A href="{$MODULE[18][linkurl]}rent.php?itemid={$itemid}">出租房源</A> </LI>
+</UL><form name="detailForm" id="detailForm" action="{$MODULE[2][linkurl]}favorite.php" method="post">
+<input type="hidden" name="action" value="add"/>
+<input type="hidden" name="title" value="{$title}"/>
+<input type="hidden" name="url" value="{$linkurl}"/>
+</form>
+<P>
+<A href="javascript:document.getElementById('detailForm').submit();">收藏该小区</A></P>
+
+
+<DIV class=clear></DIV></DIV></DIV><!--当前位置，小区导航end-->
+<DIV class="content mt10"><!--left-->
+<DIV class="left fl">
+<DIV class=partA>
+<DIV class="partA_left fl">
+<DIV id=KinSlideshow>
+ {if $thumb}
+{loop $albums $k $v}
+<A href="{$value[linkurl]}" target=_blank><IMG 
+alt={$title} src="{$v}" width=284 height=213></A> {/loop}
+ {else}<img src="{AJ_SKIN}image/nopic240.gif" width=284 height=213 /></LI>
+  {/if}
+</DIV></DIV>
+<DIV class="partA_right fr">
+<H2>{$title}</H2>
+<UL>
+  <LI><SPAN class=title>出售均价：</SPAN> <SPAN 
+  class=priseC>{$paa}</SPAN>元/m<SUP>2</SUP> <SPAN>&nbsp;与{$lb}月</SPAN><SPAN 
+  class=priseC>{$percent_change}</SPAN> 
+  <!--<LI><SPAN class=title>出租均价：</SPAN> <SPAN class=priseC>暂无价格</SPAN> <span class="title">出租均价：</span>
+                  <span class="priseC">暂无价格</span>-->
+  <LI><SPAN class=title>所属区域：</SPAN>{area_pos($areaid, '')} 
+  <LI><SPAN class=title>小区地址：</SPAN>{$address}<EM></EM> 
+  <LI><SPAN class=title>小区交通：</SPAN>{$lp_bus} 
+  <LI><SPAN class=title>物业类别：</SPAN>{cat_pos($CAT, ' &raquo; ')} 
+  <LI><SPAN class=title>物业公司：</SPAN>{$lp_company} 
+  
+ <!-- <LI><SPAN style="FLOAT: left" class=share>小区分享：</SPAN> <SPAN 
+  style="FLOAT: left; PADDING-TOP: 5px" id=ckepop><A 
+  class=jiathis_button_qzone></A><A class=jiathis_button_tsina></A><A 
+  class=jiathis_button_tqq></A><A class=jiathis_button_renren></A><A 
+  class=jiathis_button_kaixin001></A><A class=jiathis_button_tsohu></A><A 
+  class=jiathis_button_xiaoyou></A><A class=jiathis_button_tieba></A><A 
+  class=jiathis_button_sina></A></SPAN></LI>-->
+  </UL></DIV></DIV><!--出售出租start-->
+<DIV class="partB mt10">
+<H3><SPAN class="more sell_rent_more">本小区共有<SPAN class=prise>{$itemsale}</SPAN>套出售房源 <A 
+href="{$MODULE[18][linkurl]}sale.php?itemid={$itemid}">更多</A></SPAN> <SPAN 
+style="DISPLAY: none" class="more sell_rent_more">本小区共有<SPAN 
+class=prise>{$itemrent}</SPAN>套出租房源 <A 
+href="{$MODULE[18][linkurl]}rent.php?itemid={$itemid}">更多</A></SPAN> <EM 
+class="sell_rent title_select">出售</EM> <EM class=sell_rent>出租</EM> </H3><!--出售start-->
+<UL>
+ <!--{loop $hsall_list $key $value}-->
+  <LI>
+  <DIV class=centerimg><A title={$value[title]} 
+  href="{$MODULE[5][linkurl]}{$value[linkurl]}" target=_blank><IMG 
+  src="{imgurl($value[thumb], 1)}" width=100 height=75></A></DIV>
+  <DIV class=house>
+  <P><A title={$value[title]} 
+  href="{$MODULE[5][linkurl]}{$value[linkurl]}" 
+  target=_blank>{dsubstr($value[title], 16, $suffix = '')}</A></P>
+  <P><SPAN>{area_pos($value[areaid], ' ')}</SPAN></P>
+  <P><SPAN>{$value[room]}居</SPAN><SPAN> 面积:{$value[houseearm]}㎡</SPAN></P>
+  <P>{if $value[price]>0}<STRONG class=red>{$value[price]}</STRONG>万元{else}面议{/if}</P></DIV></LI>
+  <!--{/loop}-->
+ </UL><!--出售end--><!--出租start-->
+<UL style="DISPLAY: none">
+<!--{loop $hrent_list $key $value}-->
+   <LI>
+  <DIV class=centerimg><A title={$value[title]} 
+  href="{$MODULE[7][linkurl]}{$value[linkurl]}" target=_blank><IMG 
+  src="{imgurl($value[thumb], 1)}" width=100 height=75></A></DIV>
+  <DIV class=house>
+  <P><A title={$value[title]} 
+  href="{$MODULE[7][linkurl]}{$value[linkurl]}" 
+  target=_blank>{dsubstr($value[title], 16, $suffix = '')}</A></P>
+  <P><SPAN>{area_pos($value[areaid], ' ')}</SPAN></P>
+  <P><SPAN>{$value[room]}居</SPAN><SPAN> 面积:{$value[houseearm]}㎡</SPAN></P>
+  <P>{if $value[price]>0}<STRONG class=red>{$value[price]}</STRONG>元/月{else}面议{/if}</P></DIV></LI>
+  <!--{/loop}-->
+  <DIV class=clear></DIV></UL><!--出租end--></DIV><!--出售出租end-->
+  <SCRIPT type=text/javascript 
+src="{AJ_SKIN}js/jquery.KinSlideshow-1.2.1.min.js"></SCRIPT>
+  <SCRIPT type=text/javascript src="{AJ_SKIN}js/community_index.js"></SCRIPT><!--小区地图-->
+<DIV class="partB mt10">
+<H3>小区地图</H3>
+<DIV id=map_container>{php $map_height = 282;}
+	{php @include AJ_ROOT.'/api/map/baidu/show.inc.php';}</DIV></DIV><!--小区相册-->
+<DIV class="partC mt10">
+<H3><SPAN class=more><A href="#top" 
+name=maparea>返回顶部</A></SPAN>小区相册</H3>
+<UL class=photo>
+{if $thumb}
+ <LI><A href="{str_replace('.thumb.jpg', '', $thumb)}" target=_blank><img src="{str_replace('.thumb.', '.middle.', $thumb)}" width=150 height=115 /></A></LI>{else} {/if}
+{if $thumb1}
+ <LI><A href="{str_replace('.thumb.jpg', '', $thumb1)}" target=_blank><img src="{str_replace('.thumb.', '.middle.', $thumb1)}"  width=150 height=115/></A></LI>{else} {/if}
+{if $thumb2}
+ <LI><A href="{str_replace('.thumb.jpg', '', $thumb2)}" target=_blank><img src="{str_replace('.thumb.', '.middle.', $thumb2)}"  width=150 height=115/></A></LI>{else} {/if}
+
+ </UL></DIV><!--小区户型图-->
+<DIV class="partC mt10">
+<H3><SPAN class=more><A href="#top" 
+name=maparea>返回顶部</A></SPAN>{$title}小区介绍</H3>
+<UL class=photo>
+  <LI>{$content} </LI></UL></DIV><!--看看周边的小区-->
+</DIV><!--right小区，二手房，出租房，小区专家start-->
+<DIV class="right fr"><!-- 您最近浏览过的小区-->
+<DIV class=village>
+<H3>周边小区</H3>
+<DIV class=b_elist_rhousea>
+{loop $same_quyu_list $k $t} 	
+<P><SPAN class=b_elist_rtxt1><a href="{$MODULE[18][linkurl]}{$t[linkurl]}" target="_blank">{dsubstr($t[title], 10, $suffix = '')}</a></SPAN> <SPAN class=b_elist_rtxt2>{area_poss($areaid, ' ')}</SPAN> <SPAN 
+class=b_elist_rtxt3>{if $t[avg_price]}{$t[avg_price]}元/m<SUP>2</SUP>{else}暂无{/if}</SPAN></P>
+{/loop}</DIV></DIV>
+</DIV></DIV><!--right小区，二手房，出租房，小区专家end--></DIV>
+
+{template 'zoom', 'chip'}
+{template 'foot'}

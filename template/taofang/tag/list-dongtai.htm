@@ -1,0 +1,4 @@
+{loop $tags $i $t}<li class="{if $i%2==0}de_sale1{else}de_sale{/if}"><div class="a1">{date('Y-m-d', $t[addtime])}</div>
+<div class="a2">{dsubstr($t[content], 140, $suffix = '..')}<a href="{$t[linkurl]}" target="_blank" style="color:#024174;">[ÏêÏ¸]</a> </div>
+</li>{/loop}
+

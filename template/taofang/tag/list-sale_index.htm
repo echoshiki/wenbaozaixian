@@ -1,0 +1,8 @@
+{loop $tags $k $t}
+<dl style="background:none;">
+<a href="{$t[linkurl]}" target="_blank">
+<img src="{imgurl($t[thumb], 1)}" width="90" height="75"></a>
+<dd><a href="{$t[linkurl]}" target="_blank">{dsubstr($t[title], 10, $suffix = '')}</a></dd>
+<dd>{$t[room]}室{$t[hall]}厅 {$t[houseearm]}㎡</dd>
+<dd>{area_poss($t[areaid], ' ')} {if $t[price]}{$t[price]}万元{else}面议{/if}</dd>
+</dl>{/loop}

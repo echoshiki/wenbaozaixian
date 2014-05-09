@@ -1,0 +1,714 @@
+
+
+{template 'header'}
+{template 'top', 'newhouse'}
+<link href="{AJ_SKIN}/houses_style.css" rel="stylesheet" type="text/css" />
+<link href="{AJ_SKIN}/house_zhuye_js.css" rel="stylesheet" type="text/css">
+<link href="{AJ_SKIN}/loupan.css" rel="stylesheet" type="text/css" />
+<SCRIPT src="{AJ_SKIN}js/jquery-1.7.2.min.js"></SCRIPT>
+<script>
+function newslist(cid, id){
+	jQuery(".newslist_"+cid+"_li").removeClass("current").addClass("nocur");
+	jQuery("#newslist_"+cid+"_li"+id).removeClass("nocur").addClass("current");
+	jQuery(".newslist_"+cid+"_ul").hide();
+	jQuery("#newslist_"+cid+"_ul"+id).show();
+}	
+/*视频滑动门*/
+function show_menu(num){
+for(i=1;i<5;i++){
+	if($('li'+i)){
+	$('h'+i).style.display='none';
+	$('li'+i).style.display='none';
+	$('f'+i).className='shipin03';
+	 }
+}
+	  $('h'+num).style.display='block';//触发以后标题块
+	  $('li'+num).style.display='block';//触发以后信息块
+	  $('f'+num).className='shipin030';//触发以后TAG样式
+}
+
+</script>
+<style type="text/css">
+.record { border:1px solid #ccc; margin:0 20px; background:url({AJ_SKIN}image/house/side_bg01.jpg) 2px 2px no-repeat; background-color:#f6f6f6; line-height:20px; margin-bottom:12px;}
+.record ul { text-align:left; padding:4px 0 3px 35px; word-spacing:12px; color:#666;}
+
+/*图片轮换*/
+#a_tabs1 div,#a_tabs1 ul,#a_tabs1 li{margin:0 auto;padding:0;}
+.alpha1{opacity:0.8; -moz-opacity:0.8; filter:alpha(opacity=80); }
+#a_tabs1{text-align:center; height:273px;position:relative;}
+.a_menu1box{position:absolute;overflow:hidden;height:30px;width:290px;text-align:center;left:0;bottom:0; background:#000}
+#a_menu1{top:0;left:0;z-index:1;}
+#a_menu1 li{float:left;display:block;cursor:pointer;width:70px;text-align:center;line-height:30px;}
+#a_menu1 li a{text-align:center; width:70px; color:#FFF}
+#a_menu1 li.hover{ background:#fff}
+#a_menu1 li.hover a{ color:#c00;}
+.a_main1box{clear:both;margin-top:-1px;height:273px;width:298px; padding-bottom:0px;float:left;}
+.a_main1box img{ width:298px; height:273px;float:left;}
+#a_main1 ul{display: none; height:273px; padding-bottom:0px;}
+#a_main1 ul.block{display: block;}
+*html .a_menu1box{left:0;bottom:3px;}
+*html .a_info .left .pic4{ padding-bottom:0px;}
+.a_big a:hover,.a_big a:active,.a_title span a:hover,.a_title span a:active,.a_feature .left a:hover,.a_feature .left a:active,.a_phone .left a:hover,.a_phone .left a:active,.a_info .right p a:hover,.a_info .right p a:active,.a_info a:hover,.a_info a:active,.a_info .left .decimal p a:hover,.a_info .left .decimal p a:active{color:#F60;} 
+</style>
+
+
+
+<!--zhuye img div-->
+<div class="cArea">
+<!--当前位置 begin-->
+<div class="column">
+<div class="a1 linka">
+<a href="{$MODULE[1][linkurl]}">首页</a> &raquo; <a href="{$MOD[linkurl]}">{$MOD[name]}</a>&raquo;  <h3 style="display:inline"><a href="{$linkurl}">{$title}</a> </h3> &raquo; 
+楼盘主页</div>
+<div class="a2 linka">
+<form name="detailForm" id="detailForm" action="{$MODULE[2][linkurl]}favorite.php" method="post">
+<input type="hidden" name="action" value="add"/>
+<input type="hidden" name="title" value="{$title}"/>
+<input type="hidden" name="url" value="{$linkurl}"/>
+</form>
+<a href="javascript:document.getElementById('detailForm').submit();" class="a-comm">收藏</a>
+
+
+ 
+<a href="javascript:void(0);" onclick="print();">打印</a>  │  
+<span>最后更新:{$editdate}</span>
+</div>
+</div>
+<!--当前位置 end-->
+<div class="hr10"></div>
+
+
+
+<!--楼盘名称 begin-->
+<div class="tab_a">
+<div class="tab_a_l">
+<div class="a1"><h1>{$title}</h1></div>
+<div class="a2 state_{if $typeid==0}jjss{elseif $typeid==1}zs{elseif $typeid==2}wp{/if}">{$TYPE[$typeid]}</div>
+<div class="a4">{get_cats($catid,  $moduleid)}</div>
+</div>
+<div class="tab_a_r">
+<span class="reda">{$hits}</span> 人关注 
+参加{$title}购房团 
+[<span class="linka"><a href="{$MOD[linkurl]}{rewrite('inquiry.php?itemid='.$itemid)}">我要团购</a>] 
+</span>
+</div>
+</div>
+<!--楼盘名称 end-->
+<div class="hr10"></div>
+
+
+<!--浮动导航begin-->
+<div id="index_nav_box">
+<div class="qlink" id="index_nav">
+
+<!--楼盘顶部导航栏目 begin-->
+
+<DIV class="subNav">
+<UL class="clearfix">
+
+{php $menu = array('xinxi'=>'详细信息', 'huxing'=>'户型', 'dongtai'=>'销售动态', 'jiage'=>'价格明细', 'peitao'=>'地图配套', 'xiangce'=>'图片相册', 'zixun'=>'相关资讯', 'wenfang'=>'问房');}
+<li class="this"><a href="{$linkurl}">楼盘主页</a></li>{loop $menu $k $v} 
+<li ><a href="{$MODULE[6][linkurl]}{$k}.php?itemid={$itemid}">{$v}</a></li>
+{/loop}
+
+</UL>
+</DIV>
+
+<!--楼盘顶部导航栏目 end-->
+<div class="hr10"></div>
+
+</div>
+</div>
+<!--浮动导航end-->
+
+</div>
+<!--当前位置 cArea-->
+<!--zhuye img div-->
+<div class="bord">
+<div class="fpic">
+<script>
+function setTab(m,n){
+var tli=document.getElementById("a_menu"+m).getElementsByTagName("li");
+var mli=document.getElementById("a_main"+m).getElementsByTagName("ul");
+for(i=0;i<tli.length;i++){
+   tli[i].className=i==n?"hover":"";
+   mli[i].style.display=i==n?"block":"none";
+}
+}
+$(document).ready(function(){
+       $('.down_search').hover(
+	   function(){
+	      $('.down_menu').show().end();	 
+	   },
+	   function(){
+	      $('.down_menu').hide().end();	 
+	   }
+	   );
+	   })
+</script>
+<!--Focus Start-->
+<div class="shipin">
+      <div class="pic4">
+          <div id="a_tabs1">
+		              <div class="a_main1box">
+					    {if $picitems==0}
+			<img src="{imgurl240($thumb, 1)}"/>{else}
+              <div id="a_main1">
+			
+			  <!--{php $tags=tag("moduleid=12&table=aijiacms_photo m,aijiacms_photo_item c&prefix=&condition=m.itemid=c.item  and m.houseid=$itemid&pagesize=4&order=m.itemid desc&template=null");}-->
+{loop $tags $k $t}
+                                <ul class="{if $k==0}block{else}{/if}">
+				 <li><a href="{$t[linkurl]}" target='_blank'><img src="{str_replace('.thumb.', '.middle.', $t[thumb])}"/></a></li>
+				 </ul>{/loop}
+				          
+				              </div>{/if}
+            </div>{if $picitems==0}{else}
+            <div class="a_menu1box alpha1">
+              <ul id="a_menu1">  <!--{php $tags=tag("moduleid=12&table=aijiacms_photo m,aijiacms_photo_item c&prefix=&condition=m.itemid=c.item  and m.houseid=$itemid&showcat=1&pagesize=4&order=m.itemid desc&template=null");}-->
+{loop $tags $k $t}   <li class="{if $k==0}hover{else}{/if}" onMouseOver="setTab(1,{$k})"><a onClick="javascript:;">{$t[catname]}</a></li>{/loop}</ul>
+            </div> {/if}
+          		  </div>
+        </div>
+</div>	
+<!--Focus End-->
+
+<div style="width:300px; margin:8px 0;"><!--新房旗帜广告A1-->
+ {ad(36)}</div>
+<div class="f_rank">
+<div class="f_rank_t1">
+<div class="f_rank_t1_l  current" >价格走势</div>
+
+</div>
+<div class="newslist_3_ul f_rank_list" id="newslist_3_ul1">
+ <!--价格走势-->
+
+<DIV style="MARGIN: 0px auto; WIDTH: 290px; HEIGHT: 138px" id=container 
+class="fjzs pic"></DIV>
+</div>
+
+</div>
+
+</div>
+<div id="detail">
+<div class="tk_detail">
+<ul>
+<li>
+<div class="dleft"><strong>物业类别</strong>：{get_cats($catid,  $moduleid)}</div>
+<div class="dleft"><strong>项目特色</strong>：{$tedian}</div>
+</li>
+<li>
+<div class="dleft"><strong>建筑类别</strong>：{$buildtype}</div>
+<div class="dleft"><strong>销售状态</strong>：{$TYPE[$typeid]}</div>
+</li>
+
+<li>
+<div class="dleft"><strong>所在区域</strong>：{area_pos($areaid, ' ')}</div>
+<div class="dleft"><strong>售楼地址</strong>：{$address}</div>
+</li>
+<li><strong>物业地址</strong>：{$sell_address} </li>
+<li><strong>公共交通</strong>：{$lp_bus}</li>
+<div class="line"></div>
+<li>
+<div class="dleft"><strong>开盘时间</strong>：{$selltime}</div>
+<div class="dleft"><strong>入住时间</strong>：{$completion}</div>
+</li>
+<li>
+<div class="dleft"><strong>容积率</strong>：{$lp_volume} </div>
+<div class="dleft"><strong>绿化率</strong>：{$lp_green}% </div>
+</li>
+<li>
+<div class="dleft"><strong>户数</strong>：总共{$lp_number} 户 </div>
+<div class="dleft"><strong>产权归属</strong>：{$lp_year}年</div>
+</li>
+<li>
+<div class="dleft"><strong>物业费</strong>：{$lp_costs}元/㎡/月</div>
+<div class="dleft"><strong>物业公司</strong>：{$lp_company}</div>
+
+</li>
+<li><div class="dleft"><strong>开发商</strong>：{$kfs}</div>
+<div class="dleft"><strong>装修状况</strong>：{$lp_fitment}</div>
+ </li>
+
+<li><strong>售楼地址</strong>：{$sell_address}</li>
+<li><strong>{$title}房价</strong>：<font>{if $price}{$price}元/平方米{else}一房一价{/if} </font></li>
+<li id="contact">{template 'contactlp', 'chip'}</li>
+<div class="line"></div>	
+<li>
+<div class="phone"><img src="{AJ_SKIN}image/pic13.jpg" width="56" height="56" border="0"/></div>
+<div class="phone_r">
+<div class="phone_r_t">{$title}的售楼电话 <span> 我从{if $city_sitename}{$city_sitename}{else}{$AJ[sitename]}{/if}上看到售楼处电话，想咨询···</span></div>
+<div class="phone_r_b">{$telephone}</div>
+</div>
+</li>
+</ul>
+</div>
+<table width="645" border="0"cellpadding="0" cellspacing="0">
+<tr>
+<td height="13" valign="top"><img src="{AJ_SKIN}/image/line03.gif"/></td>
+</tr>
+<tr>
+<td height=""><div class="newMes">
+<h2><strong class="cred"><a href="{$linkurl}dongtai.html">销售信息</a></strong> | <span class="us_gray2">{$title}最新消息</span></h2>
+
+ <!--{tag("moduleid=8&table=aijiacms_article_8 m,aijiacms_article_data_8 c&prefix=&condition=m.itemid=c.itemid  and m.houseid=$itemid&pagesize=4&order=m.itemid desc&template=list-xsxx")}-->
+</div></td>
+</tr>
+</table>
+<div style=" margin-top:8px; width:645px; overflow:hidden">
+<!--650X70-->
+
+</div>
+</div>
+<div class="clear"></div>
+
+</div>
+<A name="vmore"></A>
+<div class="infoextra" name="infoextra">
+<div class="left">
+<div class="newsBoxList">
+<ul class="tag">
+<li class="current newslist_1_li" id="newslist_1_li1" onmouseover="newslist(1,1)">项目介绍</li>
+<li class="nocur newslist_1_li" id="newslist_1_li2" onmouseover="newslist(1,2)">项目配套</li>
+<li class="nocur newslist_1_li" id="newslist_1_li3" onmouseover="newslist(1,3)">交通状况</li>
+<li class="nocur newslist_1_li" id="newslist_1_li4" onmouseover="newslist(1,4)">建材装修</li>
+<li class="nocur newslist_1_li" id="newslist_1_li5" onmouseover="newslist(1,5)">楼盘点评</li>
+<li class="nocur newslist_1_li" id="newslist_1_li6" onmouseover="newslist(1,6)">车位信息</li>
+<li class="nocur newslist_1_li" id="newslist_1_li7" onmouseover="newslist(1,7)">相关信息</li>
+</ul>
+<div class="infoextra_m newslist_1_ul" id="newslist_1_ul1">
+<div class="infoextra_c">　　{$content}</div>
+</div>
+<div class="infoextra_m newslist_1_ul" id="newslist_1_ul2" style="display:none;">
+<div class="infoextra_c">【教育】{$lp_edu}<br/><br/>【医疗】{$lp_hospital}<br/><br/>【银行】{$lp_bank}</div>
+</div>
+<div class="infoextra_m newslist_1_ul" id="newslist_1_ul3" style="display:none;">
+<div class="infoextra_c">　交通:　{$lp_bus}</div>
+</div>
+<div class="infoextra_m newslist_1_ul" id="newslist_1_ul4" style="display:none;">
+<div class="infoextra_c">　　装修：{$lp_fitment}<br/><br/>　</div>
+</div>
+<div class="infoextra_m newslist_1_ul" id="newslist_1_ul5" style="display:none;">
+<div class="infoextra_c">　　{$lp_dianping}<br/><br/>　　</div>
+</div>
+<div class="infoextra_m newslist_1_ul" id="newslist_1_ul6" style="display:none;">
+<div class="infoextra_c">　　停车位:{$lp_car}</div>
+</div>
+<div class="infoextra_m newslist_1_ul" id="newslist_1_ul7" style="display:none;">
+<div class="infoextra_c">　　占地面积:{$lp_totalarea}平方米<br/><br/>　　建筑面积:{$lp_area}平方米<br/><br/>　　开盘时间:{$selltime}<br/><br/>　　交房时间:{$completion}<br/><br/>　　开发商:{$company}<br/><br/>　　物业管理公司:{$lp_company}<br/><br/>　　物业费:{$lp_costs}<br/><br/>　　产权年限:{$lp_year}<br/><br/>　　户&nbsp;数:总户数{$lp_number}户</div>
+</div>
+<div class="clear"></div>
+<div style="width:630px; margin-left:10px; overflow:hidden">
+
+</div>
+</div>
+</div>
+<div class="right">
+<div class="sider" style="margin-top:0px;">
+<div class="ranking">
+<ul class="rankul">
+<li id="li_hot" class="cur">最新楼盘</li>
+</ul>
+<div class="rankbox" style="display:block">
+<ul> <!--{tag("moduleid=6&table=newhouse&condition=status=3 and isnew=1&areaid=$cityid&pagesize=10&order=addtime desc&template=list-loupanhot")}--><div class="clear"></div>
+</ul>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="space10"></div>
+<!--map begin-->
+<div class="mapabc">
+<div class="tktitle">{$title}周边地图搜索</div>
+
+<div class="map_main">
+<div style="position: relative;" id="map" class="mapabc_left"> {php $map_height = 282;}
+	{php @include AJ_ROOT.'/api/map/baidu/show.inc.php';}</div>
+<div id="mapabc_open" class="open_close"></div>
+
+<div id="mapabc_right" class="mapabc_right">
+<div class="right_top">{$title}属于<a href="javascript:void(0);">{area_pos($areaid, ' ')}</a></div>
+<div class="right_bottom">
+<div class="right_t1"><span>同区域楼盘</span><em><a href="{$MODULE[6][linkurl]}" target="_blank">更多>> </a> </em></div>
+<div class="right_t2"><div class="r1">项目名称</div><div class="r2">均价</div><div class="r3">属性</div></div>
+<div class="right_r_b">
+<ul>
+ {loop $same_quyu_list $k $t} 	
+
+<li><div class="r1"><a href="{$MODULE[6][linkurl]}{$t[linkurl]}" target="_blank">{$t[title]}</a></div><div class="r2">{if $t[price]}{$t[price]}{else}均价{/if}</div><div class="r3">{cat_pos($CAT, ' &raquo; ')}</div></li>
+{/loop}
+
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--map end-->
+<div class="main">
+<div class="left">
+<div class="hot_house">
+<div class="tit3">
+<dl>
+<ul>
+<li class="first"><b>{$title}户型图</b></li>
+<li class="us_gray4">{$title}热销户型</li>
+</ul>
+</dl>
+<dd><a href="{$linkurl}huxing.html" target="_blank" class="cblue">更多>> </a></dd>
+</div>
+<div class="con">
+ <!--{tag("moduleid=12&table=aijiacms_photo m,aijiacms_photo_item c&prefix=&condition=m.itemid=c.item  and m.houseid=$itemid&catid=24&pagesize=4&order=m.itemid desc&template=list-huxing")}-->
+<div class="clear"></div>
+</div>
+</div>
+<style>
+          .nocur{color: #2b2b2b;cursor:pointer}       
+        </style>
+<div class="newsBoxList">
+<ul class="tag"><li class="current newslist_2_li" id="newslist_2_li5" onmouseover="newslist(2,5)"><a href="{$linkurl}xiangce.html" target="_blank">实景图</a></li>
+	
+<li class="nocur newslist_2_li" id="newslist_2_li6" onmouseover="newslist(2,6)"><a href="{$linkurl}xiangce.html" target="_blank">效果图</a></li>
+	
+<li class="nocur newslist_2_li" id="newslist_2_li7" onmouseover="newslist(2,7)"><a href="{$linkurl}xiangce.html" target="_blank">样板间</a></li>
+	
+</ul><div class="list cblue newslist_2_ul" id="newslist_2_ul5" style="border:1px solid #CCCCCC; border-top:0px; overflow:hidden">
+<div class="con"> <!--{tag("moduleid=12&table=aijiacms_photo m,aijiacms_photo_item c&prefix=&condition=m.itemid=c.item  and m.houseid=$itemid&catid=26&pagesize=4&order=m.itemid desc&template=list-huxing")}--></div>
+</div>
+<div class="list cblue newslist_2_ul" id="newslist_2_ul6" style="border:1px solid #CCCCCC; border-top:0px;display:none; overflow:hidden">
+<div class="con"> <!--{tag("moduleid=12&table=aijiacms_photo m,aijiacms_photo_item c&prefix=&condition=m.itemid=c.item  and m.houseid=$itemid&catid=23&pagesize=4&order=m.itemid desc&template=list-huxing")}--></div>
+</div>
+<div class="list cblue newslist_2_ul" id="newslist_2_ul7" style="border:1px solid #CCCCCC; border-top:0px;display:none; overflow:hidden">
+<div class="con"> <!--{tag("moduleid=12&table=aijiacms_photo m,aijiacms_photo_item c&prefix=&condition=m.itemid=c.item  and m.houseid=$itemid&catid=25&pagesize=4&order=m.itemid desc&template=list-huxing")}--></div>
+</div>
+<div class="clear" name="dot1" id="dot1"></div>
+</div>
+<div style="width:642px;overflow:hidden; margin-top:10px; margin-bottom:10px;">
+
+</div>
+
+<!--点评 START-->
+{template 'commentlp', 'chip'}
+<!--点评 END-->
+<div class="clear"></div>
+<table width="640" border="0"cellpadding="0" cellspacing="0" style="margin:0 auto;">
+<tr>
+<td width="70" align="left"><img src="{AJ_SKIN}/image/pic13.jpg" width="56" height="56" border="0"/> </td>
+<td align="left" class="cred" style="font-weight:bold;font-size:26px;font-family:Arial Black, Gadget, sans-serif;"><p class="us_gray2" style="font-size:12px;line-height:20px;font-weight:normal;">我从{if $city_sitename}{$city_sitename}{else}{$AJ[sitename]}{/if}上看到{$title}售楼处电话，想咨询......</p>
+{$telephone}</td>
+</tr>
+</table>
+</div>
+<div class="right">
+<div class="dps"><b><span class="cred">{$hits}</span></b></div>
+<div class="gzd"><b><span class="cred">{$s}张</span></b></div>
+<div class="clear"></div>
+<div class="sider">
+
+<!--视频开始-->
+ <!--{php $tags=tag("moduleid=14&condition=houseid=$itemid&pagesize=1&order=addtime desc&template=null");}-->
+		{loop $tags $t}{if $t[houseid]!=$itemid}
+			
+		{else}
+		
+		
+    <div class="rim">
+      <div class="rtitle">
+   <dl>
+<span>楼盘视频</span><a href="javascript:void()" class="us_gray2">{$title}视频</a>
+</dl>
+	  </div>
+	 <!--{php $tags=tag("moduleid=14&table=video&condition=houseid=$itemid&pagesize=1&template=null");}-->
+					{loop $tags $k $t}
+      <div id="player">
+	
+
+{if $t[player] == 0}
+<div class="player"><object type="application/x-shockwave-flash" data="{AJ_PATH}file/flash/vcastr3.swf" width="288" height="220" id="vcastr3">
+<param name="movie" value="{AJ_PATH}file/flash/vcastr3.swf"/>
+<param name="wmode" value="transparent"/>
+<param name="allowFullScreen" value="true"/>
+<param name="FlashVars" value="xml=
+<vcastr>
+<channel>
+<item>
+<source>{$t[video]}</source>
+<duration></duration>
+<title></title>
+</item>
+</channel>
+<config>
+<isAutoPlay>true</isAutoPlay>
+<controlPanelBgColor>0x333333</controlPanelBgColor>
+<isShowAbout>false</isShowAbout>
+</config>
+
+		<plugIns>
+			<logoPlugIn>
+				<url>{AJ_PATH}file/flash/vcastr3_logo.swf</url>
+				<logoClipUrl>{AJ_PATH}file/image/{$MOD[flvlogo]}</logoClipUrl>
+				<logoClipAlpha>0.7</logoClipAlpha>
+				<logoClipLink>{if $MOD[flvlink]}{$MOD[flvlink]}{else}{AJ_PATH}{/if}</logoClipLink>
+				<clipMargin>{$MOD[flvmargin]}</clipMargin>
+			</logoPlugIn>
+		</plugIns>
+		
+</vcastr>"/>
+</object>
+</div>
+{else}
+
+<embed src="{$t[video]}" width="288" height="220" type="application/x-shockwave-flash" extendspage="http://get.adobe.com/flashplayer/" wmode="transparent" autostart="{$video_a}" quality="high" allowfullscreen="true"></embed>
+{/if}
+	 
+	  </div>
+    {/loop}
+	
+</div>{/if}{/loop} 
+<!--视频结束-->
+
+<div class="space10"></div>
+<div class="ranking">
+<ul class="rankul">
+<li id="li_hot" class="cur">热盘排行榜</li>
+</ul>
+<div class="rankbox" style="display:block">
+<!--{tag("moduleid=6&table=newhouse&condition=status=3 and isnew=1&areaid=$cityid&pagesize=10&order=hits desc&template=list-loupanhot")}-->
+
+
+
+
+
+<div class="clear"></div>
+</div>
+</div>
+<div class="ranking">
+<div class="space10"></div>
+
+<div class="space10"></div>
+<div class="scorebox">
+<ul class="t_title">
+<li class="first"><A name="tuan">意向登记</A></li>
+<li class="us_gray4">填写团购意向信息</li>
+</ul>
+<div class="clear"></div>
+<style>
+                      .buy p{line-height:26px;}
+                    </style>
+<form method="post" action="{$MOD[linkurl]}inquiry.php"  >
+				<input type="hidden" name="forward" value=""/>
+				<input type="hidden" name="itemids" value="{$itemid}"/>
+				<input type="hidden" name="title" value="{$title}" size="60" id="title" class="pd3"/>               <input type="hidden" name="username" value="{$username}"/>
+<div class="buy" style="margin-top:5px;">
+
+<p style="padding-left:12px;padding-top:5px;">姓&nbsp;&nbsp;&nbsp;&nbsp;名：
+<INPUT type="text" class="tkformstyle" name="truename" maxlength="10" value="{$_truename}"/>
+</p>
+
+<p style="padding-left:12px;padding-top:5px;">手&nbsp;&nbsp;&nbsp;&nbsp;机：
+<INPUT type="text" class="tkformstyle" id='group_phone' name="telephone" onkeydown="onlyNum();" maxlength="20" value="{$telephones}"/>
+</p>
+<p style="padding-left:12px;padding-top:5px;">邮&nbsp;&nbsp;&nbsp;&nbsp;箱：
+<INPUT type="text" name="email" id="group_email" class="tkformstyle" value="{$_email}"/>
+</p><p style="padding-left:12px;padding-top:5px;">服务:{loop $itype $k $v}
+				
+				<input type="checkbox" name="type[]" value="{$v}" id="type_{$k}"{if $k<5} checked{/if}/><label for="type_{$k}"> {$v}</label>
+			
+				{/loop}
+</p>
+<p style="padding-left:12px;padding-top:5px;">
+快捷提问：
+<select onchange="if(this.value)Dd('content').value+=this.value+'\n';" style="width:150px;">
+				<option value="">请选择常用问题</option>
+				{loop $iask $v}
+				<option value="{$v}">{$v}</option>
+				{/loop}
+				</select>
+
+
+</p>
+<p>
+<table border="0"cellpadding="0" cellspacing="0">
+<tr>
+<td colspan="4" height="5"></td>
+</tr>
+<tr>
+<td width="12"></td>
+<td width="240">留&nbsp;&nbsp;&nbsp;&nbsp;言：</td>
+</tr>
+<tr>
+<td width="12"></td>
+<td width="240" align="left">
+
+<textarea rows="6" cols="38" name="content" id="content" style="float:left;font-size:12px;border:1px solid #cbcbcb;" onchange="if(value.length>150) value=value.substr(0,150)" onfocus="if(value=='150字以内') {value=''};" onblur="if (value=='') {value='150字以内'};">
+</textarea></td>
+</tr>
+<tr>
+<td valign="bottom" colspan="3" align="center">
+<input type="submit" name="submit" value=" 提交 " style="background:url({AJ_SKIN}/image/img_btn3.gif) no-repeat; width:50px; height:24px;font-size:12px;letter-spacing:0.3em;font-weight:bold; color:#333; border:0; margin-top:5px"/>
+</td>
+</tr>
+</table>
+<div class="clear"></div>
+</p>
+</div>
+<div class="clear"></div>
+</form>
+<br>
+ <div class="record">
+        <ul>
+          <marquee height="60px;" style="padding-left: 5px; margin-top: 10px;" behavior="scroll" valign="top" align="center" direction="up" scrolldelay="150" scrollamount="1" onmouseout="this.start()" onmouseover="this.stop()">   
+		   {loop $messages $k $t}       
+                           <li>·{$t[truename]} 电话：{dsubstr($t[telephone], 10, $suffix = '****')}</li>{/loop}
+                                      
+                                       
+                              </marquee>          
+        </ul>
+      </div>
+</div>
+
+<div class="clear"></div>
+</div>
+</div>
+<script type="text/javascript">
+function check() {
+var l;
+var f;
+f = 'title';
+l = Dd(f).value.length;
+if(l < 5 || l > 50) {
+Dmsg('标题应为5-50字，当前已输入'+l+'字', f);
+return false;
+}
+f = 'content';
+l = Dd(f).value.length;
+if(l < 10 || l > 2000) {
+Dmsg('内容应为10-2000字，当前已输入'+l+'字', f);
+return false;
+}
+f = 'truename';
+l = Dd(f).value.length;
+if(l < 2) {
+Dmsg('请填写联系人', f);
+return false;
+}
+f = 'telephone';
+l = Dd(f).value.length;
+if(l < 7) {
+Dmsg('请填写联系电话', f);
+return false;
+}
+}
+</script>
+<script>
+var show = function(type){
+jQuery('#li_hot').removeClass('cur');
+jQuery('#li_new').removeClass('cur'); 
+jQuery('#hot_rank').hide();
+jQuery('#new_rank').hide();
+liname = 'li_'+type;
+rankname = type+"_rank";
+jQuery('#'+liname).addClass('cur');
+jQuery('#'+rankname).show();
+}
+
+</script>
+</div>
+<div class="clear"></div>
+</div>
+<!--bord end-->
+
+<div class="clear"></div>
+<!--楼盘导航栏目 begin-->
+<div class="cArea">
+<DIV class="subNavcc">
+        <UL class="clearfixcc">
+     <li class="this1"><a href="{$linkurl}">楼盘主页</a></li>{loop $menu $k $v} 
+<li><a href="{$MODULE[6][linkurl]}{$k}.php?itemid={$itemid}">{$v}</a></li>
+{/loop}</UL>
+ </DIV>
+ <!--楼盘导航栏目 end-->
+</div>
+
+<script language=Javascript src="{AJ_SKIN}js/lpjs01.js"></script>
+<script language=Javascript src="{AJ_SKIN}js/lpjs02.js"></script>
+<div class="hr10"></div>
+{if $lineprice}
+<SCRIPT type=text/javascript> 
+$(function () {
+    var chart;
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+                marginRight: 5,
+                marginBottom: 27,
+				plotBorderWidth: 2
+            },
+			credits: {
+				enabled: false
+            },
+            title: {
+				enabled: false,
+                text: '',
+                x: 0
+            },
+            xAxis: {
+				gridLineWidth : 1,
+				gridLineColor: '#EEEEEE',
+				min: 0,
+                categories: [{$linedate}]
+            },
+            yAxis: {
+                title: {
+                    text: '单位(元/平米)',
+					style: 'color:#fff;'
+                }
+            },
+            tooltip: {
+                formatter: function() {
+                        return '<b>'+ this.series.name + this.x + '</b><br/>'+ this.y +'元/平米';
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+				color: '#FF0000',
+                x: -20,
+                y: 100,
+                borderWidth: 1
+            },
+            series: [{
+				showInLegend: false,
+				color: '#FF9900',
+                name: "{$title}",
+                data: [{$lineprice}]
+            }]
+        });
+		
+    });
+});
+</SCRIPT>
+{else}
+ <script type="text/javascript"> 
+	$("#container").append("<img src='{AJ_SKIN}image/nodata_sell_big.gif' width='288' height='138' />");
+</script>
+{/if}
+<SCRIPT src="{AJ_SKIN}js/highcharts.js"></SCRIPT>
+<!--footer-begin-->
+
+<!--footer-end-->
+
+
+
+
+</div>
+<!--cArea-end-->
+
+{template 'zoom', 'chip'}
+{template 'footer'}

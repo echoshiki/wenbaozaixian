@@ -1,0 +1,138 @@
+{template 'header', $template}
+  <link rel="stylesheet" type="text/css" href="{AJ_SKIN}sell/pages.css"/>
+  <div class="shop_main">
+    <div class="left_side">
+       <!--经纪人信息-->
+      <div class="message">
+        <h1><a href="{$COM[linkurl]}">{$COM[truename]}的店铺</a></h1>
+        <div class="m_tex">
+          <p class="photo"><img src="{imgurl($COM[thumb], 1)}" width="140" height="140"><br>
+            <b>{$COM[truename]}</b></p>
+			
+          <a class="btn_1" href="{$MODULE[2][linkurl]}message.php?action=send&touser={$COM[username]}" style="cursor:pointer;"></a>
+          <p class="renzheng">
+		  {if $COM[vtruename]}<img align="absmiddle" title="已通过身份证认证" src="{AJ_SKIN}image/sell/identity_yes.gif">{else}<img align="absmiddle" title="未通过身份证认证" src="{AJ_SKIN}image/sell/identity_no.gif">{/if}
+		   {if $COM[vcompany]}<img align="absmiddle" title="已通过职业资格认证" src="{AJ_SKIN}image/sell/aptitude_yes.gif">{else}<img align="absmiddle" title="未通过职业资格认证" src="{AJ_SKIN}image/sell/aptitude_no.gif">{/if}</p>
+          <ul>
+            <li>电话：<span class="red">{if $domain}{$COM[mobile]}{else}{anti_spam($COM[mobile])}{/if}{if $AJ[sms] && $COM[vmobile]}&nbsp;&nbsp;<a href="{$MODULE[2][linkurl]}sms.php?action=add&auth={encrypt($COM[mobile])}" target="_blank"><img src="{AJ_SKIN}image/sendsms.gif" align="absmiddle" title="发送短信" alt=""/></a>{/if}</span></li>
+            <li>即时通讯：{if $COM[username] && $AJ[im_web]}{im_web($COM[username])}&nbsp;{/if}
+	{if $COM[qq] && $AJ[im_qq]}{im_qq($COM[qq])}&nbsp;{/if}
+	{if $COM[ali] && $AJ[im_ali]}{im_ali($COM[ali])}&nbsp;{/if}
+	{if $COM[msn] && $AJ[im_msn]}{im_msn($COM[msn])}&nbsp;{/if}
+	{if $COM[skype] && $AJ[im_skype]}{im_skype($COM[skype])}&nbsp;{/if}</li>
+            <li>服务：{area_pos($COM[areaid], '/')}</li>
+            <li>公司：{$COM[company]} </li>
+			<li>认证：{if $COM[vcompany]}&nbsp;<img src="{$MODULE[2][linkurl]}image/v_company.gif" width="16" height="16" align="absmiddle" title="资料通过工商认证"/>{/if}
+	{if $COM[vtruename]}&nbsp;<img src="{$MODULE[2][linkurl]}image/v_truename.gif" width="16" height="16" align="absmiddle" title="资料通过实名认证"/>{/if}
+	{if $COM[vbank]}&nbsp;<img src="{$MODULE[2][linkurl]}image/v_bank.gif" width="16" height="16" align="absmiddle" title="资料通过银行帐号认证"/>{/if}
+	{if $COM[vmobile]}&nbsp;<img src="{$MODULE[2][linkurl]}image/v_mobile.gif" width="16" height="16" align="absmiddle" title="资料通过手机认证"/>{/if}
+	{if $COM[vemail]}&nbsp;<img src="{$MODULE[2][linkurl]}image/v_email.gif" width="16" height="16" align="absmiddle" title="资料通过邮件认证"/>{/if}
+	{if $COM[validated]}&nbsp;<img src="{AJ_SKIN}image/check_right.gif" align="absmiddle"/> 企业资料通过{$COM[validator]}认证{/if}	</li>
+          </ul>
+        </div>
+      </div>
+       </div>    
+    <!--右边-->
+    <div class="right">
+      <div class="nav">
+<span class="a_guanli"><a href="{$MODULE[2][linkurl]}"></a></span>
+
+<a href="{$COM[linkurl]}" class="{if $file=='homepage'}select{else}{/if}">首页</a>
+{loop $MENU $k $v}
+<a href="{$v[linkurl]}" class="{if $file==$menu_file[$k]}select{else}{/if}">{$v[name]}</a>
+{/loop}</div> 
+
+  <div class="b_shop">
+      	<h2>个人介绍</h2>
+<div class="main_body"  style="margin:15px;">
+	<div class="px13 lh18">
+	<table width="98%" cellpadding="3" cellspacing="3" align="center">
+	<tr>
+	<td width="100">公司名称：</td>
+	<td>{$COM[company]}</td>
+	</tr>
+	<tr>
+	<td>公司地址：</td>
+	<td>{$COM[address]}</td>
+	</tr>
+	{if $COM[postcode]}
+	<tr>
+	<td>邮政编码：</td>
+	<td>{$COM[postcode]}</td>
+	</tr>
+	{/if}
+	<tr>
+	<td>公司电话：</td>
+	<td>{if $domain}{$COM[telephone]}{else}{anti_spam($COM[telephone])}{/if}</td>
+	</tr>
+	{if $COM[fax]}
+	<tr>
+	<td>公司传真：</td>
+	<td>{if $domain}{$COM[fax]}{else}{anti_spam($COM[fax])}{/if}</td>
+	</tr>
+	{/if}
+	{if $COM[mail]}
+	<tr>
+	<td>电子邮件：</td>
+	<td>{if $domain}{$COM[mail]}{else}{anti_spam($COM[mail])}{/if}</td>
+	</tr>
+	{/if}
+	<tr>
+	<td>公司网址：</td>
+	<td>{if $COM[homepage]}<a href="{$COM[homepage]}" target="_blank">{$COM[homepage]}</a><br/>{/if}
+	<a href="{$COM[linkurl]}" target="_blank">{$COM[linkurl]}</a></td>
+	</tr>
+	{if $COM[truename]}
+	<tr>
+	<td>联 系 人：</td>
+	<td>{$COM[truename]} （{if $COM[gender]==1}先生{else}女士{/if}）</td>
+	</tr>
+	{/if}
+	{if $COM[department]}
+	<tr>
+	<td>部门(职位)：</td>
+	<td>{$COM[department]}{if $COM[career]} （{$COM[career]}）{/if}</td>
+	</tr>
+	{/if}
+	{if $COM[mobile]}
+	<tr>
+	<td>手机号码：</td>
+	<td>{if $domain}{$COM[mobile]}{else}{anti_spam($COM[mobile])}{/if}{if $AJ[sms] && $COM[vmobile]}&nbsp;&nbsp;<a href="{$MODULE[2][linkurl]}sms.php?action=add&auth={encrypt($COM[mobile])}" target="_blank"><img src="{AJ_SKIN}image/sendsms.gif" align="absmiddle" title="发送短信" alt=""/></a>{/if}</td>
+	</tr>
+	{/if}
+	<tr>
+	<td>即时通讯：</td>
+	<td>
+	{if $COM[username] && $AJ[im_web]}{im_web($COM[username])}&nbsp;{/if}
+	{if $COM[qq] && $AJ[im_qq]}{im_qq($COM[qq])}&nbsp;{/if}
+	{if $COM[ali] && $AJ[im_ali]}{im_ali($COM[ali])}&nbsp;{/if}
+	{if $COM[msn] && $AJ[im_msn]}{im_msn($COM[msn])}&nbsp;{/if}
+	{if $COM[skype] && $AJ[im_skype]}{im_skype($COM[skype])}&nbsp;{/if}
+	</td>
+	</tr>
+	<tr>
+	<td>在线状态：</td>
+	<td>{if online($COM[userid])==1}<span class="f_red">当前在线</span>{else}<span class="f_gray">当前离线</span>{/if}</td>
+	</tr>
+	</table>
+	</div>
+</div>
+
+<h2>公司地图</h2>
+<div class="main_body">
+	{php $map_height = 300;}
+	{php @include AJ_ROOT.'/api/map/'.$api_map.'/show.inc.php';}
+</div>
+
+{if $could_message}
+<div class="main_head"><div> <h2>在线留言</h2><a name="guestbook"></a></div></div>
+<div class="main_body" style="margin:10px;">
+	<iframe src="{$MODULE[4][linkurl]}home.php?action=message&job=guestbook&template={$template}&skin={$skin}&username={$username}&sign={crypt_sign($template.$skin.$username)}" name="fra" id="fra" style="width:98%;height:488px;" scrolling="no" frameborder="0"></iframe>
+</div>
+{/if}
+      </div>
+	  
+    </div>
+  </div>
+  <!--底部-->
+{template 'footer', $template}

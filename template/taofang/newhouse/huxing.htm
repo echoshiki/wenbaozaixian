@@ -1,0 +1,167 @@
+
+
+{template 'header'}
+{template 'top', 'newhouse'}
+<link href="{AJ_SKIN}/houses_style.css" rel="stylesheet" type="text/css" />
+<link href="{AJ_SKIN}/house_zhuye_js.css" rel="stylesheet" type="text/css">
+
+<script>
+function newslist(cid, id){
+	jQuery(".newslist_"+cid+"_li").removeClass("current").addClass("nocur");
+	jQuery("#newslist_"+cid+"_li"+id).removeClass("nocur").addClass("current");
+	jQuery(".newslist_"+cid+"_ul").hide();
+	jQuery("#newslist_"+cid+"_ul"+id).show();
+}	
+/*视频滑动门*/
+function show_menu(num){
+for(i=1;i<5;i++){
+	if($('li'+i)){
+	$('h'+i).style.display='none';
+	$('li'+i).style.display='none';
+	$('f'+i).className='shipin03';
+	 }
+}
+	  $('h'+num).style.display='block';//触发以后标题块
+	  $('li'+num).style.display='block';//触发以后信息块
+	  $('f'+num).className='shipin030';//触发以后TAG样式
+}
+
+</script>
+
+
+<script language="Javascript" src="{AJ_SKIN}js/house_zhuye.js"></script>
+
+<!--zhuye img div-->
+<div class="cArea">
+<!--当前位置 begin-->
+<div class="column">
+<div class="a1 linka">
+<a href="{$MODULE[1][linkurl]}">首页</a> &raquo; <a href="{$MOD[linkurl]}">{$MOD[name]}</a>  &raquo;  <h3 style="display:inline"><a href="{$linkurl}">{$title}</a> </h3> &raquo; 
+楼盘主页</div>
+<div class="a2 linka">
+<form name="detailForm" id="detailForm" action="{$MODULE[2][linkurl]}favorite.php" method="post">
+<input type="hidden" name="action" value="add"/>
+<input type="hidden" name="title" value="{$title}"/>
+<input type="hidden" name="url" value="{$linkurl}"/>
+</form>
+<a href="javascript:document.getElementById('detailForm').submit();" class="a-comm">收藏</a>
+
+
+ 
+<a href="javascript:void(0);" onclick="print();">打印</a>  │  
+<span>最后更新:{$editdate}</span>
+</div>
+</div>
+<!--当前位置 end-->
+<div class="hr10"></div>
+
+
+
+<!--楼盘名称 begin-->
+<div class="tab_a">
+<div class="tab_a_l">
+<div class="a1"><h1>{$title}</h1></div>
+<div class="a2 state_{if $typeid==0}jjss{elseif $typeid==1}zs{elseif $typeid==2}wp{/if}">{if $typeid==0}待售{elseif $typeid==1}在售{elseif $typeid==2}打折{elseif $typeid==3}热点楼盘{/if}</div>
+<div class="a3">{get_cats($catid,  $moduleid)}</div>
+</div>
+<div class="tab_a_r">
+<span class="reda">{$hits}</span> 人关注 
+参加{$title}购房团 
+[<span class="linka"><a href="{$MOD[linkurl]}{rewrite('inquiry.php?itemid='.$itemid)}">我要团购</a>] 
+</span>
+</div>
+</div>
+<!--楼盘名称 end-->
+<div class="hr10"></div>
+
+
+<!--浮动导航begin-->
+<div id="index_nav_box">
+<div class="qlink" id="index_nav">
+
+<!--楼盘顶部导航栏目 begin-->
+
+<DIV class="subNav">
+<UL class="clearfix">
+{php $menu = array('xinxi'=>'详细信息', 'huxing'=>'户型', 'dongtai'=>'销售动态', 'jiage'=>'价格明细', 'peitao'=>'地图配套', 'xiangce'=>'图片相册', 'zixun'=>'相关资讯', 'wenfang'=>'问房');}
+<li ><a href="{$linkurl}">楼盘主页</a></li>
+{loop $menu $k $v} 
+<li class={if huxing==$k}this{else}''{/if}><a href="{$MODULE[6][linkurl]}{$k}.php?itemid={$itemid}">{$v}</a></li>
+{/loop}
+
+</UL>
+</DIV>
+
+<!--楼盘顶部导航栏目 end-->
+<div class="hr10"></div>
+
+</div>
+</div>
+<!--浮动导航end-->
+
+</div>
+<!--当前位置 cArea--><div class="cArea">
+<div class="PartFs">
+
+ <div class="PartFsc">            
+ <ul>
+ <span><a href="{$linkurl}huxing.html"  target="_blank">{$title}户型图</a></span>
+
+
+<li class="SearchH" id='k1'>
+ <a href="{$linkurl}huxing.html"><font style="color:#333;">全部({$items})</font></a>
+</li>		
+		   <li class="SearchG1"></li>
+
+</ul>
+ </div>
+ <div class="unit_cen"> <div id=l1>
+
+
+    <div class="unit_k">
+ <!--{loop $pic_lists $key $value}-->	
+<div class="tpstyle">
+<ul>
+<li class="bk">
+<a href="{$MODULE[12][linkurl]}{$value[linkurl]}" target="_blank" title="{$value[title]}">
+<img src="{if $value[thumb]}{$value[thumb]}{else}{AJ_SKIN}image/nopic60.gif{/if}"  width="156" height="156"alt="{$value[title]}"  /></a>
+
+
+</li>
+<li>
+
+</li>
+<li>{$value[title]}</li>
+</ul>
+</div>
+<!--{/loop}-->
+
+  </div>
+     <div>
+			{$pages}              
+            </div>
+ </div>  
+
+<div style="clear:both;font-size:1px;"></div></div> 
+</div>    
+  
+     <div class="display_com_end"></div>
+     <div class="hr10"></div>
+</div>
+<!--楼盘导航栏目 begin-->
+<!--楼盘导航栏目 begin-->
+<div class="cArea">
+<DIV class="subNavcc">
+        <UL class="clearfixcc">
+           <li><a href="{$linkurl}">楼盘主页</a></li>				
+{loop $menu $k $v} 
+<li class={if huxing==$k}this1{else}''{/if}><a href="{$MODULE[6][linkurl]}{$k}.php?itemid={$itemid}">{$v}</a></li>
+{/loop}</UL>
+ </DIV>
+ <!--楼盘导航栏目 end-->
+</div>
+<script language=Javascript src="{AJ_SKIN}js/lpjs01.js"></script>
+<script language=Javascript src="{AJ_SKIN}js/lpjs02.js"></script>
+
+{template 'zoom', 'chip'}
+{template 'footer'}

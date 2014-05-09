@@ -1,0 +1,141 @@
+{template 'top'}
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/esf.css">
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/footer.css">
+<script type="text/javascript">var sh = '{$MOD[linkurl]}search.php?catid={$catid}';</script>
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/pages.css">
+<SCRIPT type=text/javascript src="{AJ_SKIN}js/list.js"></SCRIPT>
+<SCRIPT type=text/javascript>
+
+$(document).ready(function(){
+	$('.a_listdown1').hover(
+	function(){
+	  $('.down_list1').show().end();	 
+	},
+	function(){
+	  $('.down_list1').hide().end();	 
+	}
+	);
+	//装修下拉  
+	$('.a_listdown2').hover(
+	function(){
+	  $('.down_list2').show().end();	 
+	},
+	function(){
+	  $('.down_list2').hide().end();	 
+	}
+	);
+	//房龄 
+	$('.a_listdown10').hover(
+	function(){
+	  $('.down_list10').show().end();	 
+	},
+	function(){
+	  $('.down_list10').hide().end();	 
+	}
+	);
+	//发布时间下拉  
+	$('.a_listdown3').hover(
+	function(){
+	  $('.down_list3').show().end();	 
+	},
+	function(){
+	  $('.down_list3').hide().end();	 
+	}
+	);
+	//更新时间下拉  
+	$('.b_elist_linput_time').hover(
+	function(){
+	  $('.down_list5').show().end();	 
+	},
+	function(){
+	  $('.down_list5').hide().end();	 
+	}
+	);
+})
+
+
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+$(document).ready(function(){
+   $('.hotarea dt').hover(function(){
+	   $('.hotarea dt').removeClass('select');
+	   $(this).addClass('select');
+	   $('.hotarea dt').next().css('display','none');
+	   $(this).next().css('display','block');
+	   })
+   })
+</SCRIPT>
+
+<DIV id=content>
+<P class=b_elist>您现在的位置：<a href="{$MODULE[1][linkurl]}">首页</a> &raquo; <a href="{$MOD[linkurl]}">{$MOD[name]}</a> &raquo; <EM>小区列表</EM></A></P>
+<DIV class=b_elist_txt>
+<P><SPAN class=a_name>区域：</SPAN><SPAN> <a href="{$MOD[linkurl]}list.php?areaid={$cityid}&catid={$_GET['catid']}&l={$_GET['l']}" class="{if $_GET['areaid']==$cityid or $_GET['areaid']=='' }select{/if}">不限</A> 
+ {loop $mainarea $k $v}    
+  <a href="{$MOD[linkurl]}list.php?areaid={$v[areaid]}&catid={$_GET['catid']}&l={$_GET['l']}" class="{if $v[areaid]==$areaid}select{else}""{/if}">{$v[areaname]}</a>   {/loop}
+</SPAN></P>
+
+
+<P><SPAN class=a_name>拼音：</SPAN><SPAN> <a href='{$MOD[linkurl]}list.php?areaid={$_GET['areaid']}&catid={$_GET['catid']}&l=''' class='{if $_GET['l']==''}select{/if}'>不限</a> 
+ {php $l = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');}
+{loop $l $k $v}  <a href='{$MOD[linkurl]}list.php?areaid={$_GET['areaid']}&catid={$_GET['catid']}&l={$v}' class='{if $_GET['l']==$v}select{else}{/if}'>{$v}</a>&nbsp;{/loop} </SPAN></P>
+
+
+<DIV class=clear></DIV></DIV>
+<div class="b_elist_left fl ">
+      <div class="b_elist_ltxt b_mt10">
+   		<div class="b_elist_lsearch2">
+        <form id="aijiacms_search" action="{$MODULE[5][linkurl]}search.php" onsubmit="return Dsearch();">
+       <input type="hidden" name="spread" value="0" id="aijiacms_spread"/>
+	   <input name="kw" id="aijiacms_kw" type="text" class="b_elist_lsearch_txt1 b_elist_lsearch_txt1_width fl" size="15" value="请输入小区名称" onfocus="if(this.value=='请输入小区名称') this.value='';" onkeyup="STip(this.value);" autocomplete="off"/>
+        
+        <input type="button" value="找小区" name="submit_keyword" id="submit_keyword" class="b_elist_lsearch_txt2" >
+       	  </form>
+		
+
+<div class="b_elist_linput_defult" style="margin-left:240px;">
+                    <span class="b_elist_linput_one">排序方式</span>
+                    <span class="b_elist_linput_time"><em><A href="javascript:;">默认排序</A> </em>
+                    <div class="down_list5"><a href="{$MOD[linkurl]}list.php?areaid={$_GET['areaid']}&catid={$_GET['catid']}&l={$_GET['l']}">默认排序</a> </div></span>
+               
+               </div>
+          
+        </div>
+        	<p class="have">共有 <span style="color:#FF6600">{$items}</span> 套符合要求的小区</p>
+
+
+{if $tags}
+
+{if $page == 1}{load('ad_m'.$moduleid.'_c'.$catid.'.htm')}{/if}
+		{if $tags}{template 'list-'.$module, 'tag'}{/if}
+	{else}
+		{template 'noresult', 'message'}
+		{/if}
+
+
+</DIV>	</DIV>
+<DIV class="b_elist_right b_mt10 fr">
+ <div class="b_elist_r2">
+        <div class="b_elist_r2_title">
+          <h2>人气房源</h2>
+        </div>
+		<div class="b_elist_rhousea" style="display:none">还没有房源记录</div>
+		
+		<div class="b_elist_rhousea">
+		 <!--{tag("moduleid=5&table=sale&condition=status=3 and itemid<>'$itemid'&areaid=$cityid&pagesize=10&order=hits desc&template=list-saletjy")}-->
+				
+				<div class="clear"></div>
+        </div>
+		
+ </div>
+
+<DIV style="MARGIN-TOP: 5px" class=b_elist_r2>
+<DIV class=b_elist_r2_title>
+<H2>经纪人排行</H2></DIV>
+<DIV class=b_elist_rhousea>
+<!--{tag("table=member&condition=groupid=7&areaid=$cityid&order=userid desc&pagesize=10&template=list-jjr")}-->
+<DIV class=clear></DIV></DIV></DIV>
+</DIV><!--footer-->
+<DIV class=clear></DIV><!--区域链接-->
+
+{template 'foot'}

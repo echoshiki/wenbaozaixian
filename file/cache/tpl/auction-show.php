@@ -1,188 +1,155 @@
 <?php defined('IN_DESTOON') or exit('Access Denied');?><?php include template('header');?>
-<link rel="stylesheet" type="text/css" href="<?php echo DT_SKIN;?>stylee.css"/>
-<link rel="stylesheet" type="text/css" href="<?php echo DT_SKIN;?><?php echo $module;?>.css"/>
 <script type="text/javascript">var module_id= <?php echo $moduleid;?>,item_id=<?php echo $itemid;?>,content_id='content',img_max_width=<?php echo $MOD['max_width'];?>;</script>
-<script type="text/javascript">
-function Dd(i) {return document.getElementById(i);}
-function SendFav1() {
-var htm = '<form method="post" action="'+MEPath+'favorite.php" id="dfavorite" target="_blank">';
-htm += '<input type="hidden" name="action" value="add"/>';
-htm += '<input type="hidden" name="title" value="'+$('#title').html()+'"/>';
-htm += '<input type="hidden" name="url" value="'+window.location.href+'"/>';
-htm += '</form>';
-
-$('#destoon_space').html(htm);
-//alert('ddd');
-Dd('dfavorite').submit();
-}
-</script>
 <div class="m">
-<div class="m_l f_l">
 <div class="left_box">
-<div class="pos">当前位置: <a href="<?php echo $MODULE['1']['linkurl'];?>">首页</a> &raquo; <a href="<?php echo $MOD['linkurl'];?>"><?php echo $MOD['name'];?></a> &raquo; <?php echo cat_pos($CAT, ' &raquo; ');?> &raquo; </div>
-<h1 class="title" id="title" style="height:55px; line-height:55px;"><?php echo $title;?></h1>
-<?php if($introduce) { ?><div class="introduce"><?php echo $introduce;?></div><?php } ?>
-<center><img src="<?php echo $thumb;?>" alt="<?php echo $title;?>"/></center>
-<?php if($CP) { ?><?php include template('property', 'chip');?><?php } ?>
-<div class="content" id="content"><?php echo $content;?></div>
+<div class="pos"><span class="f_r"><a href="<?php echo $MODULE['2']['linkurl'];?><?php echo $DT['file_my'];?>?mid=<?php echo $moduleid;?>&action=add&catid=<?php echo $catid;?>" rel="nofollow"><img src="<?php echo DT_SKIN;?>image/btn_add.gif" width="81" height="20" alt="发布信息" style="margin-top:6px;"/></a></span>当前位置: <a href="<?php echo $MODULE['1']['linkurl'];?>">首页</a> &raquo; <a href="<?php echo $MOD['linkurl'];?>"><?php echo $MOD['name'];?></a> &raquo; <?php echo cat_pos($CAT, ' &raquo; ');?> &raquo;</div>
+<div class="b10 c_b"></div>
+<table width="100%">
+<tr>
+<td width="10"> </td>
+<td>
+<table width="100%">
+<tr>
+<td colspan="3"><h1 class="title_trade" id="title"><?php echo $title;?></h1></td>
+</tr>
+<tr>
+<td width="250" valign="top">
+<div id="mid_pos"></div>
+<div id="mid_div" onmouseover="SAlbum();" onmouseout="HAlbum();" onclick="PAlbum(Dd('mid_pic'));">
+<img src="<?php echo $albums['0'];?>" width="240" height="180" id="mid_pic"/><span id="zoomer"></span>
+</div>
+<div class="b5"></div>
+<div>
+<?php if(is_array($thumbs)) { foreach($thumbs as $k => $v) { ?><img src="<?php echo $v;?>" width="60" height="60" onmouseover="if(this.src.indexOf('nopic60.gif')==-1)Album(<?php echo $k;?>, '<?php echo $albums[$k];?>');" class="<?php if($k) { ?>ab_im<?php } else { ?>ab_on<?php } ?>
+" id="t_<?php echo $k;?>"/><?php } } ?>
+</div>
+<div class="b5"></div>
+<div onclick="PAlbum(Dd('mid_pic'));" class="c_b t_c c_p"><img src="<?php echo DT_SKIN;?>image/ico_zoom.gif" width="16" height="16" align="absmiddle"/> 点击图片查看原图</div>
+</td>
+<td width="15"> </td>
+<td valign="top">
+<div id="big_div" style="display:none;"><img src="" id="big_pic"/></div>
+<table width="100%" cellpadding="5" cellspacing="5">
+<?php if($brand) { ?>
+<tr>
+<td class="f_dblue">品牌：</td>
+<td><?php echo $brand;?></td>
+</tr>
+<?php } ?>
+<?php if($n1 && $v1) { ?>
+<tr>
+<td class="f_dblue"><?php echo $n1;?>：</td>
+<td><?php echo $v1;?></td>
+</tr>
+<?php } ?>
+<?php if($n2 && $v2) { ?>
+<tr>
+<td class="f_dblue"><?php echo $n2;?>：</td>
+<td><?php echo $v2;?></td>
+</tr>
+<?php } ?>
+<?php if($n3 && $v3) { ?>
+<tr>
+<td class="f_dblue"><?php echo $n3;?>：</td>
+<td><?php echo $v3;?></td>
+</tr>
+<?php } ?>
+<tr>
+<td class="f_dblue">单价：</td>
+<td class="f_b f_orange"><?php if($price>0) { ?><?php echo $price;?><?php echo $DT['money_unit'];?>/<?php echo $unit;?><?php } else { ?>面议<?php } ?>
+</td>
+</tr>
+<tr>
+<td class="f_dblue">起订：</td>
+<td class="f_b f_orange"><?php if($minamount) { ?><?php echo $minamount;?> <?php echo $unit;?><?php } ?>
+</td>
+</tr>
+<tr>
+<td class="f_dblue">供货总量：</td>
+<td class="f_b f_orange"><?php if($amount) { ?><?php echo $amount;?> <?php echo $unit;?><?php } ?>
+</td>
+</tr>
+<tr>
+<td class="f_dblue">发货期限：</td>
+<td>自买家付款之日起  <span class="f_b f_orange"><?php if($days) { ?><?php echo $days;?><?php } ?>
+</span> 天内发货</td>
+</tr>
+<tr>
+<td class="f_dblue">所在地：</td>
+<td><?php echo area_pos($areaid, ' ');?></td>
+</tr>
+<tr>
+<td class="f_dblue">有效期至：</td>
+<td><?php if($todate) { ?><?php echo $todate;?><?php } else { ?>长期有效<?php } ?>
+<?php if($expired) { ?> <span class="f_red">[已过期]</span><?php } ?>
+</td>
+</tr>
+<tr>
+<td class="f_dblue">最后更新：</td>
+<td><?php echo $editdate;?></td>
+</tr>
+<tr>
+<td width="80" class="f_dblue">浏览次数：</td>
+<td><span id="hits"><?php echo $hits;?></span></td>
+</tr>
+<?php if($username && !$expired) { ?>
+<tr>
+<td colspan="2"><img src="<?php echo DT_SKIN;?>image/btn_inquiry.gif" alt="询价" class="c_p" onclick="Go('<?php echo $MOD['linkurl'];?><?php echo rewrite('inquiry.php?itemid='.$itemid);?>');"/></td>
+</tr>
+<?php } ?>
+</table>
+</td>
+</tr>
+</table>
+</td>
+<td width="10"> </td>
+<td width="300" valign="top">
+<div class="contact_head">公司基本资料信息</div>
+<div class="contact_body" id="contact"><?php include template('contact', 'chip');?></div>
+<?php if(!$username) { ?>
+<br/>
+&nbsp;<strong class="f_red">注意</strong>:发布人未在本站注册，建议优先选择<a href="<?php echo $MODULE['2']['linkurl'];?>grade.php"><strong><?php echo VIP;?>会员</strong></a>
+<?php } ?>
+</td>
+<td width="10"> </td>
+</tr>
+</table>
 <div class="b10">&nbsp;</div>
+</div>
+</div>
+<div class="m">
+<div class="b10">&nbsp;</div>
+<div class="box_head">
+<strong>产品详细说明</strong>
+</div>
+<div class="box_body" style="padding:0;">
+<?php if($CP) { ?><?php include template('property', 'chip');?><?php } ?>
+<div class="content c_b" id="content"><?php echo $content;?></div>
+<?php include template('comment', 'chip');?>
+</div>
+</div>
+<?php if($username) { ?>
+<div class="m">
+<div class="b10">&nbsp;</div>
+<div class="box_head"><div><span class="f_r"><a href="<?php echo userurl($username, 'file=sell');?>">更多&raquo;</a></span><strong>本企业其它产品</strong></div></div>
+<div class="box_body">
+<div class="thumb" style="padding:10px;">
+<?php echo tag("moduleid=$moduleid&length=20&condition=status=3 and thumb<>'' and username='$username'&pagesize=8&order=edittime desc&width=80&height=80&cols=8&template=thumb-table");?>
+</div>
+</div>
+</div>
+<?php } ?>
+<div class="m">
+<br/>
 <center>
 [ <a href="<?php echo $MOD['linkurl'];?>search.php" rel="nofollow"><?php echo $MOD['name'];?>搜索</a> ]&nbsp;
-[ <a href="javascript:SendFav1();">加入收藏</a> ]&nbsp;
+[ <a href="javascript:SendFav();">加入收藏</a> ]&nbsp;
 [ <a href="javascript:SendPage();">告诉好友</a> ]&nbsp;
 [ <a href="javascript:Print();">打印本文</a> ]&nbsp;
 [ <a href="javascript:window.close()">关闭窗口</a> ]
 </center>
-<?php include template('comment', 'chip');?>
 <br/>
 </div>
-</div>
-<div class="m_n f_l">&nbsp;</div>
-<div class="m_r f_l">
-<div class="g_price">
-<div>起拍价<br/>￥<?php echo $price;?></div>
-<div>加价幅度<br/>￥<?php echo $minamount;?></div>
-<div><strong>秒杀价<br/><?php if($marketprice>=99999999) { ?>无<?php } else { ?>￥<?php echo $marketprice;?><?php } ?>
-</strong></div>
-<div id="fnotice"><strong>友情提示：</strong>为保证竞拍过程的公正与秩序，首次参与该商品竞拍的用户需支付该商品底价10%的保证金，该保证金在竞拍过程中交由网站系统保管，直到竞拍结束后归还用户账户。保证金只收取一次。</div>
-</div>
-<div class="b10 c_b">&nbsp;</div>
-<!-- <div class="g_deal" onclick="Go('<?php echo $MOD['linkurl'];?><?php echo rewrite('buy.php?itemid='.$itemid);?>');"> -->
-<div class="g_deal" id="deal1" <?php if($fromtime-86400 < time()) { ?>onclick='$("#auction_area").show(500);'<?php } ?>
->
-<input type='hidden' id="url_go" value="<?php echo $MOD['linkurl'];?><?php echo rewrite('buy.php?itemid='.$itemid);?>">
-<div>￥<?php echo $iprice;?></div>
-</div>
-<div class="g_auction" id="auction_area" style="display:none;">
-<span>竞价金额：</span><input type="number" value="" name="price" id="auction_price"/>
-<button id="go_auction">提交</button>
-</div>
-<script type="text/javascript">
-$(document).ready(function(){
-$("#go_auction").click(function(){
-var x = $("#auction_price").val();
-var y = $("#url_go").val();
-if(confirm('确定是否以'+x+'元的价格竞价此商品？')){
-var user = "<?php echo $_username; ?>";
-if (user == '') { alert('竞拍商品前请您先登录。'); return false; };
-$.get('<?php echo $MOD['linkurl'];?><?php echo rewrite("auction.php?itemid=".$itemid);?>',{values:x},function(data){
-// //处理返回的data
-// alert(data);
-if (data == '1') { alert('这个竞拍不存在或者已经结束。'); }
-if (data == '2') { alert('您的余额不足，无法以该价格进行出价，请充值后再竞拍。'); }
-if (data == '3') { alert('您的出价已经成功，请等待竞拍结束访问您的会员中心查看结果。'); }
-if (data == '4') { alert("您的出价太低，出价必须高于<?php echo $iprice_plus;?>元。(加价幅度为<?php echo $item['minamount'];?>元)"); }
-if (data == '5') { alert('您不能对自己发布的商品进行竞拍。'); }
-if (data == 'KO') { if(confirm('您成功以'+x+'元的价格秒杀此商品，现在跳转页面进行付款？')){ Go(y); return false; }};
-window.location.reload(); 
-});
-}
-});
-});
-</script>
-<?php if($fromtime-86400 < time()) { ?>
-<?php if($process == 2) { ?>
-<div class="g_timer">
-本竞拍结束于
-<div id="totimer"><?php echo timetodate($endtime, 'Y年n月j日 H:i');?></div>
-</div>
-<div class="b10 c_b">&nbsp;</div>
-<?php } else { ?>
-<?php if($totime) { ?>
-<div class="g_timer">
-距离竞拍结束还有
-<div id="totimer">&nbsp;&nbsp;</div>
-</div>
-<div class="b10 c_b">&nbsp;</div>
-<script type="text/javascript">
-var totime = new Date(<?php echo $jsdate;?>).getTime();
-function _totimer() {
-var t = new Date();
-var s = Math.floor((totime - t.getTime())/1000);
-var h = '';
-var i;
-if(s > 0) {
-i = Math.floor(s/86400);
-h += '<span>'+i+'</span>天';
-s = Math.floor(s%86400);
-i = Math.floor(s/3600);
-h += '<span>'+i+'</span>小时';
-s = Math.floor(s%3600);
-i = Math.floor(s/60);
-h += '<span>'+i+'</span>分';
-s = Math.floor(s%60);
-h += '<span>'+s+'</span>秒';
-} else {
-h = '<span class="f_red">团购已结束</span>';
-}
-Dd('totimer').innerHTML = h;
-}
-_totimer();
-setInterval("_totimer()", 1000); 
-</script>
-<?php } ?>
-<?php } ?>
-<?php } else { ?>
-<div class="g_timer">
-本竞拍开拍时间为
-<div id="totimer"><?php echo timetodate($fromtime, 'Y年n月j日');?><br />
-请等待...</div>
-</div>
-<div class="b10 c_b">&nbsp;</div>
-<?php } ?>
-<div class="g_info">
-<strong>该商品已经有 <span><?php echo $orders;?></span> 人竞拍</strong>
-<div>
-<div id="testarea">
-<table>
-<tr>
-<th width="23%">参与用户</th>
-<th>出价</th>
-<th width="50%">竞拍时间</th>
-</tr>
-<?php foreach ($tags as $key => $value) { ?>
-<tr><td><?php echo $value['auction_user'];?></td>
-<td>￥<?php echo $value['price'];?></td>
-<td><?php echo $value['time'];?></td></tr>
-<?php } ?>
-</table>
-</div>
-<span class="page_info">页码：</span><select id="test" >
-<?php for ($i=1; $i <= $pages ; $i++) { ?>
-<option value="<?php echo $i;?>"><?php echo $i;?></option>
-<?php }?>
-</select>&nbsp;&nbsp;<span class="page_info">共<span><?php echo $pages;?></span>页</span>
-<!-- <?php if($process == 0) { ?>
-正在成团，距离团购人数还差<?php echo $left;?>人
-<?php } else if($process == 1) { ?>
-团购已成功，还可以继续购买...
-<?php } else { ?>
-团购已结束
-<?php } ?>
- -->
-</div>
-</div>
-<div class="b10">&nbsp;</div>
-<div class="contact_head">联系方式</div>
-<div class="contact_body" id="contact"><?php include template('contact', 'chip');?></div>
-<div class="b10 c_b">&nbsp;</div>
-</div>
-</div>
-<div class="m">
-<!-- UY BEGIN -->
-<div id="uyan_frame"></div>
-<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1640067"></script>
-<!-- UY END -->
-</div>
-<script type="text/javascript">
-$(document).ready(function(){
-$("#test").click(function(){
-var x = $("#test").val();
-$.get('<?php echo $MOD['linkurl'];?><?php echo rewrite("show.php?itemid=".$itemid);?>',{vals:x},function(data){
-$("#testarea").html(data);
-});
-});
-});
-</script>
+<script type="text/javascript" src="<?php echo DT_STATIC;?>file/script/album.js"></script>
 <?php if($content) { ?><script type="text/javascript" src="<?php echo DT_STATIC;?>file/script/content.js"></script><?php } ?>
 <?php include template('footer');?>

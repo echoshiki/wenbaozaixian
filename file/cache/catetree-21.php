@@ -1,1 +1,1 @@
-<option value="6">最新公告</option><option value="7">推荐展讯</option></select>
+<option value="6">最新公告</option><option value="7">推荐展讯</option><option value="24">钱币资讯</option><option value="25">文宝动态</option></select>

@@ -1,0 +1,7 @@
+{loop $tags $i $t}
+			   
+<P><SPAN class=esf_name2><FONT color=#000000>{area_poss($t[areaid], '')}</FONT> - <A 
+href="{$t[linkurl]}" target=_blank>{dsubstr($t[title], 10, $suffix = '')}</A> 
+</SPAN><SPAN class=esf_huxing><FONT color=#ff0000>{if $t[price]}{$t[price]}万{else}面议{/if}</FONT></SPAN> <SPAN 
+class=esf_mianji><FONT color=#ff0000>{$t[houseearm]}平米</FONT></SPAN> <SPAN 
+class=esf_sale>{$t[room]}室</SPAN> </P>{/loop}

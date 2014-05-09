@@ -1,0 +1,27 @@
+
+{loop $tags $k $t}
+<DIV class=building>
+<DIV class=house><A title={$t[alt]} 
+href="{$MODULE[5][linkurl]}{$t[linkurl]}" target=_blank><IMG 
+src="{imgurl($t[thumb], 1)}" width=100 height=75></A><SPAN 
+class=picnumber></SPAN></DIV>
+<DIV class=info>
+<H3><A title={$t[alt]} 
+href="{$MODULE[5][linkurl]}{$t[linkurl]}" 
+target=_blank>{$t[title]}</A></H3>
+<DIV class=other_row>
+<UL class=other>
+  <LI>户型：{$t[room]}室{$t[hall]}厅，楼层：{$t[floor1]}/{$t[floor2]}，单价：{$t[danjia]}元/平米 
+  <LI> <A  href="{userurl($t[username], '')}" target=_blank>{$t[username]}</A> <SPAN>{if $t[username] && $AJ[im_web]}{im_web($t[username].'&mid='.$moduleid.'&itemid='.$t[itemid])}&nbsp;{/if}
+			{if $t[qq] && $AJ[im_qq]}{im_qq($t[qq])}&nbsp;{/if}
+			{if $t[ali] && $AJ[im_ali]}{im_ali($t[ali])}&nbsp;{/if}
+			{if $t[msn] && $AJ[im_msn]}{im_msn($t[msn])}&nbsp;{/if}
+			{if $t[skype] && $AJ[im_skype]}{im_skype($t[skype])}&nbsp;{/if}</SPAN>
+			--<A  style="cursor:pointer;" onclick="Go('{$MODULE[5][linkurl]}{rewrite('inquiry.php?itemid='.$t['itemid'])}');" target=_blank>意向登记</A>
+  <LI class=time>{timetodate($t[edittime], $datetype)} 更新 </LI></UL>
+<P class=info_area>{$t[houseearm]}平米</P>
+<P class=info_price>{if $t[price]>0}{$t[price]}万元{else}面议{/if}</P></DIV></DIV>
+<DIV class=clear></DIV></DIV>
+{/loop}	
+
+

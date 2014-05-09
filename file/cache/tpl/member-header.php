@@ -207,8 +207,8 @@
 ">商铺设置</a></li>
 <?php } ?>
 <?php if($MG['homepage'] || $show_menu) { ?>
-<li class="side_a" onmouseover="v(this.id);" onmouseout="t(this.id);" id="style"><span class="f_r"><a href="style.php?action=view" class="m">查看<?=$show_menu?>2</a></span><a href="style.php" class="<?php if($MG['homepage']) { ?>n<?php } else { ?>f<?php } ?>
-">模板设置</a></li>
+<!--<li class="side_a" onmouseover="v(this.id);" onmouseout="t(this.id);" id="style"><span class="f_r"><a href="style.php?action=view" class="m">查看</a></span><a href="style.php" class="<?php if($MG['homepage']) { ?>n<?php } else { ?>f<?php } ?>
+">模板设置</a></li>-->
 <?php } ?>
 <?php if(($MG['news_limit']>-1 && $MG['homepage']) || $show_menu) { ?>
 <li class="side_a" onmouseover="v(this.id);" onmouseout="t(this.id);" id="news"><span class="f_r"><a href="news.php?action=add" class="m">发布</a></span><a href="news.php" class="<?php if($MG['news_limit']>-1 && $MG['homepage']) { ?>n<?php } else { ?>f<?php } ?>

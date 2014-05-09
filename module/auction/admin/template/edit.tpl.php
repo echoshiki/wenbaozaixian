@@ -24,6 +24,26 @@ show_menu($menus);
 <td><input name="post[thumb]" id="thumb" type="text" size="60" value="<?php echo $thumb;?>"/>&nbsp;&nbsp;<span onclick="Dthumb(<?php echo $moduleid;?>,<?php echo $MOD['thumb_width'];?>,<?php echo $MOD['thumb_height'];?>, Dd('thumb').value);" class="jt">[上传]</span>&nbsp;&nbsp;<span onclick="_preview(Dd('thumb').value);" class="jt">[预览]</span>&nbsp;&nbsp;<span onclick="Dd('thumb').value='';" class="jt">[删除]</span><span id="dthumb" class="f_red"></span></td>
 </tr>
 <tr>
+<td class="tl"><span class="f_hid">*</span> 组图</td>
+<td>
+	<input type="hidden" name="post[thumb1]" id="thumb1" value="<?php echo $thumb1;?>"/>
+	<input type="hidden" name="post[thumb2]" id="thumb2" value="<?php echo $thumb2;?>"/>
+	<input type="hidden" name="post[thumb3]" id="thumb3" value="<?php echo $thumb3;?>"/>
+	<table width="360">
+	<tr align="center" height="120" class="c_p">
+	<td width="120"><img src="<?php echo $thumb1 ? $thumb1 : DT_SKIN.'image/waitpic.gif';?>" width="100" height="100" id="showthumb1" title="预览图片" alt="" onclick="if(this.src.indexOf('waitpic.gif') == -1){_preview(Dd('showthumb1').src, 1);}else{Dalbum(1,<?php echo $moduleid;?>,<?php echo $MOD['thumb_width'];?>,<?php echo $MOD['thumb_height'];?>, Dd('thumb1').value, true);}"/></td>
+	<td width="120"><img src="<?php echo $thumb2 ? $thumb2 : DT_SKIN.'image/waitpic.gif';?>" width="100" height="100" id="showthumb2" title="预览图片" alt="" onclick="if(this.src.indexOf('waitpic.gif') == -1){_preview(Dd('showthumb2').src, 1);}else{Dalbum(2,<?php echo $moduleid;?>,<?php echo $MOD['thumb_width'];?>,<?php echo $MOD['thumb_height'];?>, Dd('thumb2').value, true);}"/></td>
+	<td width="120"><img src="<?php echo $thumb3 ? $thumb3 : DT_SKIN.'image/waitpic.gif';?>" width="100" height="100" id="showthumb3" title="预览图片" alt="" onclick="if(this.src.indexOf('waitpic.gif') == -1){_preview(Dd('showthumb3').src, 1);}else{Dalbum(3,<?php echo $moduleid;?>,<?php echo $MOD['thumb_width'];?>,<?php echo $MOD['thumb_height'];?>, Dd('thumb3').value, true);}"/></td>
+	</tr>
+	<tr align="center" class="c_p">
+	<td><span onclick="Dalbum(1,<?php echo $moduleid;?>,<?php echo $MOD['thumb_width'];?>,<?php echo $MOD['thumb_height'];?>, Dd('thumb1').value, true);" class="jt"><img src="<?php echo $MODULE[2]['linkurl'];?>image/img_upload.gif" width="12" height="12" title="上传"/></span>&nbsp;&nbsp;<img src="<?php echo $MODULE[2]['linkurl'];?>image/img_select.gif" width="12" height="12" title="选择" onclick="selAlbum(1);"/>&nbsp;&nbsp;<span onclick="delAlbum(1, 'wait');" class="jt"><img src="<?php echo $MODULE[2]['linkurl'];?>image/img_delete.gif" width="12" height="12" title="删除"/></span></td>
+	<td><span onclick="Dalbum(2,<?php echo $moduleid;?>,<?php echo $MOD['thumb_width'];?>,<?php echo $MOD['thumb_height'];?>, Dd('thumb2').value, true);" class="jt"><img src="<?php echo $MODULE[2]['linkurl'];?>image/img_upload.gif" width="12" height="12" title="上传"/></span>&nbsp;&nbsp;<img src="<?php echo $MODULE[2]['linkurl'];?>image/img_select.gif" width="12" height="12" title="选择" onclick="selAlbum(2);"/>&nbsp;&nbsp;<span onclick="delAlbum(2, 'wait');" class="jt"><img src="<?php echo $MODULE[2]['linkurl'];?>image/img_delete.gif" width="12" height="12" title="删除"/></span></td>
+	<td><span onclick="Dalbum(3,<?php echo $moduleid;?>,<?php echo $MOD['thumb_width'];?>,<?php echo $MOD['thumb_height'];?>, Dd('thumb3').value, true);" class="jt"><img src="<?php echo $MODULE[2]['linkurl'];?>image/img_upload.gif" width="12" height="12" title="上传"/></span>&nbsp;&nbsp;<img src="<?php echo $MODULE[2]['linkurl'];?>image/img_select.gif" width="12" height="12" title="选择" onclick="selAlbum(3);"/>&nbsp;&nbsp;<span onclick="delAlbum(3, 'wait');" class="jt"><img src="<?php echo $MODULE[2]['linkurl'];?>image/img_delete.gif" width="12" height="12" title="删除"/></span></td>
+	</tr>
+	</table>
+</td>
+</tr>
+<tr>
 <td class="tl"><span class="f_red">*</span> 起拍价</td>
 <td><input name="post[price]" type="text" size="10" value="<?php echo $price;?>" id="rice"/><span id="dprice" class="f_red"></span></td>
 </tr>
@@ -63,8 +83,7 @@ var property_admin = 1;
 <tr>
 <td class="tl"><span class="f_hid">*</span> 详细说明</td>
 <td><textarea name="post[content]" id="content" class="dsn"><?php echo $content;?></textarea>
-<?php echo deditor($moduleid, 'content', $MOD['editor'], '98%', 350);?><span id="dcontent" class="f_red"></span>
-</td>
+<?php echo deditor($moduleid, 'content', $MOD['editor'], '98%', 350);?><span id="dcontent" class="f_red"></span></td>
 </tr>
 <?php
 if($MOD['swfu']) { 
@@ -75,8 +94,7 @@ if($MOD['swfu']) {
 <td class="tl"><span class="f_hid">*</span> 需要物流</td>
 <td>
 <input type="radio" name="post[logistic]" value="1" <?php if($logistic) echo 'checked';?> id="logistic_1"/><label for="logistic_1"> 是</label>&nbsp;&nbsp;&nbsp;
-<input type="radio" name="post[logistic]" value="0" <?php if(!$logistic) echo 'checked';?> id="logistic_0"/><label for="logistic_0"> 否</label>
-</td>
+<input type="radio" name="post[logistic]" value="0" <?php if(!$logistic) echo 'checked';?> id="logistic_0"/><label for="logistic_0"> 否</label></td>
 </tr>
 <!-- <tr>
 <td class="tl"><span class="f_hid">*</span> 团购人数</td>
@@ -93,8 +111,7 @@ if($MOD['swfu']) {
 <input type="radio" name="post[status]" value="2" <?php if($status == 2) echo 'checked';?>/> 待审
 <input type="radio" name="post[status]" value="1" <?php if($status == 1) echo 'checked';?> onclick="if(this.checked) Dd('note').style.display='';"/> 拒绝
 <input type="radio" name="post[status]" value="4" <?php if($status == 4) echo 'checked';?>/> 过期
-<input type="radio" name="post[status]" value="0" <?php if($status == 0) echo 'checked';?>/> 删除
-</td>
+<input type="radio" name="post[status]" value="0" <?php if($status == 0) echo 'checked';?>/> 删除</td>
 </tr>
 <tr id="note" style="display:<?php echo $status==1 ? '' : 'none';?>">
 <td class="tl"><span class="f_red">*</span> 拒绝理由</td>
@@ -110,8 +127,7 @@ if($MOD['swfu']) {
 </tr>
 <tr>
 <td class="tl"><span class="f_hid">*</span> 内容收费</td>
-<td><input name="post[fee]" type="text" size="5" value="<?php echo $fee;?>"/><?php tips('不填或填0表示继承模块设置价格，-1表示不收费<br/>大于0的数字表示具体收费价格');?>
-</td>
+<td><input name="post[fee]" type="text" size="5" value="<?php echo $fee;?>"/><?php tips('不填或填0表示继承模块设置价格，-1表示不收费<br/>大于0的数字表示具体收费价格');?></td>
 </tr>
 <tr>
 <td class="tl"><span class="f_hid">*</span> 内容模板</td>

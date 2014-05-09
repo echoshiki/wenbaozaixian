@@ -1,0 +1,212 @@
+{template 'top'}
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/esf.css">
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/footer.css">
+<script type="text/javascript">var sh = '{$MOD[linkurl]}search.php?catid={$catid}';</script>
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/pages.css">
+<DIV id=content class=mt10><!--二手房首页-->
+<P class=esf_conn_p><SPAN></SPAN>这里有<A 
+href="{$MODULE[5][linkurl]}list.php">{$sales}</A>套{$city_name}二手房正在出售，今日最新更新
+<A 
+href="{$MODULE[5][linkurl]}list.php">{$todaysales}</A>套。</P>
+<DIV class=clear></DIV>
+<DIV class="esf_con_left fl mt10">
+<DIV class=esf_con_lsearch>
+<form id="aijiacms_search" action="{$MODULE[5][linkurl]}search.php" onsubmit="return Dsearch();">
+<input type="hidden" name="spread" value="0" id="aijiacms_spread"/><INPUT id=keyword2 
+class=b_searchtxt name=kw> <INPUT id=submit_search2 class="b_searchicon1 ml10" type=submit value=""> 
+</FORM>
+<SCRIPT language=javascript>
+		//小区提示
+		jQuery(function() {
+			var options = {
+				
+				width: 300,
+				deferRequestBy: 0,
+				params: { },
+				noCache: true,
+				autoSubmit: false
+			};
+			var a1 = $('#keyword2').autocomplete(options);
+		});
+			
+		$('#keyword2').ready(function(){
+			if($('#keyword2').val() == '') $('#keyword2').val('请输入房源特征,小区名');
+		});
+		$('#keyword2').click(function(){
+			if($('#keyword2').val() == '请输入房源特征')$('#keyword2').val('');
+		});
+		$('#keyword2').blur(function(){
+			if($('#keyword2').val() == '') $('#keyword2').val('请输入房源特征');
+		});
+		$('#submit_search2').click(function(){
+			if($('#keyword2').val() == '请输入房源特征') $('#keyword2').val('');
+		});
+		</SCRIPT>
+
+<DIV class=esf_con_lsearch_txt><STRONG>热门搜索：</STRONG> 
+<P>
+<!--{tag("moduleid=$moduleid&table=keyword&condition=moduleid=$moduleid and status=3 and updatetime>$today_endtime-86400*30&pagesize=10&order=month_search desc&key=month_search&template=list-search_sale", -2)}-->
+
+ </P></DIV></DIV>
+<DIV class="esf_con_select mt10">
+<P><STRONG>区域：</STRONG> {loop $mainarea $k $v}  <a href='{$MOD[linkurl]}list.php?areaid={$v[areaid]}' >{$v[areaname]}</a> {/loop}    </P>
+<P><STRONG>价格：</STRONG> {php $price = array('30万以下', '30万-50万', '50万-80万', '80万-100万', '100万-120万', '120万-150万','150万-200万');}
+{loop $price $k $v}  <a href='{$MOD[linkurl]}list.php?p=<?php echo $k+1;?>'>{$v}</a>&nbsp;{/loop} </P>
+<P><STRONG>面积：</STRONG> {php $mianji = array('40平米以下', '40-60平米', '60-80平米', '80-100平米', '100-120平米', '120-150平米','150平米以上');}
+{loop $mianji $k $v}  <a href='{$MOD[linkurl]}list.php?a=<?php echo $k+1;?>' >{$v}</a>&nbsp;{/loop} </P>
+<P><STRONG>户型：</STRONG> {php $huxing = array('一室', '二室', '三室', '四室', '其它');}
+{loop $huxing $k $v}  <a href='{$MOD[linkurl]}list.php?r=<?php echo $k+1;?>'>{$v}</a>&nbsp;{/loop} </P></DIV>
+<DIV class="esf_con_lrec mt10">
+<DIV class="area cutA">
+<DIV class=r>
+<SCRIPT language=javascript type=text/javascript>
+                var curr_page;
+                function arr_page_show($act) {
+                    if(!curr_page) curr_page=1;
+                    if($act == 'pre')  curr_page = parseInt(curr_page)-1;
+                    else if($act == 'next') curr_page = parseInt(curr_page)+1;
+                    if(curr_page == 5 ) curr_page =1;
+                    else if(curr_page == 0 ) curr_page =4;
+                    document.getElementById('curr_page').innerHTML = curr_page;
+                }
+            </SCRIPT>
+
+<H2>
+<SPAN 
+class=left>{$city_name}二手房经纪人推荐</SPAN></H2>
+<DIV class=blockRA>
+<DIV id=MAThouse_disp_content_right_bjtj_img_2011>
+<DIV id=ISL_Cont_1 class=pp>
+<UL>
+<!--{tag("moduleid=5&length=14&condition=status=3 and level>0&thumb!=<>&areaid=$cityid&pagesize=5&order=hits desc&target=_blank&template=sale-tj")}-->
+</UL></DIV></DIV>
+</DIV><!--推荐博客 st--></DIV></DIV>
+<DIV class=clear></DIV></DIV></DIV>
+<DIV class="esf_con_right fr mt10">
+<DIV class=esf_con_rlogin><!--登录状态 --><!--未登录状态 -->
+<DIV class=a_login><A class="login_bor_btn loginbg" title=经纪人通道 
+href="{$MODULE[2][linkurl]}login.php">经纪人通道</A> 
+
+<H2>房东通道</H2>
+<DIV class=a_login_info>
+<P class="loginbg rent_Resources ">您有房屋要出租、出售吗？</P>
+<P class=gray>登记您的房屋信息，{$AJ[sitename]}帮您快速出租、出售房源！</P>
+<P class=gray>今天已发布 <SPAN class=red>{$todaysales}</SPAN> 套二手房 </P>
+<P><A class="loginbg per_login_btn" title=个人免费发布房源 
+href="{$MODULE[2][linkurl]}{$AJ[file_my]}"></A></P></DIV></DIV></DIV>
+<DIV class=mt10><!-- 广告位：二手房首页广告右1 -->
+ {ad(40)}</DIV>
+<DIV class="esf_con_r2 height143 mt10 mb10">
+<DIV class=esf_con_r2_title>
+<H2>热门小区</H2></DIV>
+<DIV class=esf_con_rhousea>
+<!--{tag("moduleid=18&table=newhouse&condition=status=3&areaid=$cityid&order=hits desc&pagesize=5&template=sale-xq")}-->
+
+<DIV class=clear></DIV></DIV></DIV></DIV></DIV>
+<DIV>
+<DIV class="esf_con_left fl">
+<DIV class=esf_con_lrec>
+<DIV class=esf_con_title>
+<H1>最新发布房源</H1>
+<DIV class="esf_more fr"><A 
+href="{$MODULE[5][linkurl]}">更多&gt;&gt;</A></DIV></DIV>
+<UL class="esf_con_house esf_con_house_bg">
+  <!--{tag("moduleid=5&table=sale&condition=status=3&areaid=$cityid&thumb!=<>&pagesize=5&order=addtime desc&target=_blank&template=sale-new")}--></UL>
+<DIV class=esf_con_ldotted>
+
+<!--{tag("moduleid=5&table=sale&condition=status=3&areaid=$cityid&pagesize=16&order=addtime desc&target=_blank&template=sale-zx")}-->
+<DIV class=clear></DIV></DIV></DIV>
+<DIV class="ad mt10"></DIV>
+<DIV class=esf_con_lrec>
+<DIV class=esf_con_title>
+<H1>{$city_name}二手房价格走势</H1>
+<DIV class="esf_more fr"><A href="{$MODULE[18][linkurl]}" 
+target=_blank>查看更多小区价格&gt;&gt;</A></DIV></DIV>
+<DIV class=esf_con_trend>
+<DIV class="esf_con_trendimg fl"> <script type="text/javascript" src="{AJ_PATH}ofc/swfobject.js"></script>
+        <script type="text/javascript">
+    swfobject.embedSWF(
+    "{AJ_PATH}open-flash-chart.swf", "my_chart",
+    "329", "156", "9.0.0", "expressInstall.swf",
+    {"data-file":"{AJ_PATH}data-files/line_sale_{$cityid}.txt"} );
+    </script>
+        <div id="my_chart"></div></DIV>
+<DIV class="esf_con_txt fl">
+<P>截止昨日，{$AJ[sitename]}统计：<BR>{$la}月{$city_name}房价均价<EM>{$paa}元/平米</EM> 比上月<SPAN 
+style="COLOR: #006600">{$percent_change}</SPAN>% </P>
+<DIV class=esf_ra_one>
+<DIV class=esf_ra_txt>
+<P>还能查小区房价，快试试…… </P>
+<FORM id=search3 method=get name=search3 
+action={$MODULE[18][linkurl]}search.php><INPUT id=keyword3 
+class="esf_lbox fl" name=kw> <INPUT id=submit_search3 class="esf_lbox_icon fl" value=查房价 type=submit> </FORM>
+
+</DIV></DIV></DIV>
+<DIV class=clear></DIV></DIV></DIV>
+<DIV class="esf_con_lrec mt10">
+<DIV class=esf_con_title>
+<H1>{$city_name}售房房源</H1>
+<UL class=esf_con_lnav>
+{php $company=$db->get_one("SELECT COUNT(*) AS num FROM ".$AJ_PRE."area WHERE parentid=$cityid");}
+
+ {loop $mainarea $k $v} 
+ 
+  <LI class="esf_con_lnavword tab_bg" 
+  onmouseover="setTimeout('Show_TabADSMenu(1,<?php echo $k+1;?>,{php echo $company[num]})',1);"><A id=tabadmenu_1<?php echo $k+1;?> 
+  href="javascript:void(0);">{$v[areaname]}</A> </LI>
+  {/loop}
+  </UL>
+<DIV class="esf_more fr"><A href="{$MODULE[18][linkurl]}" 
+target=_blank>更多&gt;&gt;</A></DIV></DIV>
+
+{loop $mainarea $k $v} 
+<DIV id=tabadcontent_1<?php echo $k+1;?> class=esf_con_ldotted  style={if $k==""}""{else}"display: none;"{/if}>
+
+<!--{tag("moduleid=5&length=14&condition=status=3&areaid=".$v[areaid]."&pagesize=3&order=hits desc&target=_blank&template=sale-qy")}-->
+ 
+
+<DIV class=clear></DIV></DIV>
+{/loop}
+</DIV></DIV>
+<DIV class="esf_con_right fr">
+<DIV class=esf_con_r2>
+<DIV class=esf_con_r2_title>
+<H2 class=fl>二手房资讯</H2>
+<DIV class="esf_more fr"><A 
+href="{$MODULE[8][linkurl]}" 
+target=_blank>更多&gt;&gt;</A></DIV></DIV>
+<DIV class=esf_con_rjs>
+
+<P class=esf_con_rnew><!--{tag("moduleid=8&table=article_8&condition=status=3&catid=36&areaid=$cityid&pagesize=10&template=sale-news")}--></P></DIV></DIV>
+<DIV class="esf_con_r2 mt10">
+<DIV class=esf_con_r2_title>
+<H2 class=fl>经纪人排行</H2>
+<DIV class="esf_more fr"><A href="{$MODULE[4][linkurl]}list.php?catid=24" 
+target=_blank>更多&gt;&gt;</A></DIV></DIV>
+<DIV class=esf_con_rman>
+<!--{tag("table=member&condition=groupid=7&areaid=$cityid&order=userid desc&pagesize=5&template=list-jjr")}-->
+<DIV class=clear></DIV></DIV></DIV>
+<DIV class="esf_con_r2 mt10">
+<DIV class=esf_con_r2_title>
+<H2>实用工具箱</H2></DIV>
+<DIV class=esf_con_rtool>
+<DIV class="esf_con_rtool_box esf_con_rbr esf_con_rbb fl">
+<DIV class=esf_calculators><SPAN class=esf_con_rc2></SPAN>
+<P><A href="#" 
+target=_blank>购房能力评估</A></P></DIV></DIV>
+<DIV class="esf_con_rtool_box esf_con_rbb fl">
+<DIV class=esf_calculators><SPAN class=esf_con_rc1></SPAN>
+<P><A href="#" 
+target=_blank>税费计算器</A></P></DIV></DIV>
+<DIV class="esf_con_rtool_box esf_con_rbr fl">
+<DIV class=esf_calculators><SPAN class=esf_con_rc3></SPAN>
+<P><A href="#" 
+target=_blank>住房公积金计算器</A></P></DIV></DIV>
+<DIV class="esf_con_rtool_box fl">
+<DIV class=esf_calculators><SPAN class=esf_con_rc4></SPAN>
+<P><A href="#" 
+target=_blank>提前还贷计算器</A></P></DIV></DIV>
+<DIV class=clear></DIV></DIV></DIV></DIV><!--footer-->
+<DIV class=clear></DIV><!--区域链接-->
+
+{template 'foot'}

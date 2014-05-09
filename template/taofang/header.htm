@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset={AJ_CHARSET}"/>
+<title>{if $seo_title}{$seo_title}{else}{if $head_title}{$head_title}{$AJ[seo_delimiter]}{/if}{if $city_sitename}{$city_sitename}{else}{$AJ[sitename]}{/if}{/if}</title>
+{if $head_keywords}
+<meta name="keywords" content="{$head_keywords}"/>
+{/if}
+{if $head_description}
+<meta name="description" content="{$head_description}"/>
+{/if}
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta name="generator" content="aijiacms,www.jssdw.com"/>
+<link rel="shortcut icon" type="image/x-icon" href="{AJ_PATH}favicon.ico"/>
+<link rel="bookmark" type="image/x-icon" href="{AJ_PATH}favicon.ico"/>
+{if $head_canonical}
+<link rel="canonical" href="{$head_canonical}"/>
+{/if}
+<link rel="stylesheet" type="text/css" href="{AJ_SKIN}pubbbs.css"/>
+{if $moduleid>4}<link rel="stylesheet" type="text/css" href="{AJ_SKIN}{$module}.css"/>{/if}
+<link href="{AJ_SKIN}/house_style25.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="{AJ_SKIN}style25.css"/>
+<link href="{AJ_SKIN}pss.css" rel="stylesheet" type="text/css" />
+
+    <script src="{AJ_PATH}file/script/focus.js" type="text/javascript" charset="gb2312"></script>
+    
+
+
+{if !AJ_DEBUG}<script type="text/javascript">window.onerror=function(){return true;}</script>{/if}
+{if $itemid && $AJ[anticopy]}
+<script type="text/javascript">
+document.oncontextmenu=function(e){return false;};
+document.onselectstart=function(e){return false;};
+
+</script>
+{/if}
+<script type="text/javascript" src="{AJ_PATH}lang/{AJ_LANG}/lang.js"></script>
+<script type="text/javascript" src="{AJ_PATH}file/script/config.js"></script>
+<script type="text/javascript" src="{AJ_PATH}file/script/common.js"></script>
+<script type="text/javascript" src="{AJ_PATH}file/script/page.js"></script>
+<script src="{AJ_PATH}file/script/commfunction.js" type="text/javascript"></script>
+
+    <script src="{AJ_PATH}file/script/jquery.js" type="text/javascript"></script>
+
+<script language="Javascript" src="{AJ_SKIN}/js/default.js"></script>
+
+<script>
+function MM_over(mmObj) {
+var mSubObj = mmObj.getElementsByTagName("div")[0];
+mSubObj.style.display = "block";
+mSubObj.style.backgroundColor = "#fff";
+}
+function MM_out(mmObj) {
+var mSubObj = mmObj.getElementsByTagName("div")[0];
+mSubObj.style.display = "none";
+
+}
+</script>
+
+</head>
+
+<style type="text/css">
+.partbd ul li{display:block; float:left; width:50px; line-height:22px;  height:22px; text-align:center; text-decoration:none;}
+.partbd ul li a{display:inline-block;}
+.partbd li a:link, .partbd li a:visited {display: inline-block; height: 17px;line-height: 17px;padding: 0 5px;text-decoration:none;}
+.partbd li a:hover{background: none repeat scroll 0 0 #30c8f7;color:#ffffff;text-decoration:none;}
+
+
+.PartAs_wrap_house UL.PartAs_wrap_house_left {
+	WIDTH: 421px; DISPLAY: block; OVERFLOW: hidden;  float:left
+}
+
+.PartAs_wrap_house UL.PartAs_wrap_house_center{
+	 width:410px; float:left; DISPLAY: block; OVERFLOW: hidden;
+}
+
+.PartAs_wrap_house UL.PartAs_wrap_house_center li{
+	 width:410px;
+}
+
+.PartAs_wrap_house UL.PartAs_wrap_house_right{
+	 width:80px; float:left; DISPLAY: block; OVERFLOW: hidden; margin-left:8px;
+}
+.PartAs_wrap_house UL.PartAs_wrap_house_right li{
+	 width:110px;
+}
+/*搜索无结果*/
+.noresult{ margin-top:20px;}
+.noresult img{ margin-left:40px;}
+.noresult img,.noresult .text{ float:left}
+.noresult .text{ padding-left:20px; margin:0px;}
+.noresult .text b{ display:block; height:20px;}
+.noresult .text .tip{ height:50px; line-height:50px; font-size:14px}
+.noresult .text p{ background:#FFF; font-size:12px; padding-left:15px; padding-top:5px; height:40px; line-height:20px; padding-bottom:20px; border-bottom:none; display:block; }
+.noresult .interest{ margin:0px;}
+.hidden{ display:none}
+.button_1 {background: url(../image/button.gif) no-repeat;height: 27px;width: 67px;border: none;cursor: pointer;text-align: center;}
+.TB_overlayBG{background:none}
+#annunciator tr td{border-bottom: none;}
+.msg dt{margin-left:134px;margin-bottom:14px;}
+.close{ text-align:right; }
+ ul.msg{background:url(../image/sell/icon.faceok_90x75.gif) no-repeat;margin:13px 0 14px 5px;height:90px}
+.border{width:350px;background:#fff;padding:10px 10px; margin-left:3px; border:none }
+#TB_window {border: 4px solid #DDDDDD}
+</style>
+
+<script>
+function setTab(cursel,n){
+ for(i=1;i<=n;i++){
+  var menu=document.getElementById("one"+i);
+  var con=document.getElementById("con_one_"+i);
+  menu.className=i==cursel?"ta on":"ta off";
+  con.style.display=i==cursel?"block":"none";
+ }
+}
+</script>
+
+
+
+<body>
+<div id="wrap">
+<div class="cArea">
+<!--通用头部 begin -->
+
+<center>
+	<div class='xafc-nav'>
+<span class='nav-link'><a href='{$MODULE[1][linkurl]}' target='_blank'><b>{$AJ[sitename]}</b></a> <a href='{$MODULE[1][linkurl]}' target='_blank'>首页</a>-{loop $MODULE $m}{if $m[ismenu]}<a href="{$m[linkurl]}"{if $m[isblank]} target="_blank"{/if}>{$m[name]}</a>-{/if}{/loop}</span>
+	<div class='rightCon nav-link'  id='passport_id'>
+	<div class="f_r" id="aijiacms_member"></div>
+	</div>
+</div>
+
+</center>
+	 
+  <!--通用头部 end-->
+
+<!-- 广告位：新房首页顶部通栏1 -->
+
+<!-- 广告位：新房首页顶部通栏2 -->
+
+
+<!--logo+搜索 begin -->
+<div class="logo_search"  style="padding-left:0px; padding-right:0px; width:960px;">
+<div class="logo"  style="float:left; padding:0; width:155px;"><a href="{$MODULE[1][linkurl]}" target="_blank"><img src="{if $MODULE[$moduleid][logo]}{AJ_SKIN}image/logo_{$moduleid}.gif{elseif $AJ[logo]}{$AJ[logo]}{else}{AJ_SKIN}image/logo.gif{/if}" width="150px" height="50px"></a></div>
+
+      <!-- 切换城市开始 -->
+	  <script type="text/javascript">
+function gocity(s) {
+	Go('{$MODULE[1][linkurl]}city.php?action=go&'+s);
+}
+</script>
+     {if $AJ[city]}  <div onmouseover="MM_over(this)" onmouseout="MM_out(this)" class="city" style=" line-height:40px; padding-left:5px;  float:left; position:relative; top:5px; border-left:1px dashed #CCCCCC; z-index:9999"> <span  style="display:block; cursor:pointer;   width:60px; background:url({AJ_SKIN}/image/city.jpg)  -40px 18px no-repeat;"> <span id="aijiacms_city">{$city_name}</span> </span> 
+          <!-- 隐藏层开始 -->
+          <div  class="partbd" style="display:none; position:absolute; top:30px; width:250px;  padding:10px; z-index:9999; border:1px solid #30c8f7; background-color:#FFFFFF">
+            <ul> {php $citys = get_city(0)}
+			{loop $citys $k $v}<li><a href="{if $v[domain]}{$v[domain]}{else}javascript:gocity('areaid={$v[areaid]}');{/if}">{$v[name]}</a></li>{/loop}  
+			
+            </ul>
+          </div>
+          <!-- 隐藏层结束 -->
+      </div>
+	  {/if}
+      <!-- 切换城市结束 -->
+<!-- search start -->
+<div class="search" style="float:right; z-index:1">
+
+<div class="pss_css" >
+  <div class="t">
+    <div class="t">
+      <ul>
+        <li id="one1" onMouseOver="setTab(1,5)" class="ta on">新房</li>
+        <li id="one2" onMouseOver="setTab(2,5)" class="ta off">二手房</li>
+        <li id="one3" onMouseOver="setTab(3,5)" class="ta off">租房</li>
+        <li id="one4" onMouseOver="setTab(4,5)" class="ta off">资讯</li>
+        
+      </ul>
+    </div>
+  </div>
+  <div class="s">
+    <!--新房部分-->
+	 <div class="p" id="con_one_1">
+      <form action="{$MODULE[6][linkurl]}search.php" method="get" id="formNewhouse" name="formNewhouse" target="_blank">
+	  <input type="hidden" name="spread" value="0" id="aijiacms_spread"/>
+	  <input type="hidden" name="moduleid" value="6" id="aijiacms_moduleid"/>
+         <div>
+             <div>
+		  
+			      <div class="sf sf1">
+			               <div>
+			               <select name="areaid" class=box2 id="areaId" >
+                           <option value="" selected="selected">区域 </option>
+						    {php $mainarea = get_mainarea($cityid)}
+						    {loop $mainarea $k $v}    
+						   <option value="{$v[areaid]}">{$v[areaname]}</option>{/loop}
+                            </select> 
+			                </div>
+			      </div>
+			      <div class="sf sf2">
+			 <select name="catid" class=box2 id="unitType">
+                           <option value="">物业类型</option>
+						   {php $leixing = get_maincat(0,6)}
+			
+                           {loop $leixing $k $v}<option value="{$v[catid]}">{$v[catname]}</option>{/loop}  
+                         
+                         </select>
+                  </div>
+			     <div class="sf sf3">
+			 <select name="p" class=box3 id="unitType">
+                           <option value="">价格范围</option>
+                           {php $prices = array('4000以下','4000-5000', '5000-6000', '6000-8000',  '8000-10000', '10000以上');}
+				{loop $prices $k $v} <option value="<?php echo $k+1;?>">{$v}</option>{/loop}
+                         
+                         </select>
+                 </div>
+                 <div class="sf sf4">
+			<img class="k" src="{AJ_SKIN}image/pss_k.gif">
+		<span>
+<input id="kw_f" size="10" name="kw" onkeyup="sendlx(this.value);" onkeydown="javascript:window.event?send():null;" onfocus="cTV('kw_f','on')" onblur="cTV('kw_f','off')" value="" type="text">
+</span>
+			     </div>
+ 
+            </div>
+         </div>
+     <div class="i"><input type="image" name="submit" src="{AJ_SKIN}image/pss_submit.gif"  /></div> </form>
+    </div>
+	     
+    <!--二手房部分-->
+    <div class="p" id="con_one_2" style="display:none;">
+     <form action="{$MODULE[5][linkurl]}search.php" method="get" id="formNewhouse" name="formNewhouse" target="_blank">
+	 <input type="hidden" name="spread" value="0" id="aijiacms_spread"/>
+	 <input type="hidden" name="moduleid" value="5" id="aijiacms_moduleid"/>
+        <div>
+          <div >
+		  
+			<div class="sf sf1"><div >
+			  <select name="areaid" class=box2 id="areaId" >
+                           <option value="" selected="selected">区域 </option>
+						    {php $mainarea = get_mainarea($cityid)}
+						    {loop $mainarea $k $v}    
+													
+                                
+                           <option value="{$v[areaid]}">{$v[areaname]}</option>{/loop}
+                        
+             </select> </div>
+			 </div>
+			 <div class="sf sf2">
+			 <select name="catid" class=box2 id="unitType">
+                           <option value="">物业类型</option>
+						   {php $leixing = get_maincat(0,5)}
+                           {loop $leixing $k $v}<option value="{$v[catid]}">{$v[catname]}</option>{/loop}  
+                         
+                         </select>
+            </div>
+			 <div class="sf sf3">
+			 <select name="p" class=box3 id="unitType">
+                           <option value="">价格范围</option>
+                           {php $prices = array('30万以下','30-50万', '50-80万', '80-100万',  '100-120万', '120-150万', '150-200万');}
+				{loop $prices $k $v} <option value="<?php echo $k+1;?>">{$v}</option>{/loop}
+                         
+                         </select>
+            </div>
+            <div class="sf sf4">
+			<img class="k" src="{AJ_SKIN}image/pss_k.gif">
+		<span>
+<input id="kw_f" size="10" name="kw" onkeyup="sendlx(this.value);" onkeydown="javascript:window.event?send():null;" onfocus="cTV('kw_f','on')" onblur="cTV('kw_f','off')" value="" type="text">
+</span>
+
+			</div>
+ 
+         </div>
+        </div>
+     <div class="i"><input type="image" name="submit" src="{AJ_SKIN}image/pss_submit.gif"  /></div>
+    </div>  </form>
+    <!--租房部分-->
+    <div class="p" style="display:none;" id="con_one_3">
+    <form action="{$MODULE[7][linkurl]}search.php" method="get" id="formNewhouse" name="formNewhouse" target="_blank">
+	<input type="hidden" name="spread" value="0" id="aijiacms_spread"/>
+	<input type="hidden" name="moduleid" value="7" id="aijiacms_moduleid"/>
+        <div>
+          <div >
+		  
+			<div class="sf sf1"><div >
+			  <select name="areaid" class=box2 id="areaId" >
+                           <option value="" selected="selected">区域 </option>
+						     {php $mainarea = get_mainarea($cityid)}
+							{loop $mainarea $k $v}    
+													
+                                
+                           <option value="{$v[areaid]}">{$v[areaname]}</option>{/loop}
+                        
+             </select> </div>
+			 </div>
+			 <div class="sf sf2">
+			 <select name="catid" class=box2 id="unitType">
+                           <option value="">物业类型</option>
+						   {php $leixing = get_maincat(0,7)}
+                           {loop $leixing $k $v}<option value="{$v[catid]}">{$v[catname]}</option>{/loop}  
+                         
+                         </select>
+            </div>
+			 <div class="sf sf3">
+			 <select name="p" class=box3 id="unitType">
+                           <option value="">价格范围</option>
+                           {php $prices = array('200元以下','200-500元', '500-1000元', '1000-1500元',  '1500-2000元', '2000-3000元','3000元以上');}
+				{loop $prices $k $v} <option value="<?php echo $k+1;?>">{$v}</option>{/loop}
+                         
+                         </select>
+            </div>
+            <div class="sf sf4">
+			<img class="k" src="{AJ_SKIN}image/pss_k.gif">
+			<span>
+<input id="kw_f" size="10" name="kw" onkeyup="sendlx(this.value);" onkeydown="javascript:window.event?send():null;" onfocus="cTV('kw_f','on')" onblur="cTV('kw_f','off')" value="" type="text">
+</span>
+			</div>
+ 
+         </div>
+        </div>
+     <div class="i"><input type="image" name="submit" src="{AJ_SKIN}image/pss_submit.gif"  /></div>
+    </div>  </form>
+	 <!--资讯部分-->
+    <div class="p" style="display:none;" id="con_one_4">
+      <form action="{$MODULE[8][linkurl]}search.php" target="_blank" method="get">  
+		<div class="sf sf1">
+		<input type="hidden" name="spread" value="0" id="aijiacms_spread"/>
+		<input type="hidden" name="moduleid" value="8" id="aijiacms_moduleid"/>
+         
+		              <select name="fields" class=box2 id="unitType">
+                           <option value="">类型</option>
+						   
+                            <option value="1">按标题</option>
+							 <option value="0">按内容</option>
+                      </select></div>
+           <div class="sf sf5">
+			<img class="k" src="{AJ_SKIN}image/pss_k.gif">
+			<span>
+<input id="kw_f" size="30" name="kw" onkeyup="sendlx(this.value);" onkeydown="javascript:window.event?send():null;" onfocus="cTV('kw_f','on')" onblur="cTV('kw_f','off')" value="" type="text">
+</span>
+
+			</div>
+			 <div class="i"><input type="image" name="submit" src="{AJ_SKIN}image/pss_submit.gif"  /></div>
+          </div>
+         
+        
+      </form>
+    
+    <!--社区搜索-->
+    
+   
+  </div>
+  <div class="adv" >
+<a href="{$EXT[spread_url]}">排名推广</a><br>
+<a href="{$MODULE[6][linkurl]}map.php" target="_blank" >地图找房</a>
+</div>
+</div>
+
+<!-- search end -->
+
+</div>
+</div>
+
+<!--logo+搜索 end -->
+{if $moduleid==8 or $moduleid==6}
+{else}
+<!--导航 begin -->
+<div class="navdao">
+<ul class="link1">
+<li{if $moduleid<4} class="link3"{/if}><a href="{$MODULE[1][linkurl]}"><span>首页</span></a></li>{loop $MODULE $m}{if $m[ismenu]}<li{if $m[moduleid]==$moduleid} class="link2"{else}class="aa"{/if}><a href="{$m[linkurl]}"{if $m[isblank]} target="_blank"{/if}><span{if $m[style]} style="color:{$m[style]};"{/if}>{$m[name]}</span></a></li>{/if}{/loop}
+</ul>
+</div>
+<div class="hr10"></div>
+<!--导航 end -->
+{/if}

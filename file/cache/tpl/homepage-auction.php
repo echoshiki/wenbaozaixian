@@ -180,12 +180,12 @@ Go('<?php echo $MOD['linkurl'];?>cart.php?itemid=<?php echo $itemid;?>&s1='+s_s[
 <div class="main_head"><div><strong>竞拍分类</strong></div></div>
 <div class="main_body">
 <div class="px13 lh18">
-<?php $tags=tag("table=type&condition=item='mall-".$userid."'&pagesize=40&order=listorder asc,typeid desc&template=null");?>
+<?php $tags=tag("table=type&condition=item='auction-".$userid."'&pagesize=40&order=listorder asc,typeid desc&template=null");?>
 <div><span class="f_r"><a href="<?php echo $MENU[$menuid]['linkurl'];?>" class="t">显示全部</a>&nbsp;</span>&nbsp;&nbsp;<strong>我公司主营以下几类商品，请查看： </strong></div>
 <table width="98%" cellpadding="3" cellspacing="3" align="center">
 <?php if(is_array($tags)) { foreach($tags as $i => $t) { ?>
 <?php if($i%3==0) { ?><tr><?php } ?>
-<td width="33%" id="type_<?php echo $t['typeid'];?>"><a href="<?php echo userurl($username, 'file=mall&typeid='.$t['typeid'], $domain);?>" title="<?php echo $t['typename'];?>" id="name_<?php echo $t['typeid'];?>"><?php echo set_style($t['typename'], $t['style']);?></a></td>
+<td width="33%" id="type_<?php echo $t['typeid'];?>"><a href="<?php echo userurl($username, 'file=auction&typeid='.$t['typeid'], $domain);?>" title="<?php echo $t['typename'];?>" id="name_<?php echo $t['typeid'];?>"><?php echo set_style($t['typename'], $t['style']);?></a></td>
 <?php if($i%3==2) { ?></tr><?php } ?>
 <?php } } ?>
 </table>

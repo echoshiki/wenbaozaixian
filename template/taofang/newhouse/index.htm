@@ -1,0 +1,357 @@
+{template 'header'}
+{template 'top', 'newhouse'}
+<link href="{AJ_SKIN}/house_style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+
+.bd{border:1px solid #d4e0f0;zoom:1;overflow:hidden;padding:7px 12px;}
+
+
+.top12_pics{padding:0 12px;}
+.top12_pics li{display:inline;float:left;width:221px;zoom:1;overflow:hidden;line-height:20px;color:#666;padding:12px 0;border-bottom:1px dashed #e2e2e2;}
+.top12_pics li img{float:left;border:1px solid #e2e2e2;padding:1px;margin-right:7px;}
+.top12_pics li.end{border-bottom:0;}
+
+
+</style>
+    <script src="{AJ_PATH}file/script/focus.js" type="text/javascript" charset="gb2312"></script>
+<!--细化搜索 begin -->
+
+<!--细化搜索 end -->
+<div class="hr10"></div>
+<!--楼盘速递 begin -->
+<div class="scroll">
+<div class="a1 link3"><a href="#">楼盘速递</a></div>
+<ul>
+
+<div id="left_1" class="left_1" style="padding:0;width:850px;">
+	<div class="left_1_i" >
+			  <!--{tag("moduleid=8&table=article_8&condition=status=3 &areaid=$cityid&pagesize=6&target=_blank&template=list-hlrlp")}-->
+			</div>
+</div>
+
+</ul>
+</div>
+
+
+<!--楼盘速递 end -->
+<div class="hr10"></div>
+</div>
+
+<div class="cArea">
+<div class="left">
+    <!--价格分布+热点购房板块 begin-->
+  <div class="left_wrap">
+  <DIV class="xfbjrmbk">
+<!--{tag("moduleid=8&condition=status=3 and level=2 and thumb!=''&areaid=$cityid&pagesize=5&target=_blank&template=slide-newhouse")}-->
+</DIV>
+  <div class="left_end"></div>
+  </div>
+  <!-- end-->
+  <div class="hr10"></div>
+  <!--销售信息 begin-->
+  <div class="left_wrap">
+  <div class="title_left link5"><span class="red1"></span><a href="{$MODULE[8][linkurl]}list.php?catid=35">销售信息</a></div>
+  
+      <DIV class="left_5">
+           <ul>
+
+					 <!--{tag("moduleid=8&table=article_8&condition=status=3 &catid=35&areaid=$cityid&pagesize=6&target=_blank&template=list-hlrlp")}-->
+            
+       
+            </ul>
+          </DIV>
+        <div class="left_end"></div>
+  </div>
+  <!--销售信息 end-->
+  <div class="hr10"></div>
+  <!--房产走势 begin-->
+  <div class="left_wrap">
+   <div class="PartDs">
+ 
+           <div class="title_left link5">房产走势</div>
+     
+      <DIV id=h1>
+	 
+            <DIV class="left_4">
+         
+         <div id="my_chart"></div>
+      <script type="text/javascript" src="{AJ_PATH}ofc/swfobject.js"></script>
+        <script type="text/javascript">
+    swfobject.embedSWF(
+    "{AJ_PATH}open-flash-chart.swf", "my_chart",
+    "300", "160", "9.0.0", "expressInstall.swf",
+    {"data-file":"{AJ_PATH}data-files/line_newhouse_{$cityid}.txt"} );
+    </script>
+    </DIV></DIV> </div>
+  <div class="left_end"></div>
+  </div>
+  <!--销售信息 end-->
+  <div class="hr10"></div>
+</div>
+<div class="center">
+  <!--楼市快讯 begin-->
+  <div class="center_wrap">
+  <div class="title_center link5"><span class="link_span"><a href="{$MODULE[8][linkurl]}list.php?catid=32">更多>></a></span><a href="{$MODULE[8][linkurl]}list.php?catid=32">新房导购</a></div>
+  <div class="content_center">
+  <div class="a1 link9">
+  
+
+ <!--{tag("moduleid=8&table=article_8&catid=32&condition=status=3  and level=5&areaid=$cityid&pagesize=1&target=_blank&template=list-hllp")}-->
+
+  </div>
+  <ul class="link8">
+
+
+
+  <!--{tag("moduleid=8&table=article_8&catid=32&condition=status=3 &areaid=$cityid&pagesize=8&target=_blank&template=list-hlrlp")}-->
+  </ul>
+  </div>
+  <div class="center_end"></div>
+  </div>
+  <!--楼市快讯 end-->
+  <div class="hr10"></div>
+  <!--楼市快报+楼市预告 begin-->
+  <div class="PartCs">
+
+            <div class="PartCsc1">
+        <ul>
+          <li class="SearchD" id=e1 onmouseover=Search2(1)><a href="{$MODULE[8][linkurl]}list.php?catid=34">看房日记</a></li>
+          <li class="SearchC" id=e2 onmouseover=Search2(2)><a href="{$MODULE[8][linkurl]}list.php?catid=28">本地楼市</a></li>
+        </ul>
+      </div>
+      <div id=f1>
+	  <div class="content_center">
+  <div class="a1 link9">
+
+ <!--{tag("moduleid=8&table=article_8&catid=34&condition=status=3  and level=5&areaid=$cityid&pagesize=1&target=_blank&template=list-hllp")}-->
+
+  </div>
+  <ul class="link8">
+
+
+
+  <!--{tag("moduleid=8&table=article_8&catid=34&condition=status=3 &areaid=$cityid&pagesize=8&target=_blank&template=list-hlrlp")}-->
+  </ul>
+  </div>
+  </div>
+  <div class="search_undis" id=f2>
+   <div class="content_center">
+  <div class="a1 link9">
+  
+
+ <!--{tag("moduleid=8&table=article_8&catid=28&condition=status=3  and level=5&areaid=$cityid&pagesize=1&target=_blank&template=list-hllp")}-->
+
+  </div>
+  <ul class="link8">
+
+
+
+  <!--{tag("moduleid=8&table=article_8&catid=28&condition=status=3 &areaid=$cityid&pagesize=8&target=_blank&template=list-hlrlp")}-->
+  </ul>
+  </div>
+  </div>    
+  
+     <div class="center_end"></div>
+     </div>
+  <!--楼市快报+楼市预告 end-->
+  <div class="hr10"></div>
+</div>
+<div class="right">
+<!--最新开盘 begin-->
+     <div class="rig_wrap">
+     <div class="title_rig link5"><span class="link_span"><a href="{$MODULE[6][linkurl]}list.php">更多>></a></span><a href="{$MODULE[6][linkurl]}list.php">最新开盘</a></div>
+      <DIV class="rig_cont px6">
+            <UL class="hlist_a">
+             <LI class="title"><SPAN class="td_1">楼盘名称</SPAN><SPAN class="td_2">价格(元/㎡)</SPAN><SPAN class="td_3">开盘时间</SPAN></LI>
+                             <!--{tag("moduleid=6&table=newhouse&areaid=$cityid&condition=status=3 and isnew=1&pagesize=10&order=addtime desc&template=list-hotloupan")}-->
+
+								 
+            </UL>
+      </DIV>
+     <div class="rig_end"></div>
+     </div>
+     <!--最新开盘 end-->
+     <div class="hr10"></div>
+     <!--优惠信息 begin-->
+     <div class="rig_wrap">
+     <div class="title_rig link5"><span class="link_span"><a href="{$MODULE[8][linkurl]}list.php">更多>></a></span><a href="{$MODULE[8][linkurl]}list.php?catid=33">优惠信息</a></div>
+     <div class="content_rig">
+          <ul>
+
+					 <!--{tag("moduleid=8&table=article_8&catid=33&condition=status=3 &areaid=$cityid&pagesize=6&target=_blank&template=list-hlrlp")}-->
+						
+          </ul>
+		  <div class="hr7"></div>
+     </div>
+     <div class="rig_end"></div>
+     </div>
+     <!--优惠信息 end-->
+     <div class="hr10"></div>
+     <!--购房专题 begin-->
+     <div class="rig_wrap">
+     <div class="title_rig link5"><span class="link_span"><a href="{$MODULE[11][linkurl]}">更多>></a></span><a href="{$MODULE[11][linkurl]}">购房专题</a></div>
+     <div class="content_rig3">
+          <ul>
+
+  <!--{tag("moduleid=11&condition=status=3&areaid=$cityid&pagesize=6&target=_blank&template=list-hlrlp")}-->
+
+
+          </ul>
+     </div>
+     <div class="rig_end"></div>
+     </div>
+     <!--购房专题 end-->
+     <div class="hr10"></div>
+</div>
+</div>
+
+<div class="cArea">
+<div class="cen_box">
+<!--楼盘超市 begin-->
+      <div class="cen_wrap">
+      <div class="title_cen1 link5"><span class="link_span"><a href="{$MODULE[6][linkurl]}list.php">更多>></a></span><a href="{$MODULE[6][linkurl]}list.php">{$city_name}楼盘超市</a>
+	</div>
+      <!--蜀山区 begin-->
+	  <div class="bd top12_pics tab_con" >
+        <ul>
+           <!--{tag("moduleid=6&table=newhouse&areaid=$cityid&condition=status=3 and isnew=1 and thumb!=''&pagesize=18&template=list-loupan")}-->
+          
+           
+                  </ul>
+     
+      </div>
+     
+      <!--蜀山区 end-->
+    
+      <br/>
+ </div>
+<!--楼盘超市 end-->
+</div>
+<div class="right">
+     <!--热点楼盘+最新楼盘 begin-->
+     <div class="PartBs">
+            <div class="PartBsc1">
+        <ul>
+          <li class="SearchD" id=c1 onmouseover=Search1(1)>最新楼盘</li>
+          <li class="SearchC" id=c2 onmouseover=Search1(2)>热点楼盘</li>
+        </ul>
+      </div>
+     
+      <DIV class="rig_cont px7"  id=d1 >
+            <UL class="hlist_aa">
+            <LI class="title"><SPAN class="td_1">楼盘名称</SPAN><SPAN class="td_03">区域</SPAN><SPAN class="td_02">价格(元/㎡)</SPAN></LI>
+						 
+           
+			
+			 <!--{tag("moduleid=6&table=newhouse&areaid=$cityid&condition=status=3 and isnew=1&pagesize=12&order=addtime desc&template=list-lpnew")}-->
+       								       
+            </UL>
+      </DIV>
+      
+    <DIV class="rig_cont px7 search_undis"  id=d2>
+            <UL class="hlist_aa">
+            			 <LI class="title"><SPAN class="td_1">楼盘名称</SPAN><SPAN class="td_03">区域</SPAN><SPAN class="td_02">价格(元/㎡)</SPAN></LI>
+          
+          
+			 
+            <!--{tag("moduleid=6&table=newhouse&areaid=$cityid&condition=status=3 and isnew=1&pagesize=12&order=hits desc&template=list-lpnew")}-->
+        						            
+					       
+            </UL>
+      </DIV> 
+  
+     <div class="rig_end"></div>
+     </div>
+     <!--热点楼盘+最新楼盘 end-->
+     <div class="hr10"></div>
+     <!--精品楼盘推荐 begin-->
+     <div class="rig_wrap">
+     <div class="title_rig link5"><span class="link_span"><a href="{$MODULE[6][linkurl]}">更多>></a></span><a href="{$MODULE[6][linkurl]}">精品楼盘推荐</a></div>
+      <DIV class="rig_cont px7">
+            <UL class="hlist_a">
+           
+			 <!--{tag("moduleid=6&table=newhouse&areaid=$cityid&condition=status=3 and level>0 and  isnew=1&pagesize=12&order=hits desc&template=list-lpnew")}-->
+                               	
+
+            </UL>
+      </DIV>
+     <div class="rig_end"></div>
+     </div>
+     <!--精品楼盘推荐 end-->
+     <div class="hr10"></div>
+</div>
+</div>
+
+<div class="cArea">
+<div class="cen_box">
+<!--视频看房 begin-->
+      <div class="cen_wrap">
+      <div class="title_cen link5"><span class="link_span"><a href="{$MODULE[14][linkurl]}">更多>></a></span><a href="{$MODULE[14][linkurl]}">视频看房</a></div>
+      <div class="content_cen">
+            <ul>
+			
+           <!--{tag("moduleid=14&table=video&condition=status=3&areaid=$cityid&pagesize=4&template=list-vo")}-->
+              </ul>
+      </div>
+      <div class="cen_end"></div>
+      </div>
+<!--视频看房 end-->
+<div class="hr10"></div>
+
+<div class="hr10"></div>
+<!--推荐样板房 begin-->
+      <div class="cen_wrap">
+      <div class="title_cen link5"><span class="link_span"><a href="{$MODULE[12][linkurl]}">更多>></a></span><a href="{$MODULE[12][linkurl]}">楼盘相册</a></div>
+
+	  <DIV class=unit_nk>
+
+<!--{tag("moduleid=12&table=photo&condition=status=3&areaid=$cityid&pagesize=4&template=list-pic")}-->
+
+  </DIV>
+
+
+
+
+
+
+
+
+      <div class="cen_end"></div>
+      </div>
+<!--推荐样板房 end-->
+</div>
+
+<div class="right">
+     <!--项目进度 begin-->
+     <div class="rig_wrap">
+     <div class="title_rig link5"><span class="link_span"><a href="{$MODULE[8][linkurl]}list.php?catid=35">更多>></a></span><a href="{$MODULE[8][linkurl]}list.php?catid=35">项目进度</a></div>
+     <div class="content_rig2">
+          <ul>
+
+						 <!--{tag("moduleid=8&table=article_8&catid=35&condition=status=3 &areaid=$cityid&pagesize=8&target=_blank&template=list-hlrlp")}-->
+
+          </ul>
+     </div>
+     <div class="rig_end"></div>
+     </div>
+     <!--项目进度 end-->
+     <div class="hr10"></div>
+     <!--看房进度 begin-->
+     <div class="rig_wrap">
+     <div class="title_rig link5"><span class="link_span"><a href="{$MODULE[8][linkurl]}list.php?catid=34">更多>></a></span><a href="{$MODULE[8][linkurl]}list.php?catid=34">看房日记</a></div>
+     <div class="content_rig2">
+          <ul>
+					 <!--{tag("moduleid=8&table=article_8&catid=34&condition=status=3 &areaid=$cityid&pagesize=6&target=_blank&template=list-hlrlp")}-->
+						          </ul>
+     </div>
+     <div class="rig_end"></div>
+     </div>
+     <!--看房进度 end-->
+     <div class="hr10"></div>
+     
+     <div class="hr10"></div>
+</div>
+</div>
+<div class="hr10"></div>
+{template 'zoom', 'chip'}
+{template 'footer'}

@@ -1,5 +1,10 @@
 <?php defined('IN_DESTOON') or exit('Access Denied');?>﻿<?php $CSS = array('index');?>
 <?php include template('header');?>
+<script type="text/javascript" src="<?php echo DT_SKIN;?>image/wenbao/ms.js"></script>
+<script type="text/javascript" src="<?php echo DT_SKIN;?>image/wenbao/dicengComm_pack_v1.0.1.js"></script>
+<SCRIPT type=text/javascript>
+TencentArticl.onload();
+</SCRIPT>
 <link rel="stylesheet" type="text/css" href="<?php echo DT_SKIN;?>stylee.css"/>
 <div class="page_center">
 <div class="center_left">
@@ -170,6 +175,28 @@ $sc=$A['arrchildid'];
 <!--newcj over-->
 <div class="clear"></div>
 </div>
+<div class="gdzq_pro">
+<DIV class="mod-left bottom-Article-QQ sildPic-Article-QQ">
+<DIV class=hd>
+<H2>高端拍品区</H2>
+<DIV class=sildPicBar id=sildPicBar>
+<SPAN class=pre></SPAN>
+<UL id=dot></UL>
+        <SPAN class=next></SPAN>
+</DIV>
+</DIV>
+<DIV class=bd style="border:none">
+<DIV class=cnt-wrap id=cnt-wrap>
+<DIV class=cnt id=cnt>
+<UL>
+<?php echo tag("moduleid=23&condition=status=3 and (price>=1000 or auction_price>=1000) and level>0 and thumb<>''&areaid=$cityid&pagesize=24&datetype=0&target=_blank&order=addtime desc&template=index-gaoduan");?>
+</UL>
+  </DIV>
+</DIV>
+</DIV>
+  
+</DIV>
+</div>
 <!--page_center1 over-->
 <div class="page_center2">
 <div class="qianmi">
@@ -287,11 +314,11 @@ $sc3=$A['arrchildid'];
 <!--maijia over-->
 <div class="zhuanchang">
 <dl class="right_hy">
-<dt class="right_titlebg"><h3 class="rightbt1">名企推荐</h3><!--<span class="wb_more"><a href="#">更多>></a></span>--></dt>
+<dt class="right_titlebg"><h3 class="rightbt1">钱币资讯</h3><!--<span class="wb_more"><a href="#">更多>></a></span>--></dt>
 <div class="clear"></div>
 <dd class="right_hynr">
 <ul class="zxppul">
-<?php echo tag("moduleid=4&condition=level>0 and catids<>''&areaid=$cityid&pagesize=5&order=vip desc&template=list-com-index-tj");?>
+<?php echo tag("moduleid=21&condition=status=3 and level>0 and catid=24 and thumb<>''&areaid=$cityid&pagesize=5&datetype=7&order=addtime desc&target=_blank&template=index-qbzx");?>
 </ul>
 </dd>
 </dl>

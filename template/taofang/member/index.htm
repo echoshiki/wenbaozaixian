@@ -1,0 +1,159 @@
+{template 'header', $module}
+<div class="center">
+  <div class="fold"></div>
+    <!--经纪人信息-->
+    <div class="info">
+      <div class="imgarea">
+	  <a href="edit.php"><img src="{if $thumb}{$thumb}{else}{AJ_SKIN}image/agent/nophoto_180x180.gif{/if}" alt="点击更换头像" width="120" height="120" /></a></div>
+      <p><span class="bold">欢迎您！ {$_truename}	  	  <img src="{AJ_SKIN}image/agent/identity_{if $vtruename}yes{else}no{/if}.gif" title="未通过身份证认证" />
+	  	  	  <img src="{AJ_SKIN}image/agent/aptitude_{if $vcompany}yes{else}no{/if}.gif" title="未通过执业资格认证" />
+	  	  </span> <span class="line">会员组：{$MG[groupname]}<br />
+        积分:{$_credit}分  <a href="credit.php" class="l">{$AJ[credit_name]}记录</a>
+		<a href="credit.php?action=buy" class="l">购买{$AJ[credit_name]}</a> | 
+<a href="invite.php" class="l">推广赚{$AJ[credit_name]}</a>
+{if $MOD[credit_exchange]}| <a href="credit.php?action=exchange" class="l">{$AJ[credit_name]}兑换</a>{/if}</span> 
+		<span>
+					帐户状态：{if $_groupid == 4}
+	<b style="color:red;">尊敬的会员，您的帐号<span class="f_red f_b">正在审核中..</span>{if $MOD[checkuser]==2}<a href="send.php?action=check" class="l">请点这里验证您的邮箱</a>，系统将自动审核{else}请稍候，等待网站审核{/if}</b>
+{/if}
+{if $_groupid > 5 && !$_edittime}<b style="color:red;">未完善详细资，<a href="edit.php?tab=2" class="t f_b">现在就去完善</a>。</b>
+{/if}
+{if $vip && $havedays < 11}
+	尊敬的{$MG[groupname]}，您的{VIP}服务将在 <strong class="f_red">{$havedays}</strong> 天后到期，请您尽快续费。&nbsp;&nbsp;<a href="renew.php" class="t f_b">点击续费</a>
+{/if}<b style="color:red;">已经开通</b>
+				<br />
+        <a href="edit.php">更换头像</a> &nbsp;<a href="edit.php">修改资料</a> &nbsp;<a href="credit.php">查看积分明细</a> &nbsp;<a target="_blank" href="{userurl($_username)}">进入店铺</a></span> </p>
+      <div class="clear"></div>
+    </div>
+    <!--提示-->
+		    <div class="tips">
+      <h1>认证提醒：</h1>
+	  {if $MOD[vmember]}
+      您有未完成的认证信息，请尽快提交信息完成认证。马上认证：
+	  &nbsp;&nbsp;<img src="image/{if $validated}v{else}u{/if}_member.gif" width="16" height="16" title="{if $validated}已通过{$validator}认证{else}未通过认证{/if}" align="absmiddle"/> 认证：
+{if $MOD[vemail]}
+<img src="image/{if $vemail}v{else}u{/if}_email.gif" width="16" height="16" title="{if $vemail}已通过{else}未通过{/if}邮件认证" align="absmiddle"/> <a href="validate.php?action=email" class="l">邮件</a> &nbsp;
+{/if}
+{if $MOD[vmobile]}
+<img src="image/{if $vmobile}v{else}u{/if}_mobile.gif" width="16" height="16" title="{if $vmobile}已通过{else}未通过{/if}手机认证" align="absmiddle"/> <a href="validate.php?action=mobile" class="l">手机</a> &nbsp;
+{/if}
+{if $MOD[vbank]}
+<img src="image/{if $vbank}v{else}u{/if}_bank.gif" width="16" height="16" title="{if $vbank}已通过{else}未通过{/if}银行帐号认证" align="absmiddle"/> <a href="validate.php?action=bank" class="l">银行</a> &nbsp;
+{/if}
+{if $MOD[vtruename]}
+<img src="image/{if $vtruename}v{else}u{/if}_truename.gif" width="16" height="16" title="{if $vtruename}已通过{else}未通过{/if}真实姓名认证" align="absmiddle"/> <a href="validate.php?action=truename" class="l">实名</a> &nbsp;
+{/if}
+{if $MOD[vcompany] && $groupid > 5}
+<img src="image/{if $vcompany}v{else}u{/if}_company.gif" width="16" height="16" title="{if $vcompany}已通过{else}未通过{/if}公司资料认证" align="absmiddle"/> <a href="validate.php?action=company" class="l">执业资格认证</a>
+
+{/if}
+{/if}	  </div>
+		
+    <div class="box">
+      <div class="tit">
+        <h1>信息中心</h1>
+      </div>
+      <table width="100%" height="86" border="0" cellspacing="0" class="package" >
+        <tr>
+          <td width="120">站内信息</td>
+          <td class="orange">{$_message}</strong> 封 <a href="message.php" class="l">未读</a></td>
+          <td class="green"><a href="message.php?typeid=1" >意向登记</a> | 
+<a href="message.php?typeid=2" >报价</a> | 
+<a href="message.php?typeid=3" >留言</a> | 
+<a href="message.php?typeid=4" >信使</a> | 
+<a href="message.php?action=send" >发信</a></td>
+        </tr>
+		<tr>
+          <td>{$AJ[money_name]}</td>
+          <td>{$_money} </td>
+          <td><b>
+<a href="charge.php?action=pay" class="l"><img src="image/btn_charge.gif" width="40" height="18" alt="" align="absmiddle"/></a></b> </td>
+        </tr>
+        <tr>
+          <td>{$AJ[credit_name]}</td>
+          <td>{$_credit} </td>
+          <td><a href="credit.php?action=buy">购买{$AJ[credit_name]}</a> | 
+<a href="invite.php" >推广赚{$AJ[credit_name]}</a>
+{if $MOD[credit_exchange]}| <a href="credit.php?action=exchange" >{$AJ[credit_name]}兑换</a>{/if}</td>
+        </tr>
+        <tr>
+          <td>我的订单</td>
+          <td>{$trade} 条</td>
+          <td>{if isset($MODULE[15])}  <a href="group.php?action=order" class="l">{$MODULE[15][name]}订单</a>{/if}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <!--右边-->
+  <div class="right" style="padding:0;">
+    <div class="box">
+      <div class="tit">
+        <h1>系统公告</h1>
+        </div>
+      <ul class="list">
+	  <li>{if $sys}
+{loop $sys $v}
+<li><span class="f_r px11 f_gray">{timetodate($v[addtime], 2)}</span>&nbsp;<a href="message.php?action=show&itemid={$v[itemid]}" title="{$v[title]}">{$v[title]}</a></li>
+{/loop}
+{else}
+<li>&nbsp;暂无消息</li>
+{/if}</li>
+	        </ul>
+    </div>
+    <div class="box">
+      <div class="tit">
+        <h1>我的资料</h1>
+        </div>
+      <ul class="list">
+       {if $_groupid > 5}
+<li>公司名称:
+{if $MG[homepage]}
+<a href="{$userurl}" target="_blank" class="l">{$company}</a>
+{else}
+{$company}
+{/if}
+</li>
+{/if}
+
+<li>会员名:{$username}</li>
+{if $MOD[passport]}
+<li>通行证:{$passport}</li>
+{/if}
+<li>会员组:{$MG[groupname]}</li>
+<li>会员ID:{$userid}</li>
+<li>登录时间:{$logintime}{if $DT[login_log]==2}&nbsp;&nbsp;<a href="record.php?action=login" class="l">登录记录</a>{/if}</li>
+<li>注册时间:{$regtime}</li>
+{if $vip}
+<li>{VIP}级别:<img src="{DT_SKIN}image/vip.gif"/> <img src="{DT_SKIN}image/vip_{$vip}.gif"/></li>
+<li>服务期:{timetodate($fromtime, 3)} 至 {timetodate($totime, 3)}</li>
+<li>剩余时间:<strong>{$havedays}</strong> 天&nbsp;&nbsp;<a href="renew.php" class="l">续费</a></li>
+{elseif $groupid>4}
+<li>会员升级:&nbsp;<a href="grade.php"><span class="f_red">立即升级</span></a></li>
+{/if}
+      </ul>
+    </div>
+	{if $support}
+    <div class="box">
+      <div class="tit">
+        <h1>客服专员</h1>
+     </div>
+      <ul class="list">
+        <li style="display:none;"><img src="image/support.gif" align="absmiddle"/><a href="support.php" class="l">点击联系</a></li>
+      </ul>
+    </div>
+	{/if}
+    <div class="box">
+      <div class="tit">
+        <h1>商务便笺</h1>
+      </div>
+      <div class="helpus">
+		<form method="post" action="index.php" onsubmit="return check();">
+		 <textarea name="note" id="note" rows="5" style="margin-top:5px;">{$note}</textarea>
+		<br />
+			<input name="submit" type="submit"  class="button_1" value="提 交" style="margin-top:5px;"/> <span id="err" style="margin-top:5px;"></span>
+		  </form>
+	  </div>
+    </div>
+   
+  </div>  
+{template 'footer', $module}

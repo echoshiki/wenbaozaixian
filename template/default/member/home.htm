@@ -1,6 +1,6 @@
 {template 'header', 'member'}
 <script type="text/javascript">c(3);</script>
-<div class="menu">
+<!--<div class="menu">
 <table cellpadding="0" cellspacing="0">
 <tr>
 <td class="tab" id="Tab0"><a href="javascript:Tab(0);"><span>常用设置</span></a></td>
@@ -15,10 +15,10 @@
 <td class="tab_nav">&nbsp;</td>
 </tr>
 </table>
-</div>
+</div>-->
 <form method="post" action="home.php" id="dform">
 <input type="hidden" name="tab" id="tab" value="{$tab}"/>
-<div id="Tabs0" style="display:;">
+<div id="Tabs0" style="display:none;">
 <table cellspacing="1" cellpadding="6" class="tb">
 <tr>
 <td class="tl">自定义背景色</td>
@@ -265,7 +265,7 @@ function UpdateURL() {
 </table>
 </div>
 
-<div id="Tabs4" style="display:none;">
+<div id="Tabs4" style="display:;">
 <table cellspacing="1" cellpadding="6" class="tb">
 <tr>
 <td class="tl">首页SEO标题</td>

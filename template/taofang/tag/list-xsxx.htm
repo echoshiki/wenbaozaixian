@@ -1,0 +1,2 @@
+{loop $tags $i $t}
+  <p><span class="us_gray4">{date('Y-m-d', $t[addtime])}</span>---{dsubstr(strip_tags($t[content]), 140, $suffix = '..')}.<a href="{$t[linkurl]}" target="_blank" style="color:#024174;">[ÏêÏ¸]</a></p>{/loop}

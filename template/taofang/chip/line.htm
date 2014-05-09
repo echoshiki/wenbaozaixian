@@ -1,0 +1,27 @@
+var aijiacms_userid = {$_userid};
+var aijiacms_username = '{$_username}';
+var aijiacms_message = {$_message};
+var aijiacms_chat = {$_chat};
+var aijiacms_stip = '';
+var aijiacms_member = '';
+{if $_userid}
+aijiacms_member += '<li>您好，<span id="TopUserName">{$_truename}</span> 欢迎您回来！ (<a href="{$MODULE[2][linkurl]}line.php" title="{if $_online}点击隐身{else}点击上线{/if}">{if $_online}<span class="f_green">在线</span>{else}<span class="f_gray">隐身</span>{/if}</a>) | <a href="{$MODULE[2][linkurl]}">会员中心</a>  | <a href="{$MODULE[2][linkurl]}credit.php">{$AJ[credit_name]}(<span class="px11">{$_credit}</span>)</a> | <a href="{$MODULE[2][linkurl]}logout.php">退出</a></li>';
+{else}
+aijiacms_member += '<li><a href="{$MODULE[2][linkurl]}{$AJ[file_login]}">会员登录</a> | <a href="{$MODULE[2][linkurl]}{$AJ[file_register]}">会员注册</a>|<a href="{AJ_PATH}api/oauth/qq/connect.php"><img src="{AJ_PATH}api/oauth/qq/login50.png"/></a></li>';
+{/if}
+try{Dd('aijiacms_member').innerHTML=aijiacms_member;}catch(e){}
+{if $AJ[city]}
+try{Dd('aijiacms_city').innerHTML='{$city_name}';}catch(e){}
+{/if}
+{if $_message}
+Dd('aijiacms_message').innerHTML='<strong class="f_red">{$_message}</strong>';
+{if $_sound}aijiacms_stip += sound('message_{$_sound}');{/if}
+{/if}
+{if $_chat && $AJ[im_web]}
+Dd('aijiacms_chat').innerHTML='<strong class="f_red">{$_chat}</strong>';
+aijiacms_stip += sound('chat_new');
+{/if}
+var aijiacms_cart = substr_count(get_cookie('cart'), ',');
+if(aijiacms_cart > 0) Dd('aijiacms_cart').innerHTML='<strong class="f_red">'+aijiacms_cart+'</strong>';
+if(aijiacms_stip) Dd('tb_c').innerHTML = aijiacms_stip;
+{if $push && $AJ[pushtime]}window.setInterval('PushNew()',{$AJ[pushtime]}*1000);{/if}

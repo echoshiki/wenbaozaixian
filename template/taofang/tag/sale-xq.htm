@@ -1,0 +1,6 @@
+{loop $tags $k $t}
+
+
+<P><SPAN class=esf_rtxt1><A href="{$t[linkurl]}" 
+target=_blank>{$t[title]}</A></SPAN> <SPAN class=esf_rtxt2>{area_poss($t[areaid], ' ')}</SPAN> <SPAN 
+class=esf_rtxt3>{if $t[price]}{$t[price]}Ôª/©O{else}ÔÝÎÞ{/if}</SPAN> </P>{/loop}

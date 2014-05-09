@@ -6,8 +6,8 @@
 <td style="border:#CCCCCC 1px solid;padding:20px 20px 20px 20px;line-height:180%;font-size:13px;">
 <strong>尊敬的<?php echo $_username;?></strong>：<br/>
 您好！<br/>
-恭喜你，你有一件竞拍商品竞拍成功。请访问以下链接进行购买。
-<a href="<?php echo $MOD['linkurl'];?>buy.php?itemid=<?php echo $item['itemid'];?>" target="_blank">请点这里进行购买。</a>
+恭喜你，你有一件竞拍商品竞拍成功。请访问以下链接进行购买。<br/>
+<a href="<?php echo $MOD['linkurl'];?>buy.php?itemid=<?php echo $item['itemid'];?>" target="_blank">请点这里进行购买。</a><br/>
 本站网址：<a href="<?php echo DT_PATH;?>" target="_blank"><?php echo DT_PATH;?></a><br/>
 </td>
 </tr>

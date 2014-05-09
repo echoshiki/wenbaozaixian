@@ -1,0 +1,8 @@
+{loop $tags $k $t}
+ 
+ <li><span class="num m_width"><?php echo $k+1 ?>.</span><span class="name"><a href="{$t[linkurl]}" target="_blank" title="{$t[alt]}">{dsubstr($t[title], 12, '')}</a></span>
+<h4>{if $t[price]}{$t[price]}元/平米{else}一房一价{/if}</h4>
+<h3>{area_poss($t[areaid], ' ')}</h3>
+</li>
+ 
+ {/loop}

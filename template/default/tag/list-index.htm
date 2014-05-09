@@ -1,0 +1,30 @@
+  <table style="font-size:13px; width:720px;">
+  	<th>房源搜索结果如下：</th>
+
+{loop $tags $k $t}
+<?php
+
+ $url = get_modurl($t['catid']);
+ $city = get_cityname($t['areaid']);
+ $catname = get_catname($t['catid']);
+ if(!$city){
+
+ 	$city = "其他";
+ }
+ 
+ $str = $t['title'];
+
+ 
+ $str = chinesesubstr($str,0,50);
+?>
+
+  	<tr>
+  		<td width="87%">>><a href="<?php echo $url;?>{$t['linkurl']}">[{$city}]
+	    [{$t['modname']}]
+  		[{$catname}]
+  		{$str}</a></td>
+  		<td width="13%">{$t['adddate']}</td>
+  	</tr>
+
+{/loop}
+  </table>		

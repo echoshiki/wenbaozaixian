@@ -1,0 +1,234 @@
+{template 'header'}
+{template 'top', 'newhouse'}
+<link href="{AJ_SKIN}/houses_style.css" rel="stylesheet" type="text/css" />
+ <script type="text/javascript">var sh = '{$MOD[linkurl]}search.php?catid={$catid}';</script>
+<div class="cArea">
+<div class="listtopsearch"></div>
+<div class="listconsearch">
+
+<div class="get" id="get">
+
+
+
+  <div class="getLine">	
+
+  
+<strong>区域：</strong> 
+<span  class="{if $_GET['areaid']==$cityid or $_GET['areaid'] =='' }j_k{else}a1 b_k{/if}">				
+<a href="{$MOD[linkurl]}list.php?l={$_GET['l']}&p={$_GET['p']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&areaid={$cityid}">不限</a>
+</span>	
+
+<ul>
+{loop $mainarea $k $v}  <li> <div class="{if $v[areaid]==$areaid}j_k{else}a1 b_k{/if}">   <a href="{$MOD[linkurl]}list.php?l={$_GET['l']}&p={$_GET['p']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&areaid={$v[areaid]}">{$v[areaname]}</a></div>					
+</li>  {/loop}
+
+</ul>
+
+
+</div>  <div class="getLine">
+<ul>
+
+<strong>价格：</strong> 
+<span  class="{if $_GET['p']=='' }j_k{else}a1 b_k{/if}">
+<a href="{$MOD[linkurl]}list.php?l={$_GET['l']}&areaid={$_GET['areaid']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&p=">不限</a>
+</span>
+ {php $jiage = array('4000-5000', '5000-6000', '6000-7000', '7000-8000', '8000-9000', '9000-10000');}
+{loop $jiage $k $v}  <li> <div class="{if $_GET['p']==($k+1)}j_k{else}a1 b_k{/if}">   <a href="{$MOD[linkurl]}list.php?l={$_GET['l']}&p={$_GET['p']}&areaid={$_GET['areaid']}&typeid={$_GET['typeid']}&catid={$_GET['catid']}&p=<?php echo $k+1;?>">{$v}</a></div>					
+</li>  {/loop}</ul>
+</div> 
+  <div class="getLine">
+<ul>
+<strong>类型：</strong>
+<span class="{if $_GET['catid'] ==''or $_GET['catid'] ==0 }j_k{else}a1 b_k{/if}">	
+<a href="{$MOD[linkurl]}list.php?l={$_GET['l']}&p={$_GET['p']}&areaid={$_GET['areaid']}&typeid={$_GET['typeid']}&catid=">不限</a>
+</span>
+{php $maincat = get_maincat(0,6)}
+{loop $maincat $k $v} 
+ <li> <div class="{if $v[catid]==$catid}j_k{else}a1 b_k{/if}">   <a href="{$MOD[linkurl]}list.php?l={$_GET['l']}&p={$_GET['p']}&typeid={$_GET['typeid']}&areaid={$_GET['areaid']}&catid={$v[catid]}">{$v[catname]}</a></div>					
+</li>  {/loop}</ul>
+</div>  
+
+   <div class="getLine">
+<ul>
+<strong>拼音：</strong>
+<span class="{if $_GET['l'] ==''}j_k{else}a1 b_k{/if}">
+<a href="{$MOD[linkurl]}list.php?catid={$_GET['catid']}&p={$_GET['p']}&areaid={$_GET['areaid']}&typeid={$_GET['typeid']}&l=">不限</a>
+
+</span>
+  {php $l = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');}
+{loop $l $k $v}  <li> <div class="{if $_GET['l']==$v}j_k{else}a1 b_k{/if}">   <a href="{$MOD[linkurl]}list.php?catid={$_GET['catid']}&p={$_GET['p']}&typeid={$_GET['typeid']}&areaid={$_GET['areaid']}&l={$v}">{$v}</a></div>					
+</li>  {/loop}</ul>
+ </div>
+ 
+  </div>
+</div>
+
+
+
+
+<div class="listendsearch linkh">	
+
+</div>
+<div class="hr10"></div>
+</div><div class="cArea">
+<div class="cen_box">
+<div class="PartGs">
+  <div class="PartGsc">
+    <ul>	  
+  
+  <li class="{if $_GET['typeid']==''}SearchJ{else}SearchI{/if}" id="m1">
+<a href="{$MOD[linkurl]}list.php?l={$_GET['l']}&p={$_GET['p']}&areaid={$_GET['areaid']}&catid={$_GET['catid']}&typeid=">全部楼盘</a>
+  </li> 
+  {loop $TYPE $k $v}  <li class="{if $typeid==$k}SearchJ{else}SearchI{/if}">      <a href='{$MOD[linkurl]}list.php?l={$_GET['l']}&p={$_GET['p']}&areaid={$_GET['areaid']}&catid={$_GET['catid']}&typeid={$k} '>{$v}</a></li>	 {/loop} 
+ 
+    </ul>
+
+  </div>
+  <div class="content_list">
+    <div id="n1">
+    <div class="results">		
+<div class="a1">共有<span class="redb">{$items}</span>个符合条件的楼盘</div><div class="a1">排序
+
+			<input type="checkbox" onclick="Go(sh+'&thumb=1');"/>图片&nbsp;
+			
+ <select onchange="Go(sh+'&day='+this.value)">
+			<option value="0">更新时间</option>
+			<option value="1">1天内</option>
+			<option value="3">3天内</option>
+			<option value="7">7天内</option>
+			<option value="15">15天内</option>
+			<option value="30">30天内</option>
+			</select>&nbsp;
+			
+</div>	<div class="a2 pagesa cla">
+<div class="pga"><select onchange="Go(sh+'&order='+this.value)">
+			<option value="0">默认排序</option>
+			<option value="2">价格从高到低</option>
+			<option value="3">价格从低到高</option>
+			<option value="6">开盘时间由新到旧</option>
+			<option value="7">开盘时间由旧到新</option>
+			</select></div>
+</div>
+
+</div><div class="listhouse_k">
+
+<!--hottop-->
+    <!--list-->
+	 {if $page==1 && $kw}
+		{ad($moduleid,$catid,$kw,6)}
+		{load('m'.$moduleid.'_k'.urlencode($kw).'.htm')}
+		{/if}
+		{if $tags}
+	
+	
+
+{if $page == 1}{load('ad_m'.$moduleid.'_c'.$catid.'.htm')}{/if}
+		{if $tags}{template 'list-'.$module, 'tag'}{/if}
+		
+		
+       {else}
+		{template 'noresult', 'message'}
+		{/if}
+	
+
+
+
+
+</div>
+    </div>
+
+   
+    <div style="clear:both;font-size:1px;"></div>
+  </div>
+</div>
+<div class="cen_end"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="right">
+
+<!--div class="houselistgg"><img src="/static/style/house/ggtp.gif" /></div-->
+<!--最新浏览记录上方广告位-->
+<!--最新浏览记录上方广告位-->	
+     <!--最新楼盘 begin-->
+     <div class="rig_wrap">
+       <div class="title_rig link5">
+   			最新楼盘
+</div>
+       <div class="rig_cont px7">
+         <ul class="hlist_a">
+           <li class="title">
+<span class="td_1">楼盘名称</span>
+<span class="td_3">区域</span>
+<span class="td_02">价格(元/㎡)</span>
+   </li>
+
+   <!--{tag("moduleid=6&table=newhouse&condition=status=3 and isnew=1&areaid=$cityid&pagesize=10&order=addtime desc&template=list-lpnew")}-->
+   
+        
+         </ul>
+       </div>
+       <div class="rig_end"></div>
+     </div>
+     <!--最新楼盘 end-->
+     <div class="hr10"></div>
+  <!--div class="houselistgg"><img src="/static/style/house/ggtp.gif" /></div-->
+ <!--最新楼盘上方广告-->
+ <!--最新楼盘上方广告-->
+
+
+
+
+
+     <!--最新楼盘 begin--> 
+     <div class="rig_wrap">
+       <div class="title_rig link5">
+   		<span class="link_span"></span>
+<a href="http://house.xafc.com/list-h5.html" target="_blank">人气楼盘</a>
+</div>
+       <div class="rig_cont px7">
+         <ul class="hlist_a">
+           <li class="title">
+<span class="td_1">楼盘名称</span>
+<span class="td_3">区域</span>
+<span class="td_02">价格(元/㎡)</span>
+   </li>
+
+   
+                <!--{tag("moduleid=6&table=newhouse&condition=status=3 and isnew=1&areaid=$cityid&pagesize=10&order=hits desc&template=list-lpnew")}-->
+            </ul>
+       </div>
+       <div class="rig_end"></div>
+     </div>
+     <!--最新楼盘 end-->
+     <div class="hr10"></div>
+
+
+
+
+ <!--div class="houselistgg"><img src="/static/style/house/ggtp.gif" /></div-->
+ <!--精品楼盘上方广告-->
+ <!--精品楼盘上方广告-->
+
+
+
+
+
+    
+     <div class="hr10"></div>
+</div>
+</div>
+
+<div class="hr10"></div>
+<div class="hr10"></div>
+
+{template 'zoom', 'chip'}
+{template 'footer'}

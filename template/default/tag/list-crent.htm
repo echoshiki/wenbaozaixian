@@ -1,0 +1,26 @@
+
+{loop $tags $k $t}
+<tr class="">
+						<td class="pic">
+							<A title={$t[alt]} 
+href="{$MODULE[5][linkurl]}{$t[linkurl]}" target=_blank><IMG 
+data-src="{imgurl($t[thumb], 1)}" width=100 height=75></A>
+						</td>
+						<td class="info">
+							<h5>
+							<A title={$t[alt]} 
+href="{$MODULE[5][linkurl]}{$t[linkurl]}" 
+target=_blank>{$t[title]}</A>						</h5>
+							<p>
+								户型：{$t[room]}室{$t[hall]}厅，楼层：{$t[floor1]}/{$t[floor2]}，装修：{$t[zhuanxiu]}								<br>
+								<a href="{userurl($t[username], '')}"  target="_blank" title="{$t[truename]}">{$t[truename]}</a>				<br>
+							<span class="gray9">{timetodate($t[edittime], $datetype)}更新</span>
+							</p>
+						</td>
+						<td class="area"><b>{$t[houseearm]}平米</b></td>
+						<td class="price">{if $t[price]}<strong>{$t[price]}</strong>元/月{else}面议{/if} 					</td>
+					</tr>
+
+{/loop}	
+
+

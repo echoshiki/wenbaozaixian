@@ -1,0 +1,67 @@
+{template 'top'}
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/community_detail.css">
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/footer.css">
+<DIV class=content><!--当前位置，小区导航start-->
+<P class=p_add>您现在的位置：<a href="{$MODULE[1][linkurl]}">首页</a> &raquo; <a href="{$MOD[linkurl]}">小区中心</A>  &raquo;<EM> {$title}</EM></P>
+<DIV class=Atitle>
+<H1>{$title}</H1>
+<DIV class="subNav clearfix">
+<UL class=clearfix>
+  <LI ><A 
+  href="{$linkurl}">小区概况</A> </LI>
+  <LI class=selected><A href="{$MODULE[18][linkurl]}jiage.php?itemid={$itemid}">价格行情</A> </LI>
+  <LI><A href="{$MODULE[18][linkurl]}sale.php?itemid={$itemid}">出售房源</A> </LI>
+  <LI><A href="{$MODULE[18][linkurl]}rent.php?itemid={$itemid}">出租房源</A> </LI>
+</UL><form name="detailForm" id="detailForm" action="{$MODULE[2][linkurl]}favorite.php" method="post">
+<input type="hidden" name="action" value="add"/>
+<input type="hidden" name="title" value="{$title}"/>
+<input type="hidden" name="url" value="{$linkurl}"/>
+</form>
+<P>
+<A href="javascript:document.getElementById('detailForm').submit();">收藏该小区</A></P>
+
+
+<DIV class=clear></DIV></DIV></DIV><!--当前位置，小区导航end-->
+<div class="content mt10">
+      <!--left-->
+      <div class="left fl">
+        <!--价格行情-->
+        <div class="partD">
+          <P class="title">
+          {$la}月均价： 
+          <span class="prise_up">
+                    	{$paa}</span> 元/平米
+                    
+                    		同比{$lb}月<span class="prise_upload" >{$percent_change}%</span>
+                    		
+          
+           　{$lb}月均价：<span class="prise_up">{$pab}</span> 元/平米 
+          </P>
+         
+          <div class="prise_map">
+		  <script type="text/javascript" src="{AJ_PATH}ofc/swfobject.js"></script>
+        <script type="text/javascript">
+    swfobject.embedSWF(
+    "{AJ_PATH}open-flash-chart.swf", "my_chart",
+    "630", "314", "9.0.0", "expressInstall.swf",
+    {"data-file":"{AJ_PATH}data-files/linesale_{$itemid}.txt"} );
+    </script>
+        <div id="my_chart"></div>
+		
+         
+          </div>
+        
+        </div>
+       </div>
+<DIV class="right fr"><!-- 您最近浏览过的小区-->
+<DIV class=village>
+<H3>周边小区</H3>
+<DIV class=b_elist_rhousea>
+{loop $same_quyu_list $k $t} 	
+<P><SPAN class=b_elist_rtxt1><a href="{$MODULE[18][linkurl]}{$t[linkurl]}" target="_blank">{dsubstr($t[title], 10, $suffix = '')}</a></SPAN> <SPAN class=b_elist_rtxt2>{area_poss($areaid, ' ')}</SPAN> <SPAN 
+class=b_elist_rtxt3>{if $t[avg_price]}{$t[avg_price]}元/m<SUP>2</SUP>{else}暂无{/if}</SPAN></P>
+{/loop}</DIV></DIV>
+</DIV></DIV><!--right小区，二手房，出租房，小区专家end--></DIV>
+
+{template 'zoom', 'chip'}
+{template 'foot'}

@@ -1,0 +1,5 @@
+{php isset($file) or $file='search';}
+
+{loop $tags $i $t}
+<a href="{$MODULE[$moduleid][linkurl]}{rewrite($file.'.php?kw='.urlencode($t['word']))}"{if $target} target="{$target}"{/if}>{$t[word]}</a>
+{/loop}

@@ -52,7 +52,7 @@
 	<div class="b10"> </div>
 	{/if}
 	{if $MOD[page_inew]}
-	<div class="box_head"><div><span class="f_r"><a href="{$MOD[linkurl]}{rewrite('search.php?page=1')}" rel="nofollow">更多&raquo;</a></span><strong>最新加入</strong></div></div>
+	<div class="box_head"><div><span class="f_r"><a href="{$MOD[linkurl]}{rewrite('search.php?new=1')}" rel="nofollow">更多&raquo;</a></span><strong>最新加入</strong></div></div>
 	<div class="box_body li_dot f_gray">
 	<!--{tag("moduleid=$moduleid&condition=groupid>5 and catids<>''&areaid=$cityid&pagesize=".$MOD[page_inew]."&order=userid desc&template=list-com")}-->
 	</div>

@@ -1,0 +1,93 @@
+{template 'top'}
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/esf.css">
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/footer.css">
+<script type="text/javascript">var sh = '{$MOD[linkurl]}search.php?catid={$catid}';</script>
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/pages.css">
+<!--top-->
+  <div id=content>
+    <!--新房首页-->
+    <p class="b_elist">您现在的位置：<a href="{$MODULE[1][linkurl]}">首页</a> &raquo; <a href="{$MOD[linkurl]}">{$MOD[name]}</a>&raquo; <em>{cat_pos($CAT, ' &raquo; ')}列表</em></p>
+    <div class="b_agencylist">
+      <p><span class="a_name">区域：</span><span>
+	  <a href="{$MOD[linkurl]}list.php?&catid={$_GET['catid']}&areaid={$cityid}" class="{if $_GET['areaid']=='' or $_GET['areaid']==$cityid }select{/if}">全部</a>
+	   {loop $mainarea $k $v}     
+                                                       <a href="{$MOD[linkurl]}list.php?&catid={$_GET['catid']}&areaid={$v[areaid]}" class="{if $v[areaid]==$areaid}select{else}""{/if}">{$v[areaname]}</a>
+															{/loop} 
+	  	  </span></p>
+		   <p><span class="a_name">类型：</span><span>
+	  <a href="{$MOD[linkurl]}list.php?&areaid={$cityid}&g=" class="{if $_GET['g']=='' }select{else}{/if}">全部</a>
+	    {php $lx = array('经纪人', '中介');}
+{loop $lx $k $v}  <a href="{$MOD[linkurl]}list.php?areaid={$_GET['areaid']}&g=<?php echo $k+1;?>" class="{if $_GET['g']==($k+1)}select{else}""{/if}">{$v}</a>{/loop}</span></p>
+	       <form action="{$MOD[linkurl]}search.php" id="fsearch">
+      <input name="kw" id="keyword_agency" type="text" class="b_agencylist_txt fl" value="" size="30" />
+      
+      <input type="submit" value="找经纪人"  id="search_agency" class="b_agencylist_txt2" >
+      <div class="clear"></div>
+      </form>
+    </div>
+	<script language="javascript">
+		$('#keyword_agency').ready(function(){
+			if($('#keyword_agency').val() == '') $('#keyword_agency').val('请输入经纪人姓名或公司名称...');
+		});
+		$('#keyword_agency').click(function(){
+			if($('#keyword_agency').val() == '请输入经纪人姓名或公司名称...')$('#keyword_agency').val('');
+		});
+		$('#keyword_agency').blur(function(){
+			if($('#keyword_agency').val() == '') $('#keyword_agency').val('请输入经纪人姓名或公司名称...');
+		});
+		$('#search_agency').click(function(){
+			if($('#keyword_agency').val() == '请输入经纪人姓名或公司名称...') $('#keyword_agency').val('');
+		});
+		$("#search_agency").click(function(){
+		var word="w"+$("#keyword_agency").val();					  
+		if( $("#keyword_agency").val() != ''){
+			if($("#requst_url").val().indexOf("w")>0 ){
+				var s1 = $("#requst_url").val().replace(/w[\S]+/,word);
+				window.location.href="/agency/"+s1+".html";
+			}else{
+				if($("#requst_url").val()==''){
+						window.location.href="/agency/y7_"+word+".html";
+					}else{
+						window.location.href="/agency/"+$("#requst_url").val()+"_"+word+'.html';
+					}
+				}
+			
+		}else{
+		   return false;	
+		}
+	});
+	</script>
+    <div class="b_elist_left fl ">
+      <div class="b_elist_ltxt b_mt10">
+        <div class="b_elist_lsearch2">
+          <div class="b_agencylist_word">当前有<span> {$items} </span>个经纪人满足您的条件</div>
+          <div class="b_elist_linput_defult"><span class="b_elist_linput_time"><em><a href="javascript:;">默认排序</a></em></span>
+           
+          </div>
+        </div>
+		
+		
+		{if $page == 1}{load('ad_m'.$moduleid.'_c'.$catid.'.htm')}{/if}
+		{if $tags}{template 'list-'.$module, 'tag'}{/if}
+		       
+		       
+		       
+		      
+        <div class="clear"></div>
+      </div>
+     
+    </div>
+    <div class="b_elist_right b_mt10 fr">
+      <div class="b_elist_r2">
+        <div class="b_elist_r2_title">
+          <h2>经纪人积分排行榜</h2>
+        </div>
+        <ul class="b_agency_intergral">
+		         <!--{tag("table=member&condition=groupid=7&areaid=$cityid&order=credit desc&pagesize=10&template=list-comjjr")}-->
+		            <div class="clear"></div>
+        </ul>
+      </div>
+    </div>
+
+{template 'zoom', 'chip'}
+{template 'foot'}

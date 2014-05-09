@@ -1,0 +1,297 @@
+{template 'top'}
+ <script type="text/javascript" src="{AJ_SKIN}/js/Autocompleter/lib/jquery.js"></script>
+<script type='text/javascript' src='{AJ_SKIN}/js/Autocompleter/jquery.autocomplete.js'></script>
+<script type='text/javascript' src='{AJ_SKIN}/js/FormValid.js'></script>
+<script type='text/javascript' src='{AJ_SKIN}/js/FV_onBlur.js'></script>
+<script type='text/javascript' src='{AJ_SKIN}/js/thickbox.js'></script>
+<link rel="stylesheet" type="text/css" href="{AJ_SKIN}/js/Autocompleter/lib/thickbox.css" />
+<link rel="stylesheet" type="text/css" href="{AJ_SKIN}/js/Autocompleter/jquery.autocomplete.css" />
+
+<script type="text/javascript">
+FormValid.showError = function(errMsg,errName,formName) {
+	if (formName=='dataForm') {
+		for (key in FormValid.allName) {
+			//document.getElementById('errMsg_'+FormValid.allName[key]).innerHTML = '';
+			//document.getElementById('errMsg_'+FormValid.allName[key]).style.display = 'none';
+			
+		}
+		for (key in errMsg) {
+			document.getElementById('errMsg_'+errName[key]).innerHTML = errMsg[key];
+			document.getElementById('errMsg_'+errName[key]).style.display = '';
+			
+		}
+	}
+}
+function addToBoroughItem(bid,bname,b_addr,b_area){
+	$("#userid").val(bid);
+	$("#company").val(bname);
+
+}
+$().ready(function() {
+	$("#company").autocomplete("ajaxb.php?action=getBoroughList", {
+		minChars: 2,
+		width: 260,
+		delay:0,
+		mustMatch:true,
+		matchContains: false,
+		scrollHeight: 220,
+		selectFirst:true,
+		scroll: true,
+		formatItem: function(data, i, total) {
+			if(data[1]){
+				return data[0];
+			}
+			return '添加新公司:'+data[0];
+		}
+	});
+	
+	$("#company").result(function(event, data, formatted) {
+		if(data[1]=="addBorough"){
+			
+			$(this).val('');
+		}else{
+			$("#userid").val(data[1]);
+		
+		}
+		
+		/*if (data)
+			$(this).parent().next().find("input").val(data[1]);*/
+	});
+});
+
+</script>
+<style type="text/css">
+.tl{width:150px;text-align:right;padding-right:20px;}
+.reg_title {border-bottom:#CCCCCC 1px solid;font-weight:bold;padding:0 0 10px 10px;margin:15px 55px 0 55px;font-size:14px;color:#FF6600;}
+.reg_inp {border:#7F9DB9 1px solid;padding:3px 0 3px 0;}
+.tips {position:absolute;z-index:1000;width:300px;background:url('image/tips_bg.gif') no-repeat 0 bottom;overflow:hidden;margin:-5px 0 0 -10px;}
+.tips div{background:url('image/tips_top.gif') no-repeat;line-height:22px;padding:8px 10px 8px 35px;}
+</style>
+<div id='main'>
+<div class="m" style="text-align:left">
+	<div class="left_box">
+	<div class="pos" style="text-indent:1em; background: #EEFEED; line-height:35px;">当前位置: <a href="{$MODULE[1][linkurl]}">首页</a> &raquo; 游客删除或重发信息</div>
+	<div style="padding:20px 50px 20px 50px;border:1px solid #CCCCCC; font-size:14px;">
+		<form name="form2" method="post" action="?bu=2" >
+					<table width="100%" border="0" cellpadding="0" cellspacing="3" bgcolor="#EEFEED">
+                      <tr>
+                        <td width="23%" align="right" class="class6">请输入游客发布时的联系人信息:</td>
+                        <td width="77%" height="40">
+						<input name="truename" type="text" id="truename" style="height:25px; line-height:25px; font-size:14px; border:1px solid #CCCCCC" /> <span style="padding-right:20px;">
+						<input type="submit" name="Submit2" value="下一步" style="height:25px; line-height:25px; text-align:center; font-size:14px; width:60px; border:1px solid #666666" />
+						</span> </td>
+                      </tr>
+                    </table>
+		</form></div>
+		<br/>
+						<script type="text/javascript">
+		Dd('username').focus();
+		var vid = '';
+		function validator(id) {
+			vid = id;
+			makeRequest('moduleid={$moduleid}&action=member&job='+id+'&value='+Dd(id).value, 'ajax.php', '_validator');
+		}
+		function _validator() {
+			if(xmlHttp.readyState==4 && xmlHttp.status==200) {
+				Dd('d'+vid).innerHTML = xmlHttp.responseText ? '<img src="{AJ_SKIN}image/check_error.gif" align="absmiddle"/> '+xmlHttp.responseText : '<img src="{AJ_SKIN}image/check_right.gif" align="absmiddle"/> ';
+			}
+		}
+		function err_msg(str, id) {
+			Dd('d'+id).innerHTML = '<img src="{AJ_SKIN}image/check_'+(str ? 'error' : 'right')+'.gif" align="absmiddle"/> '+str;
+		}
+		function validate(type) {
+			if(type == 'cpassword') {
+				if(Dd('cpassword').value != Dd('password').value) {
+					err_msg('两次输入的密码不一致', type);
+				} else {
+					err_msg('', type);
+				}
+			}
+			if(type == 'truename') {
+				if(Dd('truename').value.length < 2) {
+					err_msg('请输入真实姓名', type);
+				} else {
+					err_msg('', type);
+				}
+			}
+			if(type == 'mobile') {
+				if(Dd('mobile').value.length < 11) {
+					err_msg('请输入正确手机号码', type);
+				} else {
+					err_msg('', type);
+				}
+			}
+			if(type == 'telephone') {
+				if(Dd('telephone').value.match(/^[0-9\-\(\)\+\.]{7,}$/)) {
+					err_msg('', type);
+				} else {
+					err_msg('请输入公司电话', type);
+				}
+			}
+		}
+		function reg(type) {
+			if(type) {
+				Ds('company_detail');
+			} else {
+				Dh('company_detail');
+			}
+		}
+		function Df(ID) {
+			Dd(ID).focus();
+		}
+		function check() {
+			var f,p;
+			f = 'username';
+			if(Dd(f).value == '') {
+				err_msg('请填写会员登录名', f);
+				Df(f);
+				return false;
+			}
+			if(Dd('d'+f).innerHTML.indexOf('error') != -1) {
+				Df(f);
+				return false;
+			}
+			f = 'password';
+			if(Dd(f).value.length < 6) {
+				err_msg('请填写会员登录密码', f);
+				Df(f);
+				return false;
+			}
+			if(Dd('d'+f).innerHTML.indexOf('error') != -1) {
+				Df(f);
+				return false;
+			}
+			f = 'cpassword';
+			if(Dd(f).value == '') {
+				err_msg('请重复输入密码', f);
+				Df(f);
+				return false;
+			}
+			if(Dd('password').value != Dd(f).value) {
+				err_msg('两次输入的密码不一致', f);
+				Df(f);
+				return false;
+			}
+			f = 'truename';
+			if(Dd(f).value == '') {
+				err_msg('请填写真实姓名', f);
+				Df(f);
+				return false;
+			}
+			
+			f = 'email';
+			if(Dd(f).value.length < 6) {
+				err_msg('请填写电子邮箱', f);
+				Df(f);
+				return false;
+			}
+			if(Dd('d'+f).innerHTML.indexOf('error') != -1) {
+				Df(f);
+				return false;
+			}
+			if(Dd('areaid_1').value == 0) {
+				Dmsg('请选择所在地', 'areaid');
+				return false;
+			}
+			{if $could_emailcode}
+				f = 'emailcode';
+				if(!Dd(f).value.match(/^[0-9]{6}$/)) {
+					Dmsg('请填写邮件验证码', f);
+					return false;
+				}
+			{/if}
+			if(Dd('g_5').checked == false) {
+				f = 'company';
+				if(Dd(f).value == '') {
+					err_msg('请填写公司名称', f);
+					Df(f);
+					return false;
+				}
+				if(Dd('d'+f).innerHTML.indexOf('error') != -1) {
+					Df(f);
+					return false;
+				}
+				if(Dd('type').value == '') {
+					Dmsg('请选择公司类型', 'type');
+					return false;
+				}
+				f = 'telephone';
+				if(Dd(f).value.length < 7) {
+					err_msg('请填写公司电话', f);
+					Df(f);
+					return false;
+				}
+			}
+			{if $MOD[question_register]}
+			f = 'answer';
+			if(Dd(f).value == '') {
+				Dmsg('请回答验证问题', f);
+				return false;
+			}
+			{/if}
+			{if $MOD[captcha_register]}
+			f = 'captcha';
+			if(!is_captcha(Dd(f).value)) {
+				Dmsg('请填写验证码', f);
+				return false;
+			}
+			{/if}
+			return true;
+		}
+		function SendCode() {
+			if(Dd('demail').innerHTML.indexOf('right') == -1) {
+				Dd('email').focus();
+				return;
+			}
+			makeRequest('action={$action_sendcode}&value='+Dd('email').value, '{$AJ[file_register]}', '_SendCode');
+			Dh('sendok');
+			Dd('send_code').value = '正在发送';
+			Dd('send_code').disabled = true;
+		}
+		function _SendCode() {
+			var f = 'email';
+			if(xmlHttp.readyState==4 && xmlHttp.status==200) {			
+				Dd('send_code').value = xmlHttp.responseText == 1 ? '发送成功' : '立即发送';
+				Dd('send_code').disabled = xmlHttp.responseText == 1 ? true : false;
+				if(xmlHttp.responseText == 1) {
+					setTimeout('StopCode()', 5000);
+					Ds('sendok');
+					Dd('dsendok').innerHTML = '<img src="image/ico_mailok.gif" align="absmiddle"/> <span class="f_green">邮件发送成功，</span> <a href="goto.php?action=emailcode&email='+Dd(f).value+'" target="_blank">立即查收</a>';
+				} else if(xmlHttp.responseText == 2) {
+					err_msg('邮件格式错误，请检查', f);
+					Df(f);
+				} else if(xmlHttp.responseText == 3) {
+					err_msg('邮件地址已存在，请更换', f);
+					Df(f);
+				} else if(xmlHttp.responseText == 4) {
+					err_msg('此邮件域名已经被禁止注册，请更换', f);
+					Df(f);
+				} else {
+					alert('未知错误，请重试');
+				}
+			}
+		}
+		function StopCode() {
+			Dd('send_code').disabled = true;
+			var i = 30;
+			var interval=window.setInterval(
+				function() {
+					if(i == 0) {
+						Dd('send_code').value = '立即发送';
+						Dd('send_code').disabled = false;
+						clearInterval(interval);
+					} else {
+						Dd('send_code').value = '重新发送('+i+')';
+						i--;
+					}
+				},
+			1000);
+		}
+		</script>
+		<br/>
+		</div>
+	</div>
+	</div>
+	</div>
+</div>
+{template 'footer'}

@@ -1,0 +1,12 @@
+{loop $tags $i $t}
+ <LI>
+  <DIV><A href="{$t[linkurl]}" target=_blank><IMG 
+  title="{$t[title]}" 
+  src="{imgurl($t[thumb], 1)}" width=100 
+  height=75></A></DIV>
+  <H5><A href="{$t[linkurl]}" 
+  target=_blank>{dsubstr($t[title], 18, $suffix = '')}</A>
+  <P>{$t[room]}室{$t[hall]}厅，{$t[houseearm]}平米</P><FONT class=yellow>{if $t[price]}{$t[price]}元/月{else}面议{/if}</FONT></H5></LI>
+  
+			  {/loop}
+			  

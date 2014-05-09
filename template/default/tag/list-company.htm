@@ -1,4 +1,8 @@
 {loop $tags $k $t}
+<?
+$userid=$t[userid];
+$A = $db->get_one("SELECT * FROM `{$db->pre}member` WHERE `userid`='$userid'");
+?>
 <div class="list">
 	<table>
 	<tr align="center">
@@ -12,6 +16,7 @@
 			{if $t[mode]}({$t[mode]})&nbsp;&nbsp;{/if}
 			{if $t[validated]}[已核实]{else}[未核实]{/if}
 			</li>
+			<li class="f_gray">法人：{$A[truename]} 手机：{$A[mobile]} 地址：{$t[address]}</li>
 			</ul>
 		</td>
 		<td width="10"> </td>

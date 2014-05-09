@@ -1,0 +1,24 @@
+{loop $tags $k $t}
+	<div class="b_elist_lloupan comm_list">
+           	  <div class="b_elist_lloupanimg fl"><A title="{$t[alt]}" 
+href="{$t[linkurl]}" target=_blank><img src="{imgurl($t[thumb], 1)}" width="120" height="90" alt="{$t[alt]}" onmouseover="img_tip(this, this.src);" onmouseout="img_tip(this, '');"/></A></div>
+                <div class="b_elist_lloupantxt fl">
+                	<ul>
+                      <li class="title"><A  href="{$t[linkurl]}" target=_blank>{$t[title]}</A>  </li>
+                      <li>区域： {area_pos($t[areaid], '')}</li>
+                      <li>地址：{$t[address]}</li>
+                      <li><span class="comm">二手房：<a href="{$t[linkurl]}" target="_blank"><em>{$t[sales]}</em>套</a></span><span class="comm">出租房： <a href="{$t[linkurl]}" target="_blank"><em>{$t[rents]}</em>套</a></span></li>
+                    </ul>
+                </div>
+              <div class="b_elist_lloupantxt2 fl">{if $t[avg_price]>$t[avg_priceb] and $t[percent_change]<>0}<span class="red">↑{$t[percent_change]}%</span>{elseif $t[avg_price]< $t[avg_priceb]}<span class="bule">↓{$t[percent_change]}%</span>{else}→{/if}</div>
+                <div class="b_elist_lloupantxt3 fl">{if $t[avg_price]>0}{$t[avg_price]}<font class="txtstyle">元/平米</font> {else}{/if}</div>               
+				
+		 <div class="clear"></div>
+        </div>
+{/loop}	
+
+<DIV class=clear></DIV>
+<DIV class=pagination>
+<DIV class=pagination-inner>
+{if $showpage && $pages}{$pages}{/if}
+</DIV></DIV>

@@ -1,0 +1,21 @@
+{if in_array($moduleid, explode(',', get_module_setting(3, 'comment_module')))}
+ 
+<div class="Comments" id="Comment"  style="display:;">
+	<div class="tit3">
+<dl>
+<ul>
+<li class="first"><b>我要点评</b></li>
+<li class="us_gray4">我要对{$title}点评</li>
+</ul>
+</dl>
+<dd>共<span id="comment_count">0</span>条点评/<font class="cblue"> <a href="{$EXT[comment_url]}{rewrite('index.php?mid='.$moduleid.'&itemid='.$itemid)}" target="_blank">
+          查看全部</a></font></dd>
+</div>
+
+	
+	
+	<div class="c_b">
+	<script type="text/javascript">show_comment('{$MODULE[3][linkurl]}', {$moduleid}, {$itemid});</script>
+	</div>
+</div>
+{/if}

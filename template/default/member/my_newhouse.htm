@@ -1,0 +1,477 @@
+{template 'header', 'member'}
+<link rel="stylesheet" type="text/css" href="{AJ_SKIN}/default/admin.css"/>
+<div class="text">
+   <!--房源信息-->
+<div class="menus">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td class="tab" id="add"><a href="{$MODULE[2][linkurl]}{$AJ[file_my]}?mid={$mid}&action=add"><span>添加{$MOD[name]}</span></a></td>
+{if $_userid}
+<td class="tab_nav">&nbsp;</td>
+<td class="tab" id="s3"><a href="{$MODULE[2][linkurl]}{$AJ[file_my]}?mid={$mid}"><span>已发布<span class="px10">({$nums[3]})</span></span></a></td>
+<td class="tab_nav">&nbsp;</td>
+<td class="tab" id="s2"><a href="{$MODULE[2][linkurl]}{$AJ[file_my]}?mid={$mid}&status=2"><span>审核中<span class="px10">({$nums[2]})</span></span></a></td>
+<td class="tab_nav">&nbsp;</td>
+<td class="tab" id="s1"><a href="{$MODULE[2][linkurl]}{$AJ[file_my]}?mid={$mid}&status=1"><span>未通过<span class="px10">({$nums[1]})</span></span></a></td>
+<td class="tab_nav">&nbsp;</td>
+<td class="tab" id="s4"><a href="{$MODULE[2][linkurl]}{$AJ[file_my]}?mid={$mid}&status=4"><span>已过期<span class="px10">({$nums[4]})</span></span></a></td>
+<td class="tab_nav">&nbsp;</td>
+<td class="tab" id="type"><a href="{$MODULE[2][linkurl]}type.php?item=product"><span>{$MODULE[6][name]}分类<span class="px10">({$nums[0]})</span></span></a></td>
+{/if}
+</tr>
+</table>
+</div>
+{if $action=='add' || $action=='edit'}
+<iframe src="" name="send" id="send" style="display:none;"></iframe>
+
+<style type="text/css">
+<!--
+.STYLE1 {
+	color: #0099CC;
+	font-weight: bold;
+}
+-->
+</style>
+
+<form method="post" id="dform" action="{$MODULE[2][linkurl]}{$AJ[file_my]}" target="send" onsubmit="return check();">
+<input type="hidden" name="action" value="{$action}"/>
+<input type="hidden" name="mid" value="{$mid}"/>
+<input type="hidden" name="itemid" value="{$itemid}"/>
+<input type="hidden" name="post[isnew]" value="1"/>
+<input type="hidden" name="forward" value="{$forward}"/>
+<table cellpadding="2" cellspacing="1" class="table_form" width="100%" style="line-height:30px;">
+{if $status==1 && $action=='edit' && $note}
+<tr>
+<td class="tl">未通过原因</td>
+<td width="38%" class="tr f_blue">{$note}</td>
+</tr>
+{/if}
+	
+	<tr>
+		<th  width="80" valign="top"><strong>项目名称</strong></th>
+		<td  width="300" valign="top"><input name="post[title]" type="text" id="title" style="width:200px;" value="{$title}"/><span id="dtitle" class="f_red"></span>
+		{if $action=='add' && $could_color}
+		<br>
+{dstyle('style')}&nbsp;
+设置标题颜色消费 <strong class="f_red">{$MOD[credit_color]}</strong> {$AJ[credit_name]}
+{/if}</td>
+		<th width="80" valign="top"><strong>新盘地址</strong></th>
+		<td width="" valign="top">
+			<input name="post[address]" type="text" id="title" style="width:200px;" value="{$address}"/>
+		</td>
+	</tr>
+     
+    
+			
+					
+			<tr>
+		
+		<th valign="top"><strong>物业类型</strong></th>
+		<td valign="top">{get_category_checkboxes('post[catid]',  $moduleid, $catid)}	</td>
+		<th valign="top"><strong>楼盘特点</strong></th>
+		<td valign="top">
+<input name="post[tedian]" type="text" id="title" style="width:200px;" value="{$tedian}"/></td>
+	</tr>
+   
+	<tr>
+		<th valign="top"><strong>区域</strong></th>
+		<td valign="top">{if $areaid}{ajax_area_select('post[areaid]', '请选择', $areaid)}{else}{ajax_area_select('post[areaid]', '请选择', $cityid)}{/if} <span id="dareaid" class="f_red"></span>		</td>
+		<th valign="top"><strong>装修情况</strong></th>
+		<td valign="top"><select name="post[lp_fitment]" id="{$k}">
+    <option value="毛坯" {if $lp_fitment!==''}selected="selected"{/if}>毛坯</option>
+	 <option value="普通装修" {if $lp_fitment!==''}selected="selected"{/if}>普通装修</option>
+    <option value="精装修" {if $lp_fitment!==''}selected="selected"{/if}>精装修</option>
+  </select>		</td>
+	</tr>
+	<tr><th valign="top"><strong>物&nbsp;业&nbsp;费</strong></th>
+		<td valign="top" class=""><input name="post[lp_costs]" type="text" id="title" style="width:200px;" value="{$lp_costs}"/>元(/㎡/月)</td>
+		
+		<th valign="top"><strong>物业公司</strong></th>
+		<td valign="top" ><input name="post[lp_company]" type="text" id="title" style="width:200px;" value="{$lp_company}"/></td>
+	</tr>
+	<tr>
+		<th valign="top"><strong>销售状态</strong></th>
+		<td  valign="top"><select name="post[typeid]" id="{$k}">
+			
+			{loop $TYPE $k $v}
+			 <option value="{$k}" {if $k==$typeid}selected="selected"{/if}>{$v}</option>
+			{/loop}
+			</select>		</td> 
+		<th valign="top"><strong>地图标注</strong></th>
+		<td valign="top">{php include AJ_ROOT.'/api/map/baidu/post.inc.php';} 
+		<br>
+<font color="#CC0000">说明：点击标注弹出地图窗口，然后鼠标在地图上点击您或您公司的位置即可！</font></td>
+	</tr>
+	
+	
+	<tr>
+		<th valign="top"><strong>曲线图数值</strong></th>
+		<td valign="top" ><input type="text" name="post[lineprice]" value="{$lineprice}"  class="sup_input"/>(格式:1000,2000)</td>
+		<th valign="top"><strong>月份</strong></th>
+		<td valign="top"><input type="text"  name="post[linedate]" value="{$linedate}" class="sup_input" />
+		格式: 201207,201208</td> 
+	</tr>
+	<tr>
+		<th valign="top"><strong>价格销售</strong></th>
+		<td valign="top"><input type="text" name="post[price]" value="{$price}"  class="sup_input"/>元/㎡</td>
+		<th valign="top"><strong>产权</strong></th>
+		<td valign="top"><input type="text"  name="post[lp_year]" value="{$lp_year}" class="sup_input" />年</td> 
+	</tr>
+	{if $action=='edit'}
+
+<tr>
+		<th valign="top"><strong>联系人</strong></th>
+		<td valign="top"><input  name="post[truename]" type="text"  value="{$truename}"  class="sup_input"/></td>
+		<th valign="top"><strong>手机号码</strong></th>
+		<td valign="top"><input  name="post[mobile]" type="text" class="sup_input" value="{$mobile}" style="width:200px;" /></td> 
+	</tr>
+{else}
+<tr>
+		<th valign="top"><strong>联系人</strong></th>
+		<td valign="top"><input  name="post[truename]" type="text"  value="{$user['truename']}"  class="sup_input"/></td>
+		<th valign="top"><strong>手机号码</strong></th>
+		<td valign="top"><input  name="post[mobile]" type="text" class="sup_input" value="{$user['mobile']}" style="width:200px;" /></td> 
+	</tr>
+			
+{/if}
+	<tr>
+		<th valign="top"><strong>售楼电话</strong></th>
+		<td valign="top"><input  name="post[telephone]" type="text"  value="{$telephone}"  class="sup_input"/>(格式:028-88888888)</td>
+		<th valign="top"><strong>售楼地址</strong></th>
+		<td valign="top"><input  name="post[sell_address]" type="text" class="sup_input" value="{$sell_address}" style="width:200px;" /></td> 
+	</tr>
+	<tr>
+		<th valign="top"><strong>公交线路</strong></th>
+		<td valign="top"><input  name="post[lp_bus]" type="text" value="{$lp_bus}"  class="sup_input"/></td>
+		<th valign="top"><strong>教育</strong></th>
+		<td valign="top"><input  name="post[lp_edu]" type="text" class="sup_input" value="{$lp_edu}" style="width:200px;" /></td> 
+	</tr>
+	<tr>
+		<th valign="top"><strong>医院</strong></th>
+		<td valign="top"><input type="text" name="post[lp_hospital]" value="{$lp_hospital}"  class="sup_input"/></td>
+		<th valign="top"><strong>银行</strong></th>
+		<td valign="top"><input  name="post[lp_bank]" type="text" class="sup_input" value="{$lp_bank}" sstyle="width:200px;" /></td> 
+	</tr>
+	<tr>
+		<th valign="top"><strong>规划面积</strong></th>
+		<td valign="top"><input type="text" name="post[lp_totalarea]" value="{$lp_totalarea}"  class="sup_input"/>㎡</td>
+		<th valign="top"><strong>建筑面积</strong></th>
+		<td valign="top"><input  name="post[lp_area]" type="text" class="sup_input" value="{$lp_area}" style="width:200px;" />㎡</td> 
+	</tr>
+	<tr>
+		<th valign="top"><strong>规划户数</strong></th>
+		<td valign="top"><input type="text" name="post[lp_number]" value="{$lp_number}"  class="sup_input"/>户</td>
+		<th valign="top"><strong>车位数</strong></th>
+		<td valign="top"><input  name="post[lp_car]" type="text" class="sup_input" value="{$lp_car}" style="width:200px;" /></td> 
+	</tr>
+	<tr>
+		<th valign="top"><strong>容积率</strong></th>
+		<td valign="top"><input type="text" name="post[lp_volume]" value="{$lp_volume}"  class="sup_input"/>%</td>
+		<th valign="top"><strong>绿化率</strong></th>
+		<td valign="top"><input  name="post[lp_green]" type="text" class="sup_input" value="{$lp_green}" style="width:200px;" />%</td> 
+	</tr>
+	<tr>
+		<th valign="top"><strong>开盘时间</strong></th>
+		<td valign="top">
+		
+		{dcalendar('post[selltime]', $selltime)}</td>
+		<th valign="top"><strong>交房时间</strong></th>
+		<td valign="top">{dcalendar('post[completion]', $completion)}</td> 
+	</tr>
+	<tr>
+		<th valign="top"><strong>编辑点评</strong></th>
+		<td colspan="3" >
+		<textarea name="post[lp_dianping]" style="width:500px;" rows="5" >{$lp_dianping}</textarea>
+		
+</td>
+	</tr>
+</table>
+
+<table cellpadding="2" cellspacing="1" class="table_form">
+	<caption>新盘补充信息</caption>
+	<tr>
+		{if $FD}{fields_html('<td class="tl">', '<td class="tr">', $item)}{/if} 
+	</tr>
+	<tr>
+		<th valign="top"><strong>新盘缩略图</strong></th>
+		<td colspan="2">
+		<input type="hidden" name="post[thumb]" id="thumb" value="{$thumb}"/>
+{if $IMVIP || !$MG[uploadpt]}
+	<input type="hidden" name="post[thumb1]" id="thumb1" value="{$thumb1}"/>
+	<input type="hidden" name="post[thumb2]" id="thumb2" value="{$thumb2}"/>
+{/if}
+	<table width="360">
+	<tr align="center" height="120" class="c_p">
+	<td width="120"><img src="{if $thumb}{$thumb}{else}{AJ_SKIN}image/waitpic.gif{/if}" id="showthumb" title="预览图片" alt="" onclick="if(this.src.indexOf('waitpic.gif') == -1){_preview(Dd('showthumb').src, 1);}else{Dalbum('',{$moduleid},{$MOD[thumb_width]},{$MOD[thumb_height]}, Dd('thumb').value, true);}"/></td>
+{if $IMVIP || !$MG[uploadpt]}
+	<td width="120"><img src="{if $thumb1}{$thumb1}{else}{AJ_SKIN}image/waitpic.gif{/if}" id="showthumb1" title="预览图片" alt="" onclick="if(this.src.indexOf('waitpic.gif') == -1){_preview(Dd('showthumb1').src, 1);}else{Dalbum(1,{$moduleid},{$MOD[thumb_width]},{$MOD[thumb_height]}, Dd('thumb1').value, true);}"/></td>
+
+	<td width="120"><img src="{if $thumb2}{$thumb2}{else}{AJ_SKIN}image/waitpic.gif{/if}" id="showthumb2" title="预览图片" alt="" onclick="if(this.src.indexOf('waitpic.gif') == -1){_preview(Dd('showthumb2').src, 1);}else{Dalbum(2,{$moduleid},{$MOD[thumb_width]},{$MOD[thumb_height]}, Dd('thumb2').value, true);}"/></td>
+{else}
+	<td width="120"><a href="{$MODULE[2][linkurl]}register.php" target="_blank"><img src="{AJ_SKIN}image/vippic.gif"/></a></td>
+	<td width="120"><a href="{$MODULE[2][linkurl]}register.php" target="_blank"><img src="{AJ_SKIN}image/vippic.gif"/></a></td>
+{/if}	</tr>
+	<tr align="center" class="c_p">
+	<td><img src="image/img_upload.gif" width="12" height="12" title="上传" onclick="Dalbum('',{$moduleid},{$MOD[thumb_width]},{$MOD[thumb_height]}, Dd('thumb').value, true);"/>&nbsp;&nbsp;<img src="image/img_select.gif" width="12" height="12" title="选择" onclick="selAlbum('');"/>&nbsp;&nbsp;<img src="image/img_delete.gif" width="12" height="12" title="删除" onclick="delAlbum('','wait');"/></td>
+{if $IMVIP || !$MG[uploadpt]}
+	<td><img src="image/img_upload.gif" width="12" height="12" title="上传" onclick="Dalbum(1,{$moduleid},{$MOD[thumb_width]},{$MOD[thumb_height]}, Dd('thumb1').value, true);"/>&nbsp;&nbsp;<img src="image/img_select.gif" width="12" height="12" title="选择" onclick="selAlbum(1);"/>&nbsp;&nbsp;<img src="image/img_delete.gif" width="12" height="12" title="删除" onclick="delAlbum(1,'wait');"/></td>
+	<td><img src="image/img_upload.gif" width="12" height="12" title="上传" onclick="Dalbum(2,{$moduleid},{$MOD[thumb_width]},{$MOD[thumb_height]}, Dd('thumb2').value, true);"/>&nbsp;&nbsp;<img src="image/img_select.gif" width="12" height="12" title="选择" onclick="selAlbum(2);"/>&nbsp;&nbsp;<img src="image/img_delete.gif" width="12" height="12" title="删除" onclick="delAlbum(2,'wait');"/></td>
+{else}
+	<td onclick="if(confirm('此操作仅限{注册}会员，是否现在申请？')) Go('{$MODULE[2][linkurl]}register.php');"><img src="image/img_upload.gif" width="12" height="12" title="上传"/>&nbsp;&nbsp;<img src="image/img_select.gif" width="12" height="12" title="选择"/>&nbsp;&nbsp;<img src="image/img_delete.gif" width="12" height="12" title="删除"/></td>
+	<td onclick="if(confirm('此操作仅限{注册}会员，是否现在申请？')) Go('{$MODULE[2][linkurl]}register.php');"><img src="image/img_upload.gif" width="12" height="12" title="上传"/>&nbsp;&nbsp;<img src="image/img_select.gif" width="12" height="12" title="选择"/>&nbsp;&nbsp;<img src="image/img_delete.gif" width="12" height="12" title="删除"/></td>
+{/if}	</tr>
+	</table>	  </tr>
+</table>
+
+
+<table width="700" cellpadding="2" cellspacing="1" class="table_form">
+<caption>新盘介绍</caption>
+
+  <tr>
+   <td colspan="3"><textarea name="post[content]" id="content" cols="100" class="dsn">{$content}</textarea>
+{deditor($moduleid, 'content', $group_editor, '98%', 350)}<br/>
+1、建议您描述以下方面：楼盘的性能及优点、用途、售后服务、配套等；<br/>
+2、为避免不必要的纠纷，请使用本企业图片；<br/>
+<span id="dcontent" class="f_red"></span>
+</td>
+</tr>
+{if $MOD[swfu] == 1}
+{php include AJ_ROOT.'/file/swfupload/editor.inc.php';}
+{/if}</td>
+  </tr>
+ <tr{if !$_userid} style="display:none;"{/if}>
+<td class="tl">我的推荐</td>
+<td class="tr">
+<input type="radio" name="post[elite]" value="1"{if $elite} checked{/if}/> 是
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" name="post[elite]" value="0"{if !$elite} checked{/if}/> 否
+</td>
+</tr>
+{if !$_userid}
+{template 'guest_contact', 'chip'}
+{/if}
+{if $action=='add' && $could_elite}
+<tr>
+<td class="tl">推荐到网站首页</td>
+<td class="tr">
+<input type="checkbox" name="elite" value="1" onclick="if({$_credit} < {$MOD[credit_elite]}) {confirm('{$AJ[credit_name]}不足，当前余额:{$_credit}');this.checked=false;}"/>
+需要上传至少1张楼盘图片，且需消费 <strong class="f_red">{$MOD[credit_elite]}</strong> {$AJ[credit_name]}
+</td>
+</tr>
+{/if}
+{if $fee_add}
+<tr>
+<td class="tl">发布此信息需消费</td>
+<td class="tr"><span class="f_b f_red">{$fee_add}</span> {$fee_unit}</td>
+</tr>
+{if $fee_currency == 'money'}
+<tr>
+<td class="tl">{$AJ[money_name]}余额</td>
+<td class="tr"><span class="f_blue f_b">{$_money}{$fee_unit}</span> <a href="{$MODULE[2][linkurl]}charge.php?action=pay" target="_blank" class="t">[充值]</a></td>
+</tr>
+{else}
+<tr>
+<td class="tl">{$AJ[credit_name]}余额</td>
+<td class="tr"><span class="f_blue f_b">{$_credit}{$fee_unit}</span> <a href="{$MODULE[2][linkurl]}credit.php?action=buy" target="_blank" class="t">[购买]</a></td>
+</tr>
+{/if}
+{/if}
+{if $need_password}
+<tr>
+<td class="tl"><span class="f_red">*</span> 支付密码</td>
+<td class="tr">{template 'password', 'chip'} <span id="dpassword" class="f_red"></span></td>
+</tr>
+{/if}
+{if $need_question}
+<tr>
+<td class="tl"><span class="f_red">*</span> 验证问题</td>
+<td class="tr">{template 'question', 'chip'} <span id="danswer" class="f_red"></span></td>
+</tr>
+{/if}
+{if $need_captcha}
+<tr>
+<td class="tl"><span class="f_red">*</span> 验证码</td>
+<td class="tr">{template 'captcha', 'chip'} <span id="dcaptcha" class="f_red"></span></td>
+</tr>
+{/if}
+<tr>
+</table>
+
+
+
+
+
+<table cellpadding="2" cellspacing="1" class="table_form">
+	<tr>
+		<td height="50" class="align_c"><input type="submit" name="submit" value=" 提 交 " class="btn"/>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value=" 返 回 " class="btn" onclick="history.back(-1);"/> </td>
+	</tr>
+		
+</table>
+</form>
+
+
+{load('clear.js')}
+{if $action=='add'}
+<script type="text/javascript">s('mid_{$mid}');m('{$action}');</script>
+{else}
+<script type="text/javascript">s('mid_{$mid}');m('s{$status}');</script>
+{/if}
+{else}
+<div class="tt">
+<form action="{$MODULE[2][linkurl]}{$AJ[file_my]}">
+<input type="hidden" name="mid" value="{$mid}"/>
+<input type="hidden" name="status" value="{$status}"/>
+&nbsp;{category_select('catid', '行业分类', $catid, $moduleid)}&nbsp;
+{dselect($TYPE, 'typeid', '信息类型', $typeid)}&nbsp;
+<input type="text" size="30" name="kw" value="{$kw}" title="关键词"/>&nbsp;
+{$mycat_select}&nbsp;
+<input type="submit" value=" 搜 索 " class="btn"/>
+<input type="button" value=" 重 置 " class="btn" onclick="window.location='{$MODULE[2][linkurl]}{$AJ[file_my]}?mid={$mid}&status={$status}';"/>
+</form>
+</div>
+<div class="ls">
+<form method="post">
+<table cellpadding="0" cellspacing="0" class="tb">
+<tr>
+<th width="20"><input type="checkbox" onclick="checkall(this.form);"/></th>
+<th>图片</th>
+<th>标题</th>
+<th>物业类型</th>
+<th width="110">{if $timetype=='add'}添加{else}更新{/if}时间</th>
+<th width="50">浏览</th>
+<th width="80">管理</th>
+</tr>
+{loop $lists $k $v}
+<tr onmouseover="this.className='on';" onmouseout="this.className='';" align="center">
+<td><input type="checkbox" name="itemid[]" value="{$v[itemid]}"/></td>
+<td><a href="javascript:_preview('{$v[thumb]}');"><img src="{if $v[thumb]}{$v[thumb]}{else}{AJ_SKIN}image/nopic50.gif{/if}" width="50" class="thumb"/></a></td>
+<td align="left" title="{$v[alt]}"><ul><li>&nbsp;{if $v[level]==1}<img src="image/ico_home.gif" title="网站首页推广"/> {/if}{if $v[elite]}<span class="f_red" title="公司主页推荐">[荐]</span> {/if}{if $v[status]==3}<a href="{$v[linkurl]}" target="_blank" class="t">{else}<a href="{$MODULE[2][linkurl]}{$AJ[file_my]}?mid={$mid}&action=edit&itemid={$v[itemid]}" class="t">{/if}{$v[title]}</a>{if $v[status]==1 && $v[note]} <a href="javascript:" onclick="alert('{$v[note]}');"><img src="image/why.gif" title="未通过原因"/></a>{/if}</li></ul></td>
+<td><a href="{$v[caturl]}" target="_blank">{$v[catname]}</a></td>
+{if $timetype=='add'}
+<td class="f_gray px11" title="更新时间 {timetodate($v[edittime], 5)}">{timetodate($v[addtime], 5)}</td>
+{else}
+<td class="f_gray px11" title="添加时间 {timetodate($v[addtime], 5)}">{timetodate($v[edittime], 5)}</td>
+{/if}
+<td class="f_gray px11">{$v[hits]}</td>
+<td>
+<a href="{$MODULE[2][linkurl]}{$AJ[file_my]}?mid={$mid}&action=edit&itemid={$v[itemid]}"><img width="16" height="16" src="image/edit.png" title="修改" alt=""/></a>
+{if $MG[copy]}&nbsp;<a href="{$MODULE[2][linkurl]}{$AJ[file_my]}?mid={$mid}&action=add&itemid={$v[itemid]}&catid={$v[catid]}"><img width="16" height="16" src="image/new.png" title="复制信息" alt=""/></a>{/if}
+{if $MG[delete]}&nbsp;<a href="{$MODULE[2][linkurl]}{$AJ[file_my]}?mid={$mid}&action=delete&itemid={$v[itemid]}" onclick="return confirm('确定要删除吗？此操作将不可撤销');"><img width="16" height="16" src="image/delete.png" title="删除" alt=""/></a>{/if}
+</td>
+</tr>
+{/loop}
+</table>
+</div>
+{if $MG[delete] || $timetype!='add'}
+<div class="btns">
+{if $MG[delete]}
+<span class="f_r"><input type="submit" value=" 删除选中 " class="btn" onclick="if(confirm('确定要删除选中{$MOD[name]}吗？')){this.form.action='?mid={$mid}&status={$status}&action=delete'}else{return false;}"/></span>
+{/if}
+{if $timetype!='add'}
+<input type="submit" value=" 刷新选中 " class="btn" onclick="this.form.action='?mid={$mid}&status={$status}&action=refresh';"/>
+{if $MOD[credit_refresh]}
+刷新一条信息一次需消费 <strong class="f_red">{$MOD[credit_refresh]}</strong> {$AJ[credit_name]}，当{$AJ[credit_name]}不足时将不可刷新
+{/if}
+{/if}
+</div>
+{/if}
+</form>
+{if $MG[sell_limit] || (!$MG['fee_mode'] && $MOD[fee_add])}
+<div class="limit">
+{if $MG[sell_limit]}
+总共可发 <span class="f_b f_red">{$MG[sell_limit]}</span> 条&nbsp;&nbsp;&nbsp;
+当前已发 <span class="f_b">{$limit_used}</span> 条&nbsp;&nbsp;&nbsp;
+还可以发 <span class="f_b f_blue">{$limit_free}</span> 条&nbsp;&nbsp;&nbsp;
+{/if}
+{if !$MG['fee_mode'] && $MOD[fee_add]}
+发布信息收费 <span class="f_b f_red">{$MOD[fee_add]}</span> {if $MOD[fee_currency] == 'money'}{$AJ[money_unit]}{else}{$AJ[credit_unit]}{/if}/条&nbsp;&nbsp;&nbsp;
+可免费发布 <span class="f_b">{if $MG[sell_free_limit]<0}无限{else}{$MG[sell_free_limit]}{/if}</span> 条&nbsp;&nbsp;&nbsp;
+{/if}
+</div>
+{/if}
+<div class="pages">{$pages}</div>
+<script type="text/javascript">s('mid_{$mid}');m('s{$status}');</script>
+{/if}
+{if $action == 'add' || $action == 'edit'}
+<script type="text/javascript">
+function _p() {
+	if(Dd('tag').value) {
+		Ds('reccate');
+	}
+}
+function check() {
+	var l;
+	var f;
+	f = 'catid_1';
+	if(Dd(f).value == 0) {
+		Dmsg('请选择所属分类', 'catid', 1);
+		return false;
+	}
+	f = 'title';
+	l = Dd(f).value.length;
+	if(l < 2 || l > 30) {
+		Dmsg('信息标题应为2-30字，当前已输入'+l+'字', f);
+		return false;
+	}
+	{if $MOD[upload_thumb] && $_userid}
+		f = 'thumb';
+		l = Dd(f).value.length;
+		if(l < 5) {
+			Dmsg('请上传第一张房源图片', f);
+			return false;
+		}
+	{/if}
+	{if $FD}{fields_js()}{/if}
+	if(Dd('property_require') != null) {
+		var ptrs = Dd('property_require').getElementsByTagName('option');
+		for(var i = 0; i < ptrs.length; i++) {		
+			f = 'property-'+ptrs[i].value;
+			if(Dd(f).value == 0 || Dd(f).value == '') {
+				Dmsg('请填写或选择'+ptrs[i].innerHTML, f);
+				return false;
+			}
+		}
+	}
+{if $need_password}
+	f = 'password';
+	l = Dd(f).value.length;
+	if(l < 6) {
+		Dmsg('请填写支付密码', f);
+		return false;
+	}
+{/if}
+{if $need_question}
+	f = 'answer';
+	l = Dd(f).value.length;
+	if(l < 1) {
+		Dmsg('请填写验证问题', f);
+		return false;
+	}
+	if(Dd('c'+f).innerHTML.indexOf('error') != -1) {
+		Dd(f).focus();
+		return false;
+	}
+{/if}
+
+{if $need_captcha}
+	f = 'captcha';
+	l = Dd(f).value;
+	if(!is_captcha(l)) {
+		Dmsg('请填写正确的验证码', f);
+		return false;
+	}
+	if(Dd('c'+f).innerHTML.indexOf('error') != -1) {
+		Dd(f).focus();
+		return false;
+	}
+{/if}
+if(Dd('areaid_1').value == 0) {
+			Dmsg('请选择所在地区', 'areaid', 1);
+			return false;
+		}
+	return true;
+}
+</script>
+{/if}
+</div>
+{template 'footer', 'member'}

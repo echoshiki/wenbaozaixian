@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset={AJ_CHARSET}"/>
+<title>{if $seo_title}{$seo_title}{else}{if $head_title}{$head_title}{$AJ[seo_delimiter]}{/if}{if $city_sitename}{$city_sitename}{else}{$AJ[sitename]}{/if}{/if}</title>
+{if $head_keywords}
+<meta name="keywords" content="{$head_keywords}"/>
+{/if}
+{if $head_description}
+<meta name="description" content="{$head_description}"/>
+{/if}
+<meta name="generator" content="aijiacms,www.jssdw.com"/>
+<link rel="shortcut icon" type="image/x-icon" href="{AJ_SKIN}favicon.ico"/>
+<link rel="bookmark" type="image/x-icon" href="{AJ_SKIN}favicon.ico"/>
+{if $head_canonical}
+<link rel="canonical" href="{$head_canonical}"/>
+{/if}
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/mainesf.css">
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/headeresf.css">
+<link rel=stylesheet type=text/css href="{AJ_SKIN}sell/top_nav.css">
+
+<META name=GENERATOR content="MSHTML 8.00.6001.18702">
+<script type="text/javascript" src="{AJ_PATH}lang/{AJ_LANG}/lang.js"></script>
+<script type="text/javascript" src="{AJ_PATH}file/script/config.js"></script>
+<script type="text/javascript" src="{AJ_PATH}file/script/common.js"></script>
+<script type="text/javascript" src="{AJ_PATH}file/script/page.js"></script>
+<SCRIPT type=text/javascript src="{AJ_SKIN}js/jquery-1.4.2.min.js"></SCRIPT>
+
+<SCRIPT type=text/javascript src="{AJ_SKIN}js/common.js"></SCRIPT>
+{if !AJ_DEBUG}<script type="text/javascript">window.onerror=function(){return true;}</script>{/if}
+
+
+
+
+
+<!--[if lte IE 6]>
+<script type="text/javascript" src="{AJ_SKIN}js/jquery.pngFix.js"></script>
+<script type="text/javascript"> 
+	$(function(){
+		$(document).pngFix();
+	});
+</script> 
+<![endif]--></HEAD>
+<BODY>
+<DIV id=wrap>
+<DIV class=top>
+<div class="f1 header_line loadingbg" id="aijiacms_member"></div>
+<DIV class=f2><A href="{$MODULE[1][linkurl]}">首页</A> - <A 
+href="{$MODULE[6][linkurl]}">新房</A> - <A 
+href="{$MODULE[5][linkurl]}">二手房</A> - <A 
+href="{$MODULE[7][linkurl]}">出租房</A> - <A 
+href="{$MODULE[8][linkurl]}">资讯</A> 
+{if $EXT[wap_enable]} <a   class=phone  href="{$EXT[wap_url]}">手机聚道</a>{/if} </DIV></DIV>
+<DIV class=clear></DIV>
+<script>
+function MM_over(mmObj) {
+var mSubObj = mmObj.getElementsByTagName("div")[0];
+mSubObj.style.display = "block";
+mSubObj.style.backgroundColor = "#fff";
+}
+function MM_out(mmObj) {
+var mSubObj = mmObj.getElementsByTagName("div")[0];
+mSubObj.style.display = "none";
+
+}
+</script>
+
+<SCRIPT type=text/javascript 
+src="{AJ_SKIN}js/jquery.autocomplete.js"></SCRIPT>
+<LINK rel=stylesheet type=text/css 
+href="{AJ_SKIN}/styles.css"><!--header-->
+<DIV class=clear></DIV>
+<DIV class=a_menu>
+<DIV class=logo><a href="{$MODULE[1][linkurl]}"><img src="{if $MODULE[$moduleid][logo]}{AJ_SKIN}image/logo_{$moduleid}.gif{elseif $AJ[logo]}{$AJ[logo]}{else}{AJ_SKIN}image/logo.gif{/if}" alt="{$AJ[sitename]}" width="215" height="60"/></a></DIV>
+ <!-- 切换城市开始 -->
+	  <script type="text/javascript">
+function gocity(s) {
+	Go('{$MODULE[1][linkurl]}city.php?action=go&'+s);
+}
+</script>
+     {if $AJ[city]}  <div onmouseover="MM_over(this)" onmouseout="MM_out(this)" class="city" style=" line-height:40px; padding-left:5px;  float:left; position:relative; top:5px; border-left:1px dashed #CCCCCC; z-index:9999"> <span  style="display:block; cursor:pointer;   width:60px; background:url({AJ_SKIN}/image/city.jpg)  -40px 18px no-repeat;"> <span id="aijiacms_city">{$city_name}</span> </span> 
+          <!-- 隐藏层开始 -->
+          <div  class="partbd" style="display:none; position:absolute; top:30px; width:250px;  padding:10px; z-index:9999; border:1px solid #30c8f7; background-color:#FFFFFF">
+            <ul> {php $citys = get_city(0)}
+			{loop $citys $k $v}<li><a href="{if $v[domain]}{$v[domain]}{else}javascript:gocity('areaid={$v[areaid]}');{/if}">{$v[name]}</a></li>{/loop}  
+			
+            </ul>
+          </div>
+          <!-- 隐藏层结束 -->
+      </div>
+	  {/if}
+      <!-- 切换城市结束 -->
+<DIV class=nav>
+<DIV class=nav_content><A  {if $moduleid==5}class=current{/if}  
+href="{$MODULE[5][linkurl]}">二手房</A> <A {if $_GET['list'] =='list' }class=current{/if}  
+href="{$MODULE[5][linkurl]}list.php">出售房源</A> <A {if $moduleid==7}class=current{/if}  
+href="{$MODULE[7][linkurl]}list.php" >出租房源</A> <A {if $moduleid==18}class=current{/if}  
+href="{$MODULE[18][linkurl]}">小区找房</A> 
+<a class="a_sellmap" href="{if $moduleid==18}{$MODULE[5][linkurl]}{else}{$MOD[linkurl]}{/if}map.php" target="_blank">地图找房<span class="a_sellmapnew"><img src="{AJ_SKIN}image/sell/bg_head.gif" /></span></a>
+<A href="{$MODULE[8][linkurl]}" >资讯</A> <A {if $moduleid==4}class=current{/if}  
+ href="{$MODULE[4][linkurl]}">经纪人</A> 
+<DIV class=nav_right></DIV></DIV></DIV></DIV>
+<DIV class=header_search>
+<DIV class=down_search><SPAN>搜索</SPAN></DIV>
+{php $searchid = ($moduleid > 3 && $MODULE[$moduleid]['ismenu'] && !$MODULE[$moduleid]['islink']) ? $moduleid : 6;}
+	{php $searchids = array(6,5,7,8,4,10,9,11,12);}
+	{if !in_array($searchid, $searchids)}
+		{php $searchids[] = $searchid;}
+	{/if}
+	<script type="text/javascript">var searchid = {$searchid};</script>
+<form id="aijiacms_search" action="{AJ_PATH}search.php" onsubmit="return Dsearch();">
+	<input type="hidden" name="moduleid" value="{$searchid}" id="aijiacms_moduleid"/>
+	<input type="hidden" name="spread" value="0" id="aijiacms_spread"/>
+	<INPUT id=keyword class=text 
+name=kw> <INPUT  class=button type=submit value="" name=submit_search> </FORM>
+
+
+<P><SPAN class=s1>热门：</SPAN><SPAN id=headerHot class=s2>
+<!--{tag("moduleid=$moduleid&table=keyword&condition=moduleid=$moduleid and status=3 and updatetime>$today_endtime-86400*30&pagesize=10&order=month_search desc&key=month_search&template=list-search_sale", -2)}--></SPAN> </P>
+
+</DIV><!--top-->

@@ -1,0 +1,257 @@
+{template 'header', 'member'}
+<script type="text/javascript" src="{AJ_SKIN}/js/Autocompleter/lib/jquery.js"></script>
+<script type='text/javascript' src='{AJ_SKIN}/js/Autocompleter/jquery.autocomplete.js'></script>
+<script type='text/javascript' src='{AJ_SKIN}/js/FormValid.js'></script>
+<script type='text/javascript' src='{AJ_SKIN}/js/FV_onBlur.js'></script>
+<script type='text/javascript' src='{AJ_SKIN}/js/thickbox.js'></script>
+<link rel="stylesheet" type="text/css" href="{AJ_SKIN}/js/Autocompleter/lib/thickbox.css" />
+<link rel="stylesheet" type="text/css" href="{AJ_SKIN}/js/Autocompleter/jquery.autocomplete.css" />
+
+<script type="text/javascript">
+FormValid.showError = function(errMsg,errName,formName) {
+	if (formName=='dataForm') {
+		for (key in FormValid.allName) {
+			//document.getElementById('errMsg_'+FormValid.allName[key]).innerHTML = '';
+			//document.getElementById('errMsg_'+FormValid.allName[key]).style.display = 'none';
+			
+		}
+		for (key in errMsg) {
+			document.getElementById('errMsg_'+errName[key]).innerHTML = errMsg[key];
+			document.getElementById('errMsg_'+errName[key]).style.display = '';
+			
+		}
+	}
+}
+function addToBoroughItem(bid,bname,b_addr,b_area){
+	$("#itemid").val(bid);
+	$("#title").val(bname);
+	$("#borough_addr").val(b_addr);
+	$("#borough_area").val(b_area);
+	$("#borough_addr_tr").css("display","");
+	$("#borough_areaid_tr").css("display",""); 
+}
+$().ready(function() {
+	$("#title").autocomplete("ajaxs.php?action=getBoroughList", {
+		minChars: 2,
+		width: 260,
+		delay:0,
+		mustMatch:true,
+		matchContains: false,
+		scrollHeight: 220,
+		selectFirst:true,
+		scroll: true,
+		formatItem: function(data, i, total) {
+			if(data[1]=="addBorough"){
+				return '<strong>'+data[0]+'</strong>';
+			}
+			return data[0];
+		}
+	});
+	
+	$("#title").result(function(event, data, formatted) {
+		if(data[1]=="addBorough"){
+			//TB_show('增加小区','#TB_inline?height=155&width=400&inlineId=modalWindow',false);
+			TB_show('增加小区','addBorough.php?height=240&width=400&modal=true&rnd='+Math.random(),false);
+			$(this).val('');
+		}else{
+			$("#itemid").val(data[1]);
+			$("#borough_addr").val(data[2]);
+			$("#borough_area").val(data[3]);
+			$("#borough_addr_tr").css("display",""); 
+			$("#borough_areaid_tr").css("display","");
+		}
+		
+		/*if (data)
+			$(this).parent().next().find("input").val(data[1]);*/
+	});
+});
+
+</script>
+
+<div class="box">
+  <div class="tit">
+        <h1>房源信息</h1>        
+      </div>
+<form method="post">
+    <!--  <div class="tool">
+  <span class="fl">
+ 
+           <input type="button" class="button_1" onClick="checkall(this.form);" value="全选" />
+<input type="button" class="button_1" onClick="checkall(this.form);" value="取消选择" />
+ 
+<input type="submit" value=" 刷新 " class="button_1" onclick="this.form.action='?mid=5&status=3&action=refresh';"/>
+<input type="submit" value=" 删除 " class="button_1" onclick="if(confirm('确定要删除选中二手房吗？')){this.form.action='?mid=5&status=3&action=delete'}else{return false;}"/>
+  </span>
+ 
+  </div>-->
+  
+      <table width="100%" height="86" border="0" cellspacing="0" class="manage" >
+        <tr class="name">
+          <!--<td width="5%" height="45">选中</td>-->
+          <td>基本信息</td>
+          <td width="13%">价格</td>
+          <td width="10%">访问统计</td>
+ 
+          <td width="15%">更新时间</td>
+ 
+          <td width="18%">操作</td>
+        </tr>
+		<?
+		$truename=$_GET[truename];
+		$mobile=$_GET[mobile];
+		$result = $db->query("SELECT * FROM `{$db->pre}sale` WHERE mobile='$mobile' and (status=3 or status=2) ORDER BY `itemid` DESC");
+        while($r = $db->fetch_array($result)) {
+
+		?>
+		<tr>
+ <!--<td><input type="checkbox" name="itemid[]" value="286"/></td>-->
+          <td style="text-align:left; padding-left:3px;"><a href="/sale/show.php?itemid=<?=$r[itemid]?>" target="_blank" class="t">[出售] <?=$r[title]?></a></td>
+          <td><?=$r[price]?>万</td>
+          <td><?=$r[hits]?></td>
+  
+         
+  <td><?=$r[editdate]?></td>
+         <td><a href="/member/my.php?mid=5&action=edit&itemid=<?=$r[itemid]?>">修改房源</a> | &nbsp;<a href="/member/my.php?mid=5&action=delete&itemid=<?=$r[itemid]?>" onclick="return confirm('确定要删除吗？此操作将不可撤销');"><img width="16" height="16" src="/member/image/delete.png" title="删除" alt=""/></a></td>  
+</tr>
+<?
+}
+?>   
+
+
+<?
+$result = $db->query("SELECT * FROM `{$db->pre}rent` WHERE mobile='$mobile' and (status=3 or status=2) ORDER BY `itemid` DESC");
+        while($r = $db->fetch_array($result)) {
+
+		?>
+		<tr>
+ <!--<td><input type="checkbox" name="itemid[]" value="286"/></td>-->
+          <td style="text-align:left; padding-left:3px;"><a href="/rent/show.php?itemid=<?=$r[itemid]?>" target="_blank" class="t">[出租] <?=$r[title]?></a></td>
+          <td><?=$r[price]?>元/月</td>
+          <td><?=$r[hits]?></td>
+  
+         
+  <td><?=$r[editdate]?></td>
+         <td><a href="/member/my.php?mid=7&action=edit&itemid=<?=$r[itemid]?>">修改房源</a> | &nbsp;<a href="/member/my.php?mid=7&action=delete&itemid=<?=$r[itemid]?>" onclick="return confirm('确定要删除吗？此操作将不可撤销');"><img width="16" height="16" src="/member/image/delete.png" title="删除" alt=""/></a></td>  
+</tr>
+<?
+}
+?>
+
+
+<?
+$result = $db->query("SELECT * FROM `{$db->pre}buy` WHERE mobile='$mobile' and (status=3 or status=2) ORDER BY `itemid` DESC");
+        while($r = $db->fetch_array($result)) {
+
+		?>
+		<tr>
+ <!--<td><input type="checkbox" name="itemid[]" value="286"/></td>-->
+          <td style="text-align:left; padding-left:3px;"><a href="/buy/show.php?itemid=<?=$r[itemid]?>" target="_blank" class="t">[求购/求租] <?=$r[title]?></a></td>
+          <td><?=$r[price]?>元/平方米</td>
+          <td><?=$r[hits]?></td>
+  
+         
+  <td><?=$r[editdate]?></td>
+         <td><a href="/member/my.php?mid=16&action=edit&itemid=<?=$r[itemid]?>">修改房源</a> | &nbsp;<a href="/member/my.php?mid=16&action=delete&itemid=<?=$r[itemid]?>" onclick="return confirm('确定要删除吗？此操作将不可撤销');"><img width="16" height="16" src="/member/image/delete.png" title="删除" alt=""/></a></td>  
+</tr>
+<?
+}
+?>
+
+
+    </table>
+     <div class="tool">
+  <!--<span class="fl">
+           <input type="button" class="button_1" onClick="checkall(this.form);" value="全选" />
+<input type="button" class="button_1" onClick="checkall(this.form);" value="取消选择" />
+ 
+<input type="submit" value=" 刷新 " class="button_1" onclick="this.form.action='?mid=5&status=3&action=refresh';"/>
+<input type="submit" value=" 删除 " class="button_1" onclick="if(confirm('确定要删除选中二手房吗？')){this.form.action='?mid=5&status=3&action=delete'}else{return false;}"/>
+</form></span>-->
+            
+        
+<span class="fl">
+<div class="pagination">
+  <div class="pagination-inner"></div>
+</div>
+        </span>
+</div>
+
+
+
+<script type="text/javascript">s('mid_{$mid}');m('s{$status}');</script>
+
+
+<script type="text/javascript">
+function _p() {
+	if(Dd('tag').value) {
+		Ds('reccate');
+	}
+}
+function check() {
+	var l;
+	var f;
+	
+	
+	f = 'title';
+	l = Dd(f).value.length;
+	if(l < 2 || l > 30) {
+		Dmsg('小区名称应为2-30字，当前已输入'+l+'字', f);
+		return false;
+	}
+	
+	{if $MOD[upload_thumb] && $_userid}
+		f = 'thumb';
+		l = Dd(f).value.length;
+		if(l < 5) {
+			Dmsg('请上传第一张房源图片', f);
+			return false;
+		}
+	{/if}
+	{if $FD}{fields_js()}{/if}
+	if(Dd('property_require') != null) {
+		var ptrs = Dd('property_require').getElementsByTagName('option');
+		for(var i = 0; i < ptrs.length; i++) {		
+			f = 'property-'+ptrs[i].value;
+			if(Dd(f).value == 0 || Dd(f).value == '') {
+				Dmsg('请填写或选择'+ptrs[i].innerHTML, f);
+				return false;
+			}
+		}
+	}
+{if $need_password}
+	f = 'password';
+	l = Dd(f).value.length;
+	if(l < 6) {
+		Dmsg('请填写支付密码', f);
+		return false;
+	}
+{/if}
+{if $need_question}
+	f = 'answer';
+	l = Dd(f).value.length;
+	if(l < 1) {
+		Dmsg('请填写验证问题', f);
+		return false;
+	}
+	if(Dd('c'+f).innerHTML.indexOf('error') != -1) {
+		Dd(f).focus();
+		return false;
+	}
+{/if}
+{if $need_captcha}
+	f = 'captcha';
+	l = Dd(f).value;
+	if(!is_captcha(l)) {
+		Dmsg('请填写正确的验证码', f);
+		return false;
+	}
+	if(Dd('c'+f).innerHTML.indexOf('error') != -1) {
+		Dd(f).focus();
+		return false;
+	}
+{/if}
+	return true;
+}
+</script>
+
+{template 'footer', 'member'}

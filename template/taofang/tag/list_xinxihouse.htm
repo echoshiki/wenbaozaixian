@@ -1,0 +1,9 @@
+	{loop $tags $k $t}
+ 
+               <LI>
+<SPAN class="td_1">·<A   href="{$t[linkurl]}" target="_blank">{$t[title]}</A></SPAN>
+<SPAN class="td_5 link6">{area_poss($t[areaid], ' ')}</SPAN>
+<SPAN class="td_02 link6">{if $t[price]}{$t[price]}{else}一房一价{/if}</SPAN>
+ </LI>
+  {/loop} 
+			

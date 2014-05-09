@@ -92,7 +92,7 @@ prefs.setCharPref('browser.startup.homepage','<?php echo $MODULE['1']['linkurl']
 line.png" width="10" height="10" align="absmiddle"/></a> | <a href="<?php echo $MODULE['2']['linkurl'];?>">商务中心</a> | <a href="<?php echo $MODULE['2']['linkurl'];?>message.php">站内信(<span class="head_t" id="destoon_message"><?php if($_message) { ?><strong><?php echo $_message;?></strong><?php } else { ?>0<?php } ?>
 </span>)</a><?php if($DT['im_web']) { ?> | <a href="<?php echo $MODULE['2']['linkurl'];?>chat.php">新对话(<span class="head_t" id="destoon_chat"><?php if($_chat) { ?><strong><?php echo $_chat;?></strong>'+sound('chat_new')+'<?php } else { ?>0<?php } ?>
 </span>)</a><?php } ?>
- | <a href="<?php echo $MODULE['2']['linkurl'];?>logout.php">退出</a><?php } else { ?>您好，欢迎您访问文宝在线拍卖网！<!--<strong><a href="<?php echo $MODULE['2']['linkurl'];?><?php echo $DT['file_login'];?>" style="color:#FF0000">登录</a></strong>  -->[<a href="<?php echo $MODULE['2']['linkurl'];?><?php echo $DT['file_register'];?>">免费注册</a>]<?php } ?>
+ | <a href="<?php echo $MODULE['2']['linkurl'];?>logout.php">退出</a><?php } else { ?>您好，欢迎访问中国最专业的钱币在线拍卖平台！<strong><a href="<?php echo $MODULE['2']['linkurl'];?><?php echo $DT['file_login'];?>" style="color:#FF0000">登录</a></strong> [<a href="<?php echo $MODULE['2']['linkurl'];?><?php echo $DT['file_register'];?>">免费注册</a>]<?php } ?>
 </li>
 <li class="top_right"><script type="text/javascript">addFav('收藏本页');</script> | <a href="javascript:setHomepage();">设为首页</a></li>
 </ul>
@@ -145,7 +145,7 @@ line.png" width="10" height="10" align="absmiddle"/></a> | <a href="<?php echo $
                         <h4><a href="/auction/list.php?catid=9">加盟方区</a></h4>
                     </li>
                     <li class="bg clearfix">
-                        <h4><a href="/auction/list.php?catid=10">会员区</a></h4>
+                        <h4><a href="/company/search.php?new=1">会员区</a></h4>
                     </li>
                     <li class="clearfix">
                         <h4><a href="/auction/list.php?catid=11">瓷器及其他</a></h4>

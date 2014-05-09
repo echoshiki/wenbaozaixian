@@ -1,0 +1,32 @@
+
+{loop $tags $k $t}
+<tr>
+			<td class="pic">
+				<a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank"><img data-src="{imgurl($t[thumb], 1)}" alt="{$t[alt]}"></a>
+				
+			</td>
+			<td class="info">
+				<h5>
+					<a href="{$t[linkurl]}" title="{$t[alt]}" target="_blank">{$t[title]}</a>
+														</h5>
+				<p>
+					<a href="{$MODULE[18][linkurl]}show.php?itemid={$t[houseid]}" target="_blank" >{$t[housename]}</a> [{area_pos($t[areaid], '')}]{$t[address]}					<br>
+					<!--户型：{if $t[room]}{$t[room]}室{/if}{if $t[hall]}{$t[hall]}厅{/if}{if $t[toilet]}{$t[toilet]}卫{/if}	&nbsp;-->交租方式：{$t[jiaozu]}&nbsp;{if $t[zhuanxiu]}装修:{$t[zhuanxiu]}{else}{/if}&nbsp;房龄：{if $t[houseyear]}{$t[houseyear]}年{else}不详{/if}					<br>
+							
+					<a href="{userurl($t[username], '')}"  target="_blank" title="{$t[truename]}">{$t[truename]}</a>					  
+					{timetodate($t[edittime], 5)} 更新{if $t[username] && $AJ[im_web]}{im_web($t[username].'&mid='.$moduleid.'&itemid='.$t[itemid])}&nbsp;{/if}
+			{if $t[qq] && $AJ[im_qq]}{im_qq($t[qq])}&nbsp;{/if}
+			{if $t[ali] && $AJ[im_ali]}{im_ali($t[ali])}&nbsp;{/if}
+			{if $t[msn] && $AJ[im_msn]}{im_msn($t[msn])}&nbsp;{/if}
+			{if $t[skype] && $AJ[im_skype]}{im_skype($t[skype])}&nbsp;{/if}
+				</p>
+			</td>
+			<td class="area">{$t[houseearm]}平米</td>
+			<td class="price">
+				<strong>{if $t[price]}{$t[price]}{if $t[zjfs]}{$t[zjfs]}{else}元/月{/if}{else}面议{/if}</strong>
+				<input type="button" class="btn" data-val="{$t[itemid]}" data-url="{$t[linkurl]}" data-name="{$t[housename]}" />
+			</td>
+			<td class=""> </td>
+		</tr>
+		{/loop}	
+		
