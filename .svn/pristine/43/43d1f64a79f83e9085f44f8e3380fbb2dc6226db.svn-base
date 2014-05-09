@@ -1,7 +1,0 @@
-{loop $tags $t}
-<li class="zxpp_mc">
-<a href="{$t[linkurl]}" target="_blank"><img src="{$t[thumb]}" title="" width="75" height="74" /></a><div><strong>出品方：</strong><a href="{$t[linkurl]}" target="_blank"><b class="cjmz1">{$t[company]}</b></a>
-<p class="llcs">公司类型:<b class="cjmz1">{$t[type]}</b></p><p>类别：<b class="cjmz1">{cat_pos1($t[catid], '&nbsp;')}</b></p><p>点击数：<b class="cjmz1">{$t[hits]}</b></p></div>
-<div class="clear"></div></span>
-</li>
-{/loop}

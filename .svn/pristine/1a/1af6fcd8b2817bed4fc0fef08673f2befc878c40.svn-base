@@ -1,4 +1,0 @@
-
-{loop $tags $t}
-<li style="width:90px;"><a href="{$t[linkurl]}" target="_blank"><img src="{DT_SKIN}image/wenbao/jm.gif" border="0" align="absmiddle" style="margin-right:3px;"/></a><a href="{$t[linkurl]}" target="_blank">{$t[company]}</a></li>
-{/loop}

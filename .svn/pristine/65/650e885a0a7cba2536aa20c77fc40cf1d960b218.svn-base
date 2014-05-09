@@ -1,5 +1,0 @@
-
-
-{loop $tags $i $t}
-<li class="wb_news"><a href="{$t[linkurl]}"{if $target} target="{$target}"{/if}{if $class} class="{$class}"{/if} title="{$t[alt]}">{$t[title]}</a>      [{timetodate($t[addtime], $datetype)}]</li>
-{/loop}
